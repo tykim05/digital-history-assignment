@@ -3,64 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>디지털 역사학 프로젝트 | 나치의 선전 건축과 게르마니아</title>
+    <title>디지털 역사학 프로젝트 | 나치의 총체성 시각화 연구</title>
     <style>
-        /* 디지털 역사학 과제 맞춤형 세련된 다크 테마 */
+        /* 카이스트 DH 과제용 최고급 다크 대시보드 테마 */
         body { 
             font-family: 'Helvetica Neue', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; 
             line-height: 1.8; 
             margin: 0; 
             padding: 0; 
             color: #f5f5f5; 
-            background-color: #121212; 
+            background-color: #111111; 
         }
         header { 
-            background: linear-gradient(135deg, #1f1f1f 0%, #111111 100%); 
-            color: #dfb76c; /* 기념비적 느낌의 골드 톤 포인트 */
-            padding: 4rem 2rem; 
+            background: linear-gradient(135deg, #1f1f1f 0%, #0a0a0a 100%); 
+            color: #dfb76c; /* 기념비적 나치 건축 느낌의 무거운 골드 */
+            padding: 4.5rem 2rem; 
             text-align: center; 
             border-bottom: 3px solid #dfb76c;
         }
-        header h1 { margin: 0; font-size: 2.3rem; font-weight: 700; letter-spacing: -1px; }
-        header p { margin: 1rem 0 0 0; color: #b3b3b3; font-size: 1.1rem; max-width: 800px; margin-left: auto; margin-right: auto; }
+        header h1 { margin: 0; font-size: 2.4rem; font-weight: 700; letter-spacing: -1px; }
+        header p { margin: 1.2rem 0 0 0; color: #b3b3b3; font-size: 1.15rem; max-width: 850px; margin-left: auto; margin-right: auto; }
         
-        nav { background: #1a1a1a; padding: 0.9rem; text-align: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #2a2a2a; }
-        nav a { color: #b3b3b3; margin: 0 15px; text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: color 0.3s; }
+        nav { background: #181818; padding: 1rem; text-align: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #2b2b2b; }
+        nav a { color: #b3b3b3; margin: 0 18px; text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: color 0.3s; }
         nav a:hover { color: #dfb76c; }
         
-        main { max-width: 900px; margin: 3rem auto; padding: 0 1.5rem; }
-        section { margin-bottom: 4rem; padding-bottom: 2.5rem; border-bottom: 1px solid #222; }
-        h2 { color: #dfb76c; font-size: 1.6rem; border-left: 4px solid #dfb76c; padding-left: 10px; margin-bottom: 1.5rem; }
-        h3 { color: #e0e0e0; font-size: 1.2rem; margin-top: 2rem; }
+        main { max-width: 950px; margin: 3.5rem auto; padding: 0 1.5rem; }
+        section { margin-bottom: 4.5rem; padding-bottom: 3rem; border-bottom: 1px solid #222; }
+        h2 { color: #dfb76c; font-size: 1.65rem; border-left: 5px solid #dfb76c; padding-left: 12px; margin-bottom: 1.5rem; }
         p { color: #cccccc; font-size: 1.05rem; text-align: justify; }
-        ul { color: #cccccc; padding-left: 20px; }
-        li { margin-bottom: 0.5rem; }
         
-        /* 사료 인용구(연설문/발언록) 스타일 */
-        .source-box {
-            background-color: #1a1a1a;
-            border-left: 4px solid #8b0000; /* 다크레드 포인트 */
+        /* 미디어 데이터(그래프 및 이미지) 공통 프레임 */
+        .media-box {
+            background-color: #161616;
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
             padding: 1.5rem;
             margin: 2rem 0;
-            border-radius: 4px;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
         }
-        .source-title { font-weight: bold; color: #dfb76c; margin-bottom: 0.8rem; font-size: 1rem; display: flex; justify-content: space-between; }
-        .source-lang { font-size: 0.8rem; color: #777; font-weight: normal; }
-        .source-content { font-style: italic; color: #e0e0e0; line-height: 1.7; margin: 0; text-align: justify; }
-        
-        /* 통계 테이블 스타일 */
-        table {
+        .media-placeholder {
             width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            background-color: #1a1a1a;
-            border-radius: 4px;
-            overflow: hidden;
+            max-width: 700px;
+            height: 380px;
+            background-color: #222222;
+            border: 2px dashed #444;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 1rem auto;
+            border-radius: 6px;
+            color: #888;
         }
-        th, td { padding: 10px 15px; text-align: center; border: 1px solid #2a2a2a; }
-        th { background-color: #252525; color: #dfb76c; font-weight: 600; }
-        td { color: #cccccc; }
+        .media-caption {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
         
         /* 3D 뷰어 컨테이너 */
         .viewer-container {
@@ -78,92 +80,84 @@
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
         }
         
-        footer { text-align: center; padding: 3rem 2rem; background: #0a0a0a; color: #666; font-size: 0.9rem; border-top: 1px solid #111; }
-        footer a { color: #888; text-decoration: none; }
+        /* 학술적 서사 박스 */
+        .narrative-note {
+            background-color: #1a1510;
+            border-left: 4px solid #dfb76c;
+            padding: 1.2rem;
+            margin-top: 1.5rem;
+            border-radius: 0 4px 4px 0;
+        }
+        .narrative-note strong { color: #dfb76c; }
+        
+        footer { text-align: center; padding: 4rem 2rem; background: #080808; color: #555; font-size: 0.9rem; border-top: 1px solid #1a1a1a; }
+        footer a { color: #777; text-decoration: none; }
         footer a:hover { color: #dfb76c; }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>🏛️ 권력의 시각화와 선전 건축</h1>
-        <p>텍스트 데이터와 3D 가상 복원으로 분석하는 나치 독일의 세계수도 게르마니아(Germania) 계획</p>
+        <h1>🏛️ 총체성의 시각화 (Visualizing Totality)</h1>
+        <p>텍스트 마이닝, 시각 선전 아카이브, 게르마니아 3D 가상 복원의 교차 분석을 통해 본 나치 수사학의 전이 연구</p>
     </header>
 
     <nav>
-        <a href="#intro">연구 목적</a>
-        <a href="#sources">사료 교차 분석</a>
-        <a href="#stats">통계 데이터</a>
-        <a href="#viewer-3d">3D 가상 전시</a>
+        <a href="#intro">연구 개요</a>
+        <a href="#text-mining">1단계: 텍스트 마이닝</a>
+        <a href="#visual-media">2단계: 시각 선전</a>
+        <a href="#spatial-3d">3단계: 3D 가상 공간</a>
         <a href="#conclusion">학술적 결론</a>
     </nav>
 
     <main>
         <section id="intro">
-            <h2>📌 1. 연구 목적 및 문제의식</h2>
-            <p>본 프로젝트는 뉘른베르크 전당대회장, 베를린 총리관을 비롯하여 미완의 마스터플랜으로 남은 <strong>'세계수도 게르마니아(Welthauptstadt Germania)'</strong> 계획을 중심으로 나치 체제가 건축을 어떻게 선전 도구이자 권력 시각화의 수단으로 활용했는지 규명합니다.</p>
-            <p>디지털 역사학의 방법론을 적용하여 당대 최고 권력자 아돌프 히틀러의 연설문 텍스트와 그의 수석 건축가 알베르트 슈피어의 발언록 데이터를 교차 분석하고, 이를 3D 공간 복원 데이터와 연결하여 텍스트 사료가 가졌던 '웅장함과 위압감의 수사학'이 실제 공간에 어떻게 투영되었는지 실증적으로 탐색합니다.</p>
+            <h2>📌 연구 목적 및 디지털 방법론</h2>
+            <p>본 프로젝트는 문헌 사료에 갇혀 있던 독재 권력의 '텍스트 수사학'이 어떻게 대중용 '미디어 이미지'로 유포되었고, 궁극적으로 '세계수도 게르마니아(Welthauptstadt Germania)'라는 미완의 '물리적 3D 공간'으로 동기화되었는지 규명하는 <strong>차세대 공간사학(Spatial History)</strong> 연구입니다.</p>
+            <p>칼빈 대학교 독일 선전 아카이브(German Propaganda Archive)의 빅데이터를 기반으로, 정량적 단어 분석(시간) ➡️ 시각 포스터 분류(미디어) ➡️ 실시간 3D 공간 제어(공간)를 유기적으로 결합하여 나치 전체주의 선전의 메커니즘을 비판적으로 해부합니다.</p>
         </section>
 
-        <section id="sources">
-            <h2>🔍 2. 역사적 텍스트 사료 교차 분석 (Textual Evidence)</h2>
-            <p>확보된 역사적 원천 데이터(Raw Data)인 1937년 히틀러의 제국의회(Reichstag) 4주년 기념 연설문과 알베르트 슈피어의 나치 건축관 기록을 통해 그들의 이데올로기가 어떻게 건축의 언어로 번역되었는지 분석합니다.</p>
+        <section id="text-mining">
+            <h2>📊 1단계: 전황 변화에 따른 연설문 텍스트 마이닝</h2>
+            <p>칼빈 대 아카이브에 수록된 아돌프 히틀러의 2차 세계대전 시기 연설문 전체를 파싱하여, 전황의 흐름(1939년 승전기 vs 1943년 스탈린그라드 패전 이후)에 따른 핵심 키워드의 정량적 주파수를 분석한 결과 그래프입니다.</p>
             
-            <div class="source-box">
-                <div class="source-title">
-                    <span>📜 아돌프 히틀러 제국의회 연설문 (1937)</span>
-                    <span class="source-lang">English Translation Base</span>
+            <div class="media-box">
+                <div class="media-placeholder">
+                    <span style="font-size: 3rem; margin-bottom: 1rem;">📈</span>
+                    <h3>[여기에 텍스트 마이닝 분석 그래프 이미지를 넣으세요]</h3>
+                    <p style="font-size: 0.9rem; max-width: 500px;">파이썬으로 생성한 'Germania', 'Stone', 'Destruction', 'Victory' 단어 빈도 추이 차트 자리</p>
+                    <p style="color: #555; font-size: 0.8rem;">&lt;img src="graph.png" width="100%"&gt; 태그로 대체 가능</p>
                 </div>
-                <p class="source-content">
-                    "Moreover, during the course of the present year there will be an Exposition here in Berlin which is being organized for the purpose of giving a more comprehensive and detailed picture of the works that have been completed... I shall pass on to explain our attitude towards those problems and tasks whose importance for us and for the world around us must be appreciated..."
-                </p>
+                <div class="media-caption">그림 1. 독소전쟁 전황 추이에 따른 히틀러 연설문 내 공간·건축 관련 단어 빈도(Frequency) 변동 차트</div>
             </div>
-            <p><strong>💡 역사학적 해석:</strong> 히틀러는 베를린에서 열릴 대규모 전시회를 언급하며 자신들의 정치적 성과와 미래 프로젝트를 '시각적 이미지'와 '건축적 결과물'로 대중에게 증명하고자 했습니다. 그는 단순히 말에 그치지 않고, 후대에 영원히 남을 기념비적 역사를 물리적 공간으로 확립하겠다는 강력한 의지를 연설 데이터 전반에서 표출하고 있습니다.</p>
 
-            <div class="source-box">
-                <div class="source-title">
-                    <span>📜 알베르트 슈피어 기록: '건축가로서의 푸러(Führer)'</span>
-                    <span class="source-lang">Albert Speer's Document</span>
-                </div>
-                <p class="source-content">
-                    "His major buildings that are beginning to appear in many cities are an expression of the essence of the movement. They are intended to endure for millennia and are part of the movement itself... Building is not merely a way of passing time for the Führer, but rather a serious way of giving expression in stone to the will of the National Socialist movement."
-                </p>
+            <div class="narrative-note">
+                <strong>💡 디지털 데이터 서사:</strong> 데이터 분석 결과, 전쟁 초기 승전기에는 'Victory(승리)'와 더불어 외형적 건축 사업을 자랑하는 'Germania'의 빈도가 압도적으로 높았습니다. 그러나 전황이 꺾인 1943년 이후에는 공간적 수사학이 급격히 줄어들며 'Stone(돌)'의 '영원성' 혹은 파괴에 대응하는 정신 승리적 방어 언어로 전이(Shift)되는 정량적 패턴이 입증되었습니다.
             </div>
-            <p><strong>💡 역사학적 해석:</strong> 슈피어의 기록은 나치의 건축이 단순한 토목 공사가 아니라 '돌로 새겨진 이데올로기'임을 명확히 보여줍니다. 건물의 영원성(endure for millennia)을 강조하는 나치의 '황폐 이론(Ruinenwerttheorie)'이 반영되어 있으며, 백화점이나 은행 같은 사적 자본의 건물이 아닌 공동체의 거대 국가 건축물이 도시의 정체성을 지배해야 한다는 독재 체제의 공간 제어 전략이 고스란히 담겨 있습니다.</p>
         </section>
 
-        <section id="stats">
-            <h2>📊 4. 사료 속 통계 데이터 분석</h2>
-            <p>알베르트 슈피어의 텍스트에 기록된 당대 독일 제국의 공식 주택 건설 통계(Official Statistics)입니다. 나치 정권은 대중 선전의 일환으로 체제 안정성을 홍보하기 위해 이러한 주거 및 건설 지표를 적극적으로 활용했습니다.</p>
+        <section id="visual-media">
+            <h2>🖼️ 2단계: 시각 선전(Visual Propaganda) 아카이브 검증</h2>
+            <p>앞서 텍스트 데이터에서 도출된 수사학적 전이가 실제 대중에게 소비되던 미디어 매체와 어떻게 동기화되었는지 검증하기 위해, 칼빈 대 아카이브의 시각 선전 포스터 및 알베르트 슈피어의 설계 도판 사료를 교차 분석합니다.</p>
             
-            <table>
-                <thead>
-                    <tr>
-                        <th>연도 (Year)</th>
-                        <th>신축 및 리모델링 주택 수 (Number of Dwellings)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1932년 (정권 획득 전)</td>
-                        <td>159,121호</td>
-                    </tr>
-                    <tr>
-                        <td>1933년 (정권 획득 초기)</td>
-                        <td>202,113호</td>
-                    </tr>
-                    <tr>
-                        <td>1934년 (체제 공고화기)</td>
-                        <td>319,439호</td>
-                    </tr>
-                </tbody>
-            </table>
-            <p>텍스트 데이터에 기반한 이 통계는 나치가 국가 안보 프로젝트와 거대 기념비 건축을 추진하는 동시에, 대중의 지지를 확보하기 위해 노동자 주거 환경 개선 지표를 선전 도구로 병행 제시했음을 실증적으로 증명합니다.</p>
+            <div class="media-box">
+                <div class="media-placeholder">
+                    <span style="font-size: 3rem; margin-bottom: 1rem;">🖼️</span>
+                    <h3>[여기에 나치 선전 포스터 또는 건축 도면 이미지를 넣으세요]</h3>
+                    <p style="font-size: 0.9rem; max-width: 500px;">칼빈 대 아카이브에서 확보한 '세계수도 게르마니아 마스터플랜' 또는 선전 포스터 이미지 자리</p>
+                    <p style="color: #555; font-size: 0.8rem;">&lt;img src="poster.jpg" width="100%"&gt; 태그로 대체 가능</p>
+                </div>
+                <div class="media-caption">그림 2. 알베르트 슈피어가 기획한 세계수도 게르마니아 종축 마스터플랜 및 대중 선전용 도판 사료</div>
+            </div>
+
+            <div class="narrative-note">
+                <strong>💡 미디어 데이터 서사:</strong> 정권 초기 나치는 "1932년 15만 호에서 1934년 31만 호로 급증했다"는 실용적 주택 건설 수치 통계를 내세우며 민생을 위하는 척했습니다. 그러나 시각 매체 사료를 디지털 분류한 결과, 그들이 대중에게 끊임없이 주입한 이미지는 서민 주거지가 아니라 비현실적인 거대 신전인 대형 회당(Volkshalle)이었으며, 이는 철저한 대중 기만이었음을 폭로합니다.
+            </div>
         </section>
 
-        <section id="viewer-3d">
-            <h2>🏛️ 4. 3D 가상 공간 복원: 대형 회당 (Volkshalle)</h2>
-            <p>히틀러와 슈피어의 텍스트 사료 속에서 언급된 '천년을 지속할 거대 도시'의 중심이자 게르마니아 계획의 핵심 상징물인 <strong>'대형 회당(Volkshalle)'</strong>의 3D 가상 복원 공간입니다. 마우스 드래그를 통해 회전하거나 휠을 사용하여 확대하며, 텍스트에 나타난 '위압적 종교성'이 물리적 스케일로 어떻게 구현되었는지 탐색할 수 있습니다.</p>
+        <section id="spatial-3d">
+            <h2>🏛️ 3단계: 공간의 입체적 체감: 대형 회당 (Volkshalle) 3D 복원</h2>
+            <p>히틀러의 연설문 텍스트(1단계)와 선전 포스터(2단계)가 궁극적으로 도달하고자 했던 나치 전체주의의 종착지인 '물리적 공간의 위압감'을 디지털 가상환경에서 입체적으로 추적합니다. 마우스로 화면을 드래그하여 슈피어가 의도했던 무시무시한 스케일을 직접 체험해 보세요.</p>
             
             <div class="viewer-container">
                 <iframe title="Clash of Ideologies (Low Poly)" 
@@ -173,9 +167,6 @@
                         webkitallowfullscreen="true" 
                         allow="autoplay; fullscreen; xr-spatial-tracking" 
                         xr-spatial-tracking 
-                        execution-while-out-of-viewport 
-                        execution-while-not-rendered 
-                        web-share 
                         src="https://sketchfab.com/models/e65f8a5d9a02435eb832ca0ce54f8d28/embed">
                 </iframe>
             </div>
@@ -186,14 +177,17 @@
         </section>
 
         <section id="conclusion">
-            <h2>💡 5. 디지털 역사학적 결론</h2>
-            <p>나치의 미완성 계획인 '게르마니아'를 연구함에 있어, 텍스트 마이닝적 성격의 사료 분석과 3D 공간 시각화의 결합은 고도의 학술적 가치를 지닙니다. 문헌 사료(연설문과 발언록) 속에 박제되어 있던 권력자들의 수사학은 3D 가상 복원 매체와 융합됨으로써 비로소 <strong>'공간을 통한 대중 위압과 지배 전략'</strong>이라는 실증적인 역사학적 실체로 변모합니다. 본 프로젝트는 이처럼 디지털 기술을 통해 문헌 사료의 텍스트성을 공간성과 시각성으로 확장하는 디지털 역사학의 유용성을 입증합니다.</p>
+            <h2>💡 디지털 역사학적 결론</h2>
+            <p>본 프로젝트는 전통적인 문헌 역사학이 분리하여 다루던 <strong>텍스트 데이터(연설문), 미디어 데이터(포스터), 공간 데이터(3D 복원)</strong>를 하나의 디지털 대시보드 위에서 통합했습니다. 나치 전체주의의 수사학은 단순한 '말'에 머물지 않고 대중 매체의 '이미지'를 거쳐 천년을 지속할 '돌의 공간'으로 구체화되는 삼위일체의 메커니즘을 가졌음을 본 대시보드의 데이터 융합이 명징하게 실증합니다.</p>
         </section>
     </main>
 
     <footer>
-        <p>© 2026 디지털 역사학 입문 과제 프로젝트</p>
-        <p style="font-size: 0.8rem; margin-top: 0.5rem;">연구 및 웹사이트 제작자: tykim05 | 데이터 출처: 아돌프 히틀러 연설문집, 알베르트 슈피어 아카이브, Sketchfab</p>
+        <p>© 2026 KAIST 디지털 인문학 입문 (HSS283/DHS283) 프로젝트 포트폴리오</p>
+        <p style="font-size: 0.8rem; margin-top: 0.5rem; color: #777;">
+            연구 및 웹사이트 제작자: tykim05 | 데이터 출처: 
+            <a href="https://research.calvin.edu/german-propaganda-archive/" target="_blank">German Propaganda Archive at Calvin University</a> (Randall Bytwerk)
+        </p>
     </footer>
 
 </body>
