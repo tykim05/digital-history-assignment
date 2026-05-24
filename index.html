@@ -66,14 +66,12 @@
             color: var(--text-muted);
         }
 
-        /* Structured Layout Container */
         .container {
             max-width: 1100px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* Academic Abstract Section */
         .abstract-box {
             background-color: var(--bg-secondary);
             border-left: 3px solid var(--text-gold);
@@ -124,12 +122,21 @@
             margin: 20px 0;
         }
 
-        /* Interactive Voting UI System */
+        /* Multi-Stage Quiz Interactive UI Engine */
+        .stage-indicator {
+            font-family: monospace;
+            color: var(--text-gold);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
         .vote-zone {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
-            margin-top: 25px;
+            margin-top: 15px;
         }
 
         .vote-card {
@@ -147,17 +154,18 @@
 
         .vote-card:hover {
             border-color: var(--text-gold);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
         }
 
         .vote-img-box {
             background-color: #000;
             padding: 15px;
-            height: 220px;
+            height: 250px;
             display: flex;
             align-items: center;
             justify-content: center;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .vote-img-box img {
@@ -171,39 +179,43 @@
             background-color: transparent;
             border: 1px solid var(--text-gold);
             color: var(--text-gold);
-            padding: 10px 24px;
-            font-size: 1rem;
+            padding: 8px 20px;
+            font-size: 0.95rem;
             font-family: 'Times New Roman', serif;
             margin-top: 15px;
             cursor: pointer;
             border-radius: 4px;
-            transition: background 0.3s;
+            transition: all 0.3s;
         }
 
-        .vote-btn:hover {
+        .vote-card:hover .vote-btn {
             background-color: var(--text-gold);
             color: #000;
         }
 
-        /* Result Display Reveal Panel */
-        .result-panel {
+        /* Gated Core Content - Hidden completely at first */
+        #gated-project-content {
             display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .result-panel {
             background-color: #14171f;
             border: 1px solid #232d3d;
             border-radius: 6px;
-            padding: 25px;
-            margin-top: 25px;
-            animation: fadeIn 0.6s ease forwards;
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
         }
 
         .result-verdict {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: bold;
             margin-bottom: 15px;
-            padding-left: 10px;
         }
 
-        /* Dual-Column Gallery Styling */
+        /* Dual-Column Gallery System */
         .gallery-system {
             display: flex;
             flex-wrap: wrap;
@@ -234,18 +246,8 @@
 
         .card-body { padding: 20px; flex-grow: 1; }
 
-        .meta-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .meta-table th, .meta-table td {
-            padding: 8px 12px;
-            text-align: left;
-            font-size: 0.95rem;
-            border-bottom: 1px solid #2a2e3d;
-        }
-
+        .meta-table { width: 100%; border-collapse: collapse; }
+        .meta-table th, .meta-table td { padding: 8px 12px; text-align: left; font-size: 0.95rem; border-bottom: 1px solid #2a2e3d; }
         .meta-table th { color: var(--text-gold); font-weight: normal; width: 35%; }
 
         .spatial-frame-container {
@@ -261,15 +263,6 @@
 
         .spatial-frame-container iframe { width: 100%; height: 100%; border: 0; }
 
-        .narrative-note {
-            background-color: #1a1510;
-            border-left: 4px solid var(--text-gold);
-            padding: 1.2rem;
-            margin-top: 1.5rem;
-            border-radius: 0 4px 4px 0;
-        }
-        .narrative-note strong { color: var(--text-gold); }
-
         footer {
             margin-top: 80px;
             border-top: 1px solid var(--border-color);
@@ -281,11 +274,6 @@
 
         footer a { color: var(--text-gold); text-decoration: none; }
         footer a:hover { text-decoration: underline; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
     </style>
 </head>
 <body>
@@ -298,174 +286,250 @@
 
     <div class="container">
 
-        <div class="abstract-box">
-            <p><strong>Abstract:</strong> This installation integrates computational linguistics with an interactive curatorial gateway. By contrasting Albert Speer’s mathematical text metrics with raw visual propaganda archives and interactive user simulation, we demonstrate how the Third Reich weaponized abstract concepts of "beauty, purity, and absolute order" to camouflage the violent mechanics of socio-cultural liquidation.</p>
-        </div>
-
-        <section id="interactive-experiment">
-            <h2 class="section-title">I. Curatorial Experiment: What is Your Aesthetic Ideology?</h2>
+        <section id="interactive-quiz-gate" style="margin-top: 40px;">
+            <h2 class="section-title">🔒 Archival Gate: Discover Your Aesthetic Ideology</h2>
             <p class="narrative-text">
-                Before evaluating the historical statistics, perform a blind curation choice. Below are two distinct artistic styles circulated during the mid-20th century. Select the work that aligns closer to your personal design preferences.
+                To unlock the comprehensive historical database and data metrics of this project, you must first complete a 4-stage blind aesthetic evaluation. Below are alternating visual art and architectural styles circulated during the mid-20th century. Select the option that genuinely matches your design affinity.
             </p>
 
-            <div class="vote-zone">
-                <div class="vote-card" onclick="castVote('canonical')">
-                    <div class="vote-img-box">
-                        <img src="https://research.calvin.edu/german-propaganda-archive/images/speer/speer10.jpg" alt="Aesthetic Specimen A">
+            <div class="content-block" style="background-color: var(--bg-secondary);">
+                <div id="quiz-stage-text" class="stage-indicator">STAGE 1 OF 4</div>
+                
+                <div class="vote-zone">
+                    <div class="vote-card" onclick="processSelection('left')">
+                        <div class="vote-img-box">
+                            <img id="img-choice-left" src="" alt="Aesthetic Choice Left">
+                        </div>
+                        <h4 id="title-choice-left" style="margin-top:15px; color:var(--text-cream);">Style Option Alpha</h4>
+                        <button class="vote-btn">Select This Style</button>
                     </div>
-                    <h4 style="margin-top:15px; color:var(--text-cream);">Style Option A</h4>
-                    <p style="font-size:0.85rem; color:var(--text-muted); padding:0 10px; margin-top:5px;">Symmetrical Geometry, Classical Balance, Monumental Form</p>
-                    <button class="vote-btn">Select Style A</button>
-                </div>
 
-                <div class="vote-card" onclick="castVote('degenerate')">
-                    <div class="vote-img-box">
-                        <img src="https://research.calvin.edu/german-propaganda-archive/images/caricatures/vopo43.jpg" alt="Aesthetic Specimen B">
+                    <div class="vote-card" onclick="processSelection('right')">
+                        <div class="vote-img-box">
+                            <img id="img-choice-right" src="" alt="Aesthetic Choice Right">
+                        </div>
+                        <h4 id="title-choice-right" style="margin-top:15px; color:var(--text-cream);">Style Option Beta</h4>
+                        <button class="vote-btn">Select This Style</button>
                     </div>
-                    <h4 style="margin-top:15px; color:var(--text-cream);">Style Option B</h4>
-                    <p style="font-size:0.85rem; color:var(--text-muted); padding:0 10px; margin-top:5px;">Emotional Expression, Distorted Figures, Avant-Garde Critique</p>
-                    <button class="vote-btn">Select Style B</button>
                 </div>
             </div>
+        </section>
 
-            <div id="resultPanel" class="result-panel">
+        <div id="gated-project-content">
+            
+            <div class="result-panel">
                 <div id="verdictTitle" class="result-verdict"></div>
-                <p id="verdictDescription" class="narrative-text" style="margin-bottom:0; font-size:1rem;"></p>
+                <p id="verdictDescription" class="narrative-text" style="margin-bottom:0; font-size:1.1rem;"></p>
             </div>
-        </section>
 
-        <section id="text-mining">
-            <h2 class="section-title">II. Quantitative Text-Mining: Deconstructing Speer’s "Facts"</h2>
-            <p class="narrative-text">
-                In his 1938 programmatic tract, <em>"Facts and Lies"</em> (tatsachen.htm), Reich Architect Albert Speer defended authoritarian scales under the semantic guise of objective structural "Truth." Computational string-frequency mapping illuminates how fascist architecture systematically swapped political violence with sterile words of cosmic order.
-            </p>
-            
-            <div class="content-block">
-                <h3>Keyword Cluster Frequency in Speer's Prose</h3>
-                <div class="chart-wrapper">
-                    <canvas id="speerChart" height="110"></canvas>
-                </div>
+            <div class="abstract-box">
+                <p><strong>Digital Exhibit Context:</strong> You have now unlocked the master portfolio. This computational research project interrogates the dark synergy between quantitative linguistic patterns and physical curation within the Third Reich. By contrasting Albert Speer’s mathematical text parameters with visual databases and spatial 3D architecture, this installation exposes how authoritarian geometry weaponized the sublime philosophy of absolute order to validate systemic human exclusion.</p>
             </div>
-        </section>
 
-        <section id="archival-juxtaposition">
-            <h2 class="section-title">III. Visual Juxtaposition: Canonical vs. Degenerate Archives</h2>
-            <p class="narrative-text">
-                The linguistic sanitized criteria observed in Speer’s text directly dictated the physical curation of visual fine arts. The state canonized sterile heroic realism while aggressively organizing public shaming exhibitions to liquidate modernism.
-            </p>
-
-            <div class="gallery-system">
-                <div class="gallery-card">
-                    <div class="card-header-accent canonical">🏛️ CANONICAL ART RECORD (Official Reich Fine Art)</div>
-                    <div class="card-body">
-                        <table class="meta-table">
-                            <tr>
-                                <th>Rhetorical Sync</th>
-                                <td>Aligned with Speer's vocabulary of <strong>"Purity, Order, and Eternal Form"</strong></td>
-                            </tr>
-                            <tr>
-                                <th>Visual Motif</th>
-                                <td>Neo-classical statuary, idealized agrarian labor, and mathematically static landscapes devoid of raw individual emotion.</td>
-                            </tr>
-                        </table>
+            <section id="text-mining">
+                <h2 class="section-title">II. Quantitative Text-Mining: Deconstructing Speer’s "Facts"</h2>
+                <p class="narrative-text">
+                    In his 1938 programmatic tract, <em>"Facts and Lies"</em> (tatsachen.htm), Reich Architect Albert Speer defended monumental urban projects under the semantic cloak of neutral structural "Truth." Computational string-frequency mapping maps how the regime intentionally substituted the discourse of political terror with sterile vocabularies of cosmic order. [cite: 2322]
+                </p>
+                
+                <div class="content-block">
+                    <h3>Keyword Cluster Frequency in Speer's Prose</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="speerChart" height="110"></canvas>
                     </div>
                 </div>
+            </section>
 
-                <div class="gallery-card">
-                    <div class="card-header-accent degenerate">🔥 DEGENERATE ART RECORD (Banned Modernism)</div>
-                    <div class="card-body">
-                        <table class="meta-table">
-                            <tr>
-                                <th>Rhetorical Sync</th>
-                                <td>Branded as the chaotic antithesis—labeled as <strong>"Decay, Chaos, and Lies"</strong></td>
-                            </tr>
-                            <tr>
-                                <th>Visual Motif</th>
-                                <td>Expressionism, psychological distortion, and profound avant-garde critiques exposing the traumas of militarism.</td>
-                            </tr>
-                        </table>
+            <section id="archival-juxtaposition">
+                <h2 class="section-title">III. Visual Juxtaposition: Canonical vs. Degenerate Archives</h2>
+                <p class="narrative-text">
+                    The linguistic metrics calculated from Speer’s text directly dictated the physical state censorship of fine arts [cite: 2312, 2323]. The Reich executed a calculated, dual-track curatorial layout: canonizing hyper-classical realism while organizing public shaming operations to liquidate avant-garde modernism [cite: 2323].
+                </p>
+
+                <div class="gallery-system">
+                    <div class="gallery-card">
+                        <div class="card-header-accent canonical">🏛️ CANONICAL ART RECORD (Official Reich Fine Art)</div>
+                        <div class="card-body">
+                            <table class="meta-table">
+                                <tr>
+                                    <th>Rhetorical Sync</th>
+                                    <td>Aligned with Speer's vocabulary of <strong>"Purity, Order, and Eternal Form"</strong> [cite: 2312, 2323]</td>
+                                </tr>
+                                <tr>
+                                    <th>Visual Motif</th>
+                                    <td>Neo-classical statuary, idealized agrarian labor, and mathematically static landscapes completely devoid of individual human emotion [cite: 2323].</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="gallery-card">
+                        <div class="card-header-accent degenerate">🔥 DEGENERATE ART RECORD (Banned Modernism)</div>
+                        <div class="card-body">
+                            <table class="meta-table">
+                                <tr>
+                                    <th>Rhetorical Sync</th>
+                                    <td>Branded as the chaotic antithesis—labeled as <strong>"Decay, Chaos, and Lies"</strong> [cite: 2323]</td>
+                                </tr>
+                                <tr>
+                                    <th>Visual Motif</th>
+                                    <td>Expressionism, psychological distortion, and profound avant-garde critiques exposing the traumas of state militarism [cite: 2323].</td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="spatial-geometry">
-            <h2 class="section-title">④. Spatial Manifestation: Welthauptstadt Germania</h2>
-            <p class="narrative-text">
-                The ultimate synthesis of text metrics and visual censorship materialized in the projected megalithic blueprints of Germania. The interactive 3D rendering below demonstrates how totalitarianism forced abstract philosophies into a permanent topography of mass psychological subjugation.
-            </p>
+            <section id="spatial-geometry">
+                <h2 class="section-title">IV. Spatial Manifestation: Welthauptstadt Germania</h2>
+                <p class="narrative-text">
+                    The absolute manifestation of text parameters and visual curation was targeted to crystallize into the macro-geography of Welthauptstadt Germania [cite: 2312, 2324]. The interactive 3D model of the Volkshalle below demonstrates how totalitarianism forced abstract philosphies into a permanent physical topography of mass psychological subjugation [cite: 2324].
+                </p>
 
-            <div class="content-block">
-                <div class="spatial-frame-container">
-                    <iframe title="Welthauptstadt Germania - Volkshalle" 
-                            src="https://sketchfab.com/models/e65f8a5d9a02435eb832ca0ce54f8d28/embed?autostart=1&ui_theme=dark&internal=1" 
-                            allow="autoplay; fullscreen; xr-spatial-tracking" 
-                            execution-while-out-of-viewport 
-                            execution-while-not-rendered 
-                            web-share>
-                    </iframe>
+                <div class="content-block">
+                    <div class="spatial-frame-container">
+                        <iframe title="Welthauptstadt Germania - Volkshalle" 
+                                src="https://sketchfab.com/models/e65f8a5d9a02435eb832ca0ce54f8d28/embed?autostart=1&ui_theme=dark&internal=1" 
+                                allow="autoplay; fullscreen; xr-spatial-tracking" 
+                                execution-while-out-of-viewport 
+                                execution-while-not-rendered 
+                                web-share>
+                        </iframe>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-    </div>
+            <footer>
+                <p>Data Sources Compiled From: <a href="https://research.calvin.edu/german-propaganda-archive/" target="_blank">German Propaganda Archive (Calvin University)</a> & Sketchfab Repository [cite: 2325].</p>
+                <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.6;">KAIST HSS283/DHS283 Intro to Digital Humanities Portfolio Project.</p>
+            </footer>
 
-    <footer>
-        <p>Data Sources Compiled From: <a href="https://research.calvin.edu/german-propaganda-archive/" target="_blank">German Propaganda Archive (Calvin University)</a> & Sketchfab Repository.</p>
-        <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.6;">KAIST HSS283/DHS283 Intro to Digital Humanities Portfolio Project.</p>
-    </footer>
-
-    <script>
-        // Real-Time Interaction Script for Voting Experiment
-        function castVote(type) {
-            const panel = document.getElementById('resultPanel');
-            const title = document.getElementById('verdictTitle');
-            const desc = document.getElementById('verdictDescription');
-            
-            panel.style.display = "block";
-            
-            if(type === 'canonical') {
-                title.style.color = "var(--text-gold)";
-                title.innerHTML = "⚠️ REGIME COMPLIANCE VERDICT: You Favor Canonical Art";
-                desc.innerHTML = "By choosing Style Option A, your preferences synchronize with Albert Speer's totalitarian criteria of 'Order and Structural Harmony.' You have succumbed to the monumental aesthetics designed to substitute political terror with sterile geometric purity. In 1938, this choice would make you an ideal consumer of state-sanctioned propaganda art.";
-            } else {
-                title.style.color = "var(--accent-red)";
-                title.innerHTML = "🔥 TOTALITARIAN LIQUIDATION VERDICT: You Favor Degenerate Art";
-                desc.innerHTML = "By choosing Style Option B, you have selected what the Nazi regime classified as 'Entartete Kunst' (Degenerate Art). Your appreciation for emotional abstraction and non-conformist expression represents the ultimate resistance against authoritarian geometry. In 1938, the Gestapo would have confiscated your collection, banned your career, and labeled your cognitive taste as a biological disease against the state.";
+        </div> </div> <script>
+        // Comprehensive 8-Image Database mapped across 4 Stages
+        const quizDatabase = [
+            {
+                stage: 1,
+                hint: "Architectural Symmetry vs. Cultural Satire",
+                left: { img: "https://research.calvin.edu/german-propaganda-archive/images/speer/speer10.jpg", label: "Classical Monumentalism", alignment: "canonical" },
+                right: { img: "https://research.calvin.edu/german-propaganda-archive/images/caricatures/vopo43.jpg", label: "Avant-Garde Expressionism", alignment: "degenerate" }
+            },
+            {
+                stage: 2,
+                hint: "State Memorialization vs. Modernist Distortion",
+                left: { img: "https://research.calvin.edu/german-propaganda-archive/images/speer/speer14.jpg", label: "Symmetrical Order", alignment: "canonical" },
+                right: { img: "https://research.calvin.edu/german-propaganda-archive/images/caricatures/vopo28.jpg", label: "Abstract Lineation", alignment: "degenerate" }
+            },
+            {
+                stage: 3,
+                hint: "Idealized State Realism vs. Societal Critique",
+                left: { img: "https://research.calvin.edu/german-propaganda-archive/images/speer/speer12.jpg", label: "Heroic Realism", alignment: "canonical" },
+                right: { img: "https://research.calvin.edu/german-propaganda-archive/images/caricatures/vopo11.jpg", label: "Fragmented Figures", alignment: "degenerate" }
+            },
+            {
+                stage: 4,
+                hint: "Sterile Urban Form vs. Psychological Chaos",
+                left: { img: "https://research.calvin.edu/german-propaganda-archive/images/speer/speer17.jpg", label: "Totalitarian Alignment", alignment: "canonical" },
+                right: { img: "https://research.calvin.edu/german-propaganda-archive/images/caricatures/vopo42.jpg", label: "Subversive Caricature", alignment: "degenerate" }
             }
+        ];
+
+        let currentStageIndex = 0;
+        let scoreTracker = { canonical: 0, degenerate: 0 };
+
+        // Initialize Stage 1 Viewport
+        function renderQuizStage() {
+            const currentData = quizDatabase[currentStageIndex];
+            document.getElementById('quiz-stage-text').innerText = `STAGE ${currentData.stage} OF 4: ${currentData.hint.toUpperCase()}`;
             
-            // Auto-smooth scroll to result reveal
-            panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            document.getElementById('img-choice-left').src = currentData.left.img;
+            document.getElementById('title-choice-left').innerText = currentData.left.label;
+            
+            document.getElementById('img-choice-right').src = currentData.right.img;
+            document.getElementById('title-choice-right').innerText = currentData.right.label;
         }
 
-        // Static Chart Rendering
-        const ctx = document.getElementById('speerChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Fact / Truth', 'Order / Structure', 'Monument / Building', 'Health / Purity', 'Lies / Decay'],
-                datasets: [{
-                    label: 'Relative Keyword Cluster Weight (Normalized Index)',
-                    data: [84, 76, 62, 49, 21],
-                    backgroundColor: [
-                        'rgba(212, 175, 55, 0.85)',
-                        'rgba(212, 175, 55, 0.65)',
-                        'rgba(212, 175, 55, 0.45)',
-                        'rgba(212, 175, 55, 0.25)',
-                        'rgba(139, 0, 0, 0.75)'
-                    ],
-                    borderColor: ['#d4af37', '#d4af37', '#d4af37', '#d4af37', '#8b0000'],
-                    borderWidth: 1.5
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: { beginAtZero: true, grid: { color: '#2c303b' }, ticks: { color: '#a0a5b5' } },
-                    x: { grid: { display: false }, ticks: { color: '#f4f1ea' } }
-                }
+        // Process User Choice & Track Matrix Sequence
+        function processSelection(chosenSide) {
+            const currentData = quizDatabase[currentStageIndex];
+            const identity = (chosenSide === 'left') ? currentData.left.alignment : currentData.right.alignment;
+            
+            // Increment Ideological Index
+            scoreTracker[identity]++;
+
+            // Move to Next Stage or Execute Content Unlock
+            if (currentStageIndex < quizDatabase.length - 1) {
+                currentStageIndex++;
+                renderQuizStage();
+            } else {
+                executeProjectUnlock();
             }
-        });
+        }
+
+        // Unlocking Mechanism: Reveals Gated Materials and Triggers Dynamic Smooth Scroll
+        function executeProjectUnlock() {
+            // Hide the active quiz gate header block smoothly
+            document.getElementById('interactive-quiz-gate').style.display = "none";
+            
+            // Reveal Gated Primary Project Content Container
+            const gatedContent = document.getElementById('gated-project-content');
+            gatedContent.style.display = "block";
+            setTimeout(() => { gatedContent.style.opacity = "1"; }, 50);
+
+            // Compute Final Verdict Summary
+            const title = document.getElementById('verdictTitle');
+            const desc = document.getElementById('verdictDescription');
+
+            if (scoreTracker.canonical >= scoreTracker.degenerate) {
+                title.style.color = "var(--text-gold)";
+                title.innerHTML = "⚠️ IDEOLOGICAL COMPLIANCE RECORD: High Symmetry Affinity";
+                desc.innerHTML = `Out of 4 algorithmic choices, your aesthetic preferences matched ${scoreTracker.canonical} elements of Albert Speer's rigid architectural framework. You subconsciously gravitated toward the sterile geometric 'Order and Purity' that the Nazi state utilized to mask industrial atrocities. In 1938, your taste parameters would have seamlessly integrated into the state's official propaganda consumption matrix.`;
+            } else {
+                title.style.color = "var(--accent-red)";
+                title.innerHTML = "🔥 TOTALITARIAN SUBVERSION RECORD: High Modernist Affinity";
+                desc.innerHTML = `Out of 4 algorithmic choices, your aesthetic preferences favored ${scoreTracker.degenerate} elements of banned avant-garde modernism. Your affinity for emotional distortion and subversion directly matches what the Third Reich condemned as 'Entartete Kunst' (Degenerate Art). In 1938, your cognitive artistic stance would have been publicly liquidated by the Gestapo as a biological pathology against the state.`;
+            }
+
+            // Trigger Chart JS compilation post-unlock to prevent zero-height width rendering bugs
+            initializeChart();
+
+            // Smooth Scroll dynamic focus straight to the Verdict Panel
+            title.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Chart Initialization Engine
+        function initializeChart() {
+            const ctx = document.getElementById('speerChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Fact / Truth', 'Order / Structure', 'Monument / Building', 'Health / Purity', 'Lies / Decay'],
+                    datasets: [{
+                        label: 'Relative Keyword Cluster Weight (Normalized Index)',
+                        data: [84, 76, 62, 49, 21],
+                        backgroundColor: [
+                            'rgba(212, 175, 55, 0.85)',
+                            'rgba(212, 175, 55, 0.65)',
+                            'rgba(212, 175, 55, 0.45)',
+                            'rgba(212, 175, 55, 0.25)',
+                            'rgba(139, 0, 0, 0.75)'
+                        ],
+                        borderColor: ['#d4af37', '#d4af37', '#d4af37', '#d4af37', '#8b0000'],
+                        borderWidth: 1.5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: '#2c303b' }, ticks: { color: '#a0a5b5' } },
+                        x: { grid: { display: false }, ticks: { color: '#f4f1ea' } }
+                    }
+                }
+            });
+        }
+
+        // Initialize Core View on Load
+        window.onload = renderQuizStage;
     </script>
 </body>
 </html>
