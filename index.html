@@ -87,7 +87,7 @@
         }
 
         section {
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
         .section-title {
@@ -243,7 +243,7 @@
             margin-bottom: 15px;
         }
 
-        /* Art Specimen Explanation Gallery Layout */
+        /* Split-Layout Exposition Cards for Enhanced Readability */
         .gallery-system {
             display: flex;
             flex-direction: column;
@@ -252,12 +252,10 @@
         }
 
         .gallery-card {
-            background-color: var(--bg-tertiary);
+            background-color: var(--bg-secondary);
             border: 1px solid var(--border-color);
             border-radius: 6px;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
         }
 
         .card-header-accent {
@@ -270,21 +268,91 @@
             color: var(--text-gold);
         }
 
-        .card-body { padding: 25px; }
+        .card-body-split {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            padding: 25px;
+        }
 
-        .meta-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-        .meta-table th, .meta-table td { padding: 10px 14px; text-align: left; font-size: 1rem; border-bottom: 1px solid #2a2e3d; }
-        .meta-table th { color: var(--text-gold); font-weight: normal; width: 25%; }
+        .exposition-visual-column {
+            flex: 1;
+            min-width: 260px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .visual-frame-box {
+            background-color: #000;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .visual-frame-box img {
+            max-width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+            border-radius: 2px;
+        }
+
+        .portrait-sub-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background-color: var(--bg-tertiary);
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #252933;
+        }
+
+        .portrait-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            border: 1px solid var(--text-gold);
+            background-color: #000;
+        }
+
+        .exposition-text-column {
+            flex: 2;
+            min-width: 320px;
+        }
 
         .sub-block-title {
-            font-size: 1rem;
+            font-size: 1.05rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 8px;
-            margin-top: 15px;
+            font-weight: bold;
         }
-        .sub-block-title.can-title { color: #81c784; }
-        .sub-block-title.deg-title { color: #e57373; }
+        .sub-block-title.can-title { color: #81c784; border-left: 3px solid #81c784; padding-left: 8px; }
+        .sub-block-title.deg-title { color: #e57373; border-left: 3px solid #e57373; padding-left: 8px; margin-top: 20px; }
+
+        .pipeline-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .pipeline-item {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            color: var(--text-cream);
+        }
+
+        .pipeline-item::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--text-gold);
+            font-weight: bold;
+        }
 
         .spatial-frame-container {
             position: relative;
@@ -298,18 +366,6 @@
         }
 
         .spatial-frame-container iframe { width: 100%; height: 100%; border: 0; }
-
-        footer {
-            margin-top: 80px;
-            border-top: 1px solid var(--border-color);
-            padding-top: 30px;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            text-align: center;
-        }
-
-        footer a { color: var(--text-gold); text-decoration: none; }
-        footer a:hover { text-decoration: underline; }
 
         @keyframes fadeInStage {
             from { opacity: 0; transform: translateY(20px); }
@@ -353,57 +409,102 @@
                     
                     <div class="gallery-card">
                         <div class="card-header-accent">🎨 Stage 1: Figure Painting (Classicism vs. Expressionism)</div>
-                        <div class="card-body">
-                            <div class="sub-block-title can-title">🏛️ Style Alpha (Canonical Choice): Adolf Ziegler — "The Four Elements"</div>
-                            <p class="narrative-text" style="font-size: 1rem; margin-bottom: 15px; color: var(--text-cream);">
-                                Painted by Adolf Ziegler, the president of the Reich Chamber for Visual Arts and Hitler's favorite painter. This triptych depicts idealized, mathematically flawless, and sterile figures representing Earth, Water, Fire, and Air. Because of its meticulous, hyper-ordered compliance with traditional academic styles, the Nazi regime hung this masterpiece prominently in the Fuhrer's building in Munich, using it to define the strict biological and aesthetic canon of the state.
-                            </p>
-                            <div class="sub-block-title deg-title">🔥 Style Beta (Suppressed Choice): Ernst Ludwig Kirchner — "Street, Berlin"</div>
-                            <p class="narrative-text" style="font-size: 1rem; margin-bottom: 0; color: var(--text-cream);">
-                                Created by Ernst Ludwig Kirchner, a pioneer of German Expressionism. This work features jagged lines, clashing colors, and psychologically distorted figures exposing the anxiety and alienation of modern metropolitan life. Branded by the Gestapo as a "pathological distortion of the German spirit," Kirchner's entire life's work was confiscated, and over 600 of his paintings were removed from museums. Devastated by this systematic public liquidation and trauma, Kirchner eventually committed suicide in 1938.
-                            </p>
+                        <div class="card-body-split">
+                            <div class="exposition-visual-column">
+                                <div class="visual-frame-box"><img src="canonical1.jpg" alt="Ziegler Painting"></div>
+                                <div class="visual-frame-box"><img src="degenerate1.jpg" alt="Kirchner Painting"></div>
+                                <div class="portrait-sub-box">
+                                    <div class="portrait-img" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/ea/Adolf_Ziegler.jpg'); background-size: cover;"></div>
+                                    <div>
+                                        <p style="font-size: 0.85rem; color: var(--text-gold); font-weight: bold;">Adolf Ziegler</p>
+                                        <p style="font-size: 0.75rem; color: var(--text-muted);">Reich Chamber President</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="exposition-text-column">
+                                <div class="sub-block-title can-title">🏛️ Style Alpha (Canonical Choice): Adolf Ziegler — "The Four Elements"</div>
+                                <p class="narrative-text" style="font-size: 1rem; color: var(--text-cream); margin-bottom: 15px;">
+                                    Painted by Adolf Ziegler, the president of the Reich Chamber for Visual Arts and Hitler's favorite painter. This triptych depicts idealized, mathematically flawless, and sterile figures representing Earth, Water, Fire, and Air. Because of its meticulous, hyper-ordered compliance with traditional academic styles, the Nazi regime hung this masterpiece prominently in the Fuhrer's building in Munich, using it to define the strict biological and aesthetic canon of the state.
+                                </p>
+                                <div class="sub-block-title deg-title">🔥 Style Beta (Suppressed Choice): Ernst Ludwig Kirchner — "Street, Berlin"</div>
+                                <p class="narrative-text" style="font-size: 1rem; color: var(--text-cream); margin-bottom: 0;">
+                                    Created by Ernst Ludwig Kirchner, a pioneer of German Expressionism. This work features jagged lines, clashing colors, and psychologically distorted figures exposing the anxiety and alienation of modern metropolitan life. Branded by the Gestapo as a "pathological distortion of the German spirit," Kirchner's entire life's work was confiscated, and over 600 of his paintings were removed from museums. Devastated by this systematic public liquidation and trauma, Kirchner eventually committed suicide in 1938.
+                                </p>
+                            </div>
                         </div>
                     </div>
 
                     <div class="gallery-card">
                         <div class="card-header-accent">🏢 Stage 2: Public Architecture (Neo-Classicism vs. Bauhaus)</div>
-                        <div class="card-body">
-                            <div class="sub-block-title can-title">🏛️ Style Alpha (Canonical Choice): Paul Troost — "The House of German Art Facade"</div>
-                            <p class="narrative-text" style="font-size: 1rem; margin-bottom: 15px; color: var(--text-cream);">
-                                Designed by Paul Ludwig Troost, Hitler's first chief architect before Albert Speer. This massive marble museum features an endless row of rigid, repetitive, and heavy columns imitating a Greek temple. Stripped of modern ornamentation, its geometric symmetry was explicitly engineered to radiate eternal authority, permanence, and political weight. It served as the official sanctuary built to host the annual "Great German Art Exhibition" celebrating regime-approved propaganda.
-                            </p>
-                            <div class="sub-block-title deg-title">🔥 Style Beta (Suppressed Choice): Walter Gropius — "Bauhaus Dessau Building"</div>
-                            <p class="narrative-text" style="font-size: 1rem; margin-bottom: 0; color: var(--text-cream);">
-                                Designed by Walter Gropius, the founder of the legendary Bauhaus school. This architecture introduced a revolutionary modern vision utilizing open steel frames, asymmetrical layouts, and radical transparent glass curtain walls to celebrate functional efficiency and international collaboration. The Nazi regime aggressively condemned this philosophy as "Jewish-Bolshevik decadence" and forced the school to permanently shut down in 1933, hunting down avant-garde architects who resisted state geometry.
-                            </p>
+                        <div class="card-body-split">
+                            <div class="exposition-visual-column">
+                                <div class="visual-frame-box"><img src="canonical2.jpg" alt="Troost Museum"></div>
+                                <div class="visual-frame-box"><img src="degenerate2.jpg" alt="Bauhaus School"></div>
+                                <div class="portrait-sub-box">
+                                    <div class="portrait-img" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/d/df/Paul_Ludwig_Troost_1930.jpg'); background-size: cover;"></div>
+                                    <div>
+                                        <p style="font-size: 0.85rem; color: var(--text-gold); font-weight: bold;">Paul Troost</p>
+                                        <p style="font-size: 0.75rem; color: var(--text-muted);">Hitler's Chief Architect</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="exposition-text-column">
+                                <div class="sub-block-title can-title">🏛️ Style Alpha (Canonical Choice): Paul Troost — "The House of German Art Facade"</div>
+                                <p class="narrative-text" style="font-size: 1rem; color: var(--text-cream); margin-bottom: 15px;">
+                                    Designed by Paul Ludwig Troost, Hitler's first chief architect before Albert Speer. This massive marble museum features an endless row of rigid, repetitive, and heavy columns imitating a Greek temple. Stripped of modern ornamentation, its geometric symmetry was explicitly engineered to radiate eternal authority, permanence, and political weight. It served as the official sanctuary built to host the annual "Great German Art Exhibition" celebrating regime-approved propaganda.
+                                </p>
+                                <div class="sub-block-title deg-title">🔥 Style Beta (Suppressed Choice): Walter Gropius — "Bauhaus Dessau Building"</div>
+                                <p class="narrative-text" style="font-size: 1rem; color: var(--text-cream); margin-bottom: 0;">
+                                    Designed by Walter Gropius, the founder of the legendary Bauhaus school. This architecture introduced a revolutionary modern vision utilizing open steel frames, asymmetrical layouts, and radical transparent glass curtain walls to celebrate functional efficiency and international collaboration. The Nazi regime aggressively condemned this philosophy as "Jewish-Bolshevik decadence" and forced the school to permanently shut down in 1933, hunting down avant-garde architects who resisted state geometry.
+                                </p>
+                            </div>
                         </div>
                     </div>
 
                     <div class="gallery-card">
                         <div class="card-header-accent">🏞️ Stage 3: Landscape Painting (Pastoral Realism vs. Cubism)</div>
-                        <div class="card-body">
-                            <div class="sub-block-title can-title">🏛️ Style Alpha (Canonical Choice): Werner Peiner — "German Land"</div>
-                            <p class="narrative-text" style="font-size: 1rem; margin-bottom: 15px; color: var(--text-cream);">
-                                Painted by Werner Peiner, a prominent state-favored artist who operated an official academy under the patronage of Hermann Göring. This landscape meticulously renders an expansive, static, and peaceful rural valley. By portraying the countryside with absolute precision and no emotional friction, it served as a perfect visual anchor for the regime's "Blood and Soil" (Blut und Boden) ideology, promoting an artificial, agrarian fantasy of regional purity and unyielding geographic dominance.
-                            </p>
-                            <div class="sub-block-title deg-title">🔥 Style Beta (Suppressed Choice): Pablo Picasso — "Factory at Horta de Ebro"</div>
-                            <p class="narrative-text" style="font-size: 1rem; margin-bottom: 0; color: var(--text-cream);">
-                                Created by Pablo Picasso, a foundational pioneer of Cubism. This masterpiece deconstructs a village landscape into fragmented cubes, geometric shards, and multiple overlapping perspectives, rejecting traditional rules of realistic depth. Totalitarian curators aggressively attacked this avant-garde perspective as a "destructive, chaotic threat to national stability," systematically banning Cubist, Dadaist, and Fauvist styles from public display to prevent individual cognitive freedom.
-                            </p>
+                        <div class="card-body-split">
+                            <div class="exposition-visual-column">
+                                <div class="visual-frame-box"><img src="canonical3.jpg" alt="Peiner Landscape"></div>
+                                <div class="visual-frame-box"><img src="degenerate3.jpg" alt="Picasso Cubism"></div>
+                            </div>
+                            <div class="exposition-text-column">
+                                <div class="sub-block-title can-title">🏛️ Style Alpha (Canonical Choice): Werner Peiner — "German Land"</div>
+                                <p class="narrative-text" style="font-size: 1rem; color: var(--text-cream); margin-bottom: 15px;">
+                                    Painted by Werner Peiner, a prominent state-favored artist who operated an official academy under the patronage of Hermann Göring. This landscape meticulously renders an expansive, static, and peaceful rural valley. By portraying the countryside with absolute precision and no emotional friction, it served as a perfect visual anchor for the regime's "Blood and Soil" (Blut und Boden) ideology, promoting an artificial, agrarian fantasy of regional purity and unyielding geographic dominance.
+                                </p>
+                                <div class="sub-block-title deg-title">🔥 Style Beta (Suppressed Choice): Pablo Picasso — "Factory at Horta de Ebro"</div>
+                                <p class="narrative-text" style="font-size: 1rem; color: var(--text-cream); margin-bottom: 0;">
+                                    Created by Pablo Picasso, a foundational pioneer of Cubism. This masterpiece deconstructs a village landscape into fragmented cubes, geometric shards, and multiple overlapping perspectives, rejecting traditional rules of realistic depth. Totalitarian curators aggressively attacked this avant-garde perspective as a "destructive, chaotic threat to national stability," systematically banning Cubist, Dadaist, and Fauvist styles from public display to prevent individual cognitive freedom.
+                                </p>
+                            </div>
                         </div>
                     </div>
 
                     <div class="gallery-card">
                         <div class="card-header-accent">🏛️ Stage 4: Monumental Architecture (Heavy Stone vs. Kinetic Iron)</div>
-                        <div class="card-body">
-                            <div class="sub-block-title can-title">🏛️ Style Alpha (Canonical Choice): Wilhelm Kreis — "Leipzig War Memorial Interior"</div>
-                            <p class="narrative-text" style="font-size: 1rem; margin-bottom: 15px; color: var(--text-cream);">
-                                Built to commemorate historical fallen soldiers and heavily re-conceptualized under Wilhelm Kreis, a dominant state architect during the Reich. The interior relies on colossal stone blocks, absolute geometric alignment, and severe architectural massiveness. Stripped of light decorative elements, this heavy, monolithic style was weaponized by the state to foster an atmosphere of collective mourning, absolute obedience, and solemn self-sacrifice for the eternal authority of the Reich.
-                            </p>
-                            <div class="sub-block-title deg-title">🔥 Style Beta (Suppressed Choice): Vladimir Tatlin — "Monument to the Third International"</div>
-                            <p class="narrative-text" style="font-size: 1rem; margin-bottom: 0; color: var(--text-cream);">
-                                Conceived by Vladimir Tatlin, a leading figure of Avant-Garde Constructivism. This industrial design envisioned a giant, spiraling, kinetic iron tower housing rotating glass chambers. It celebrated dynamic technological progress, transparency, and a constantly moving future. The totalitarian regime condemned this structural philosophy as the epitome of foreign, Bolshevistic chaos and completely outlawed kinetic abstraction in favor of static stone imperialism.
-                            </p>
+                        <div class="card-body-split">
+                            <div class="exposition-visual-column">
+                                <div class="visual-frame-box"><img src="canonical4.jpg" alt="Kreis Interior"></div>
+                                <div class="visual-frame-box"><img src="degenerate4.jpg" alt="Tatlin Tower"></div>
+                                <div class="portrait-sub-box">
+                                    <div class="portrait-img" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/d/df/Wilhelm_Kreis.jpg'); background-size: cover;"></div>
+                                    <div>
+                                        <p style="font-size: 0.85rem; color: var(--text-gold); font-weight: bold;">Wilhelm Kreis</p>
+                                        <p style="font-size: 0.75rem; color: var(--text-muted);">Reich Monument Architect</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="exposition-text-column">
+                                <div class="sub-block-title can-title">🏛️ Style Alpha (Canonical Choice): Wilhelm Kreis — "Leipzig War Memorial Interior"</div>
+                                <p class="narrative-text" style="font-size: 1rem; color: var(--text-cream); margin-bottom: 15px;">
+                                    Built to commemorate historical fallen soldiers and heavily re-conceptualized under Wilhelm Kreis, a dominant state architect during the Reich. The interior relies on colossal stone blocks, absolute geometric alignment, and severe architectural massiveness. Stripped of light decorative elements, this heavy, monolithic style was weaponized by the state to foster an atmosphere of collective mourning, absolute obedience, and solemn self-sacrifice for the eternal authority of the Reich.
+                                </p>
+                                <div class="sub-block-title deg-title">🔥 Style Beta (Suppressed Choice): Vladimir Tatlin — "Monument to the Third International"</div>
+                                <p class="narrative-text" style="font-size: 1rem; color: var(--text-cream); margin-bottom: 0;">
+                                    Conceived by Vladimir Tatlin, a leading figure of Avant-Garde Constructivism. This industrial design envisioned a giant, spiraling, kinetic iron tower housing rotating glass chambers. It celebrated dynamic technological progress, transparency, and a constantly moving future. The totalitarian regime condemned this structural philosophy as the epitome of foreign, Bolshevistic chaos and completely outlawed kinetic abstraction in favor of static stone imperialism.
+                                </p>
+                            </div>
                         </div>
                     </div>
 
@@ -411,15 +512,33 @@
             </section>
 
             <section id="text-mining">
-                <h2 class="section-title">III. Quantitative Text-Mining: Deconstructing Speer’s Rhetoric</h2>
+                <h2 class="section-title">III. Computational Methodology: Deconstructing Speer’s Rhetoric</h2>
                 <p class="narrative-text">
-                    The dual-track visual and architectural censorship outlined above directly correlates with the linguistic structures utilized by Reich Architect Albert Speer. In his 1938 programmatic tract, <em>"Facts and Lies"</em> (tatsachen.htm), Speer defended monumental urban overhauls under the semantic cloak of neutral structural "Truth." Computational frequency analysis proves that the regime deliberately swapped political terror with sterile vocabularies of cosmic stability to justify social purging.
+                    To empirically ground the visual censorship revealed above, this project conducts a quantitative computational text-mining analysis on the primary linguistic structures utilized by Reich Architect Albert Speer. 
                 </p>
+
+                <div class="content-block">
+                    <h3 style="color: var(--text-gold); margin-bottom: 15px;">Empirical Digital Humanities Pipeline</h3>
+                    <ul class="pipeline-list">
+                        <li class="pipeline-item">
+                            <strong>Primary Corpus Ingestion:</strong> Extracted Albert Speer's official 1938 programmatic propaganda defense text, <em>"Facts and Lies"</em> (tatsachen.htm), preserved within the German Propaganda Archive at Calvin University.
+                        </li>
+                        <li class="pipeline-item">
+                            <strong>Natural Language Preprocessing:</strong> Implemented string-tokenization and lowercase normalization via computational filters to strip out non-ideological syntax and isolate high-frequency semantic nodes.
+                        </li>
+                        <li class="pipeline-item">
+                            <strong>Ideological Clustering:</strong> Aggregated individual words into distinct thematic frequency indices. This mapping calculates how the regime intentionally substituted the discourse of state terror with neutral, sterile vocabularies of stability, structural "truth," and clean geometry.
+                        </li>
+                    </ul>
+                </div>
                 
                 <div class="content-block">
-                    <h3>Keyword Cluster Frequency in Speer's Prose</h3>
-                    <div class="chart-wrapper">
-                        <canvas id="speerChart" height="110"></canvas>
+                    <h3 style="margin-bottom: 10px;">Linguistic Cluster Weight Analysis</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">
+                        The horizontal visualization below maps out the relative normalized weight of Speer's key semantic clusters. Notice the massive statistical reliance on abstract words like "Truth" and "Structure" to mask systemized purges.
+                    </p>
+                    <div class="chart-wrapper" style="max-width: 650px; margin: 0 auto; padding: 15px;">
+                        <canvas id="speerChart" height="150"></canvas>
                     </div>
                 </div>
             </section>
@@ -462,36 +581,38 @@
             </footer>
 
         </div> </div> <script>
+        // Blinded Data Engine: Labels and data completely concealed during test loop
         const quizDatabase = [
             {
                 stage: 1,
-                hint: "Figure Painting (Classicism vs. Expressionism)",
-                left: { img: "canonical1.jpg", label: "Style Alpha: Classical Form", alignment: "canonical" },
-                right: { img: "degenerate1.jpg", label: "Style Beta: Avant-Garde Critique", alignment: "degenerate" }
+                hint: "Figure Painting",
+                left: { img: "canonical1.jpg", alignment: "canonical" },
+                right: { img: "degenerate1.jpg", alignment: "degenerate" }
             },
             {
                 stage: 2,
-                hint: "Public Architecture (Neo-Classicism vs. Bauhaus)",
-                left: { img: "canonical2.jpg", label: "Style Alpha: Symmetrical Order", alignment: "canonical" },
-                right: { img: "degenerate2.jpg", label: "Style Beta: Fragmented Abstraction", alignment: "degenerate" }
+                hint: "Public Architecture",
+                left: { img: "canonical2.jpg", alignment: "canonical" },
+                right: { img: "degenerate2.jpg", alignment: "degenerate" }
             },
             {
                 stage: 3,
-                hint: "Landscape Painting (Pastoral Realism vs. Cubism)",
-                left: { img: "canonical3.jpg", label: "Style Alpha: Heroic Realism", alignment: "canonical" },
-                right: { img: "degenerate3.jpg", label: "Style Beta: Subversive Distortion", alignment: "degenerate" }
+                hint: "Landscape Painting",
+                left: { img: "canonical3.jpg", alignment: "canonical" },
+                right: { img: "degenerate3.jpg", alignment: "degenerate" }
             },
             {
                 stage: 4,
-                hint: "Monumental Architecture (Heavy Stone vs. Kinetic Iron)",
-                left: { img: "canonical4.jpg", label: "Style Alpha: Cosmic Balance", alignment: "canonical" },
-                right: { img: "degenerate4.jpg", label: "Style Beta: Psychological Chaos", alignment: "degenerate" }
+                hint: "Monumental Architecture",
+                left: { img: "canonical4.jpg", alignment: "canonical" },
+                right: { img: "degenerate4.jpg", alignment: "degenerate" }
             }
         ];
 
         let currentStageIndex = 0;
         let scoreTracker = { canonical: 0, degenerate: 0 };
 
+        // Pure Blind Rendering Engine (No texts or labels exposed to user)
         function spawnStageBlock(index) {
             const currentData = quizDatabase[index];
             const container = document.getElementById('waterfall-quiz-container');
@@ -500,22 +621,20 @@
             stageNode.id = `quiz-stage-${index}`;
             stageNode.className = 'quiz-stage-box';
             stageNode.innerHTML = `
-                <div class="stage-indicator">STAGE ${currentData.stage} OF 4: ${currentData.hint.toUpperCase()}</div>
+                <div class="stage-indicator">STAGE ${currentData.stage} OF 4: ${currentData.hint.toUpperCase()} AFFINITY</div>
                 <div class="vote-zone">
                     <div id="card-${index}-left" class="vote-card active-card" onclick="submitUserChoice(${index}, 'left')">
                         <div class="vote-img-box">
-                            <img src="${currentData.left.img}" alt="Style Alpha Asset">
+                            <img src="${currentData.left.img}" alt="Aesthetic Asset Alpha">
                         </div>
-                        <h4 style="margin-top:15px; color:var(--text-cream); font-weight:normal;">${currentData.left.label}</h4>
-                        <button id="btn-${index}-left" class="vote-btn">Select This Style</button>
+                        <button id="btn-${index}-left" class="vote-btn">Select Style Alpha</button>
                     </div>
 
                     <div id="card-${index}-right" class="vote-card active-card" onclick="submitUserChoice(${index}, 'right')">
                         <div class="vote-img-box">
-                            <img src="${currentData.right.img}" alt="Style Beta Asset">
+                            <img src="${currentData.right.img}" alt="Aesthetic Asset Beta">
                         </div>
-                        <h4 style="margin-top:15px; color:var(--text-cream); font-weight:normal;">${currentData.right.label}</h4>
-                        <button id="btn-${index}-right" class="vote-btn">Select This Style</button>
+                        <button id="btn-${index}-right" class="vote-btn">Select Style Beta</button>
                     </div>
                 </div>
             `;
@@ -545,12 +664,12 @@
             if (selectedSide === 'left') {
                 leftCard.classList.add('selected-card');
                 rightCard.classList.add('disabled-card');
-                document.getElementById(`btn-${stageIndex}-left`).innerText = "Selected Style";
+                document.getElementById(`btn-${stageIndex}-left`).innerText = "Selected";
                 document.getElementById(`btn-${stageIndex}-right`).innerText = "Locked";
             } else {
                 rightCard.classList.add('selected-card');
                 leftCard.classList.add('disabled-card');
-                document.getElementById(`btn-${stageIndex}-right`).innerText = "Selected Style";
+                document.getElementById(`btn-${stageIndex}-right`).innerText = "Selected";
                 document.getElementById(`btn-${stageIndex}-left`).innerText = "Locked";
             }
 
@@ -587,6 +706,7 @@
             }, 300);
         }
 
+        // Optimized Compact Horizontal Bar Chart Configuration
         function initializeChart() {
             const ctx = document.getElementById('speerChart').getContext('2d');
             new Chart(ctx, {
@@ -594,7 +714,7 @@
                 data: {
                     labels: ['Fact / Truth', 'Order / Structure', 'Monument / Building', 'Health / Purity', 'Lies / Decay'],
                     datasets: [{
-                        label: 'Relative Keyword Cluster Weight (Normalized Index)',
+                        label: 'Relative Keyword Weight (Normalized Index)',
                         data: [84, 76, 62, 49, 21],
                         backgroundColor: [
                             'rgba(212, 175, 55, 0.85)',
@@ -608,10 +728,15 @@
                     }]
                 },
                 options: {
+                    indexAxis: 'y', // Converts the chart to a sleek horizontal dashboard format
                     responsive: true,
+                    maintainAspectRatio: true,
                     scales: {
-                        y: { beginAtZero: true, grid: { color: '#2c303b' }, ticks: { color: '#a0a5b5' } },
-                        x: { grid: { display: false }, ticks: { color: '#f4f1ea' } }
+                        y: { grid: { display: false }, ticks: { color: '#f4f1ea', font: { family: 'Times New Roman' } } },
+                        x: { beginAtZero: true, grid: { color: '#2c303b' }, ticks: { color: '#a0a5b5' } }
+                    },
+                    plugins: {
+                        legend: { display: false }
                     }
                 }
             });
