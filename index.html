@@ -1,194 +1,403 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>디지털 역사학 프로젝트 | 나치의 총체성 시각화 연구</title>
+    <title>Aesthetics of Exclusion | Digital History Project</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* 카이스트 DH 과제용 최고급 다크 대시보드 테마 */
-        body { 
-            font-family: 'Helvetica Neue', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; 
-            line-height: 1.8; 
-            margin: 0; 
-            padding: 0; 
-            color: #f5f5f5; 
-            background-color: #111111; 
+        /* Core System Styles & Variable Typography */
+        :root {
+            --bg-primary: #0d0e10;
+            --bg-secondary: #16181c;
+            --bg-tertiary: #1f232b;
+            --text-gold: #d4af37;
+            --text-cream: #f4f1ea;
+            --text-muted: #a0a5b5;
+            --border-color: #2c303b;
+            --accent-red: #8b0000;
         }
-        header { 
-            background: linear-gradient(135deg, #1f1f1f 0%, #0a0a0a 100%); 
-            color: #dfb76c; /* 기념비적 나치 건축 느낌의 무거운 골드 */
-            padding: 4.5rem 2rem; 
-            text-align: center; 
-            border-bottom: 3px solid #dfb76c;
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-        header h1 { margin: 0; font-size: 2.4rem; font-weight: 700; letter-spacing: -1px; }
-        header p { margin: 1.2rem 0 0 0; color: #b3b3b3; font-size: 1.15rem; max-width: 850px; margin-left: auto; margin-right: auto; }
-        
-        nav { background: #181818; padding: 1rem; text-align: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #2b2b2b; }
-        nav a { color: #b3b3b3; margin: 0 18px; text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: color 0.3s; }
-        nav a:hover { color: #dfb76c; }
-        
-        main { max-width: 950px; margin: 3.5rem auto; padding: 0 1.5rem; }
-        section { margin-bottom: 4.5rem; padding-bottom: 3rem; border-bottom: 1px solid #222; }
-        h2 { color: #dfb76c; font-size: 1.65rem; border-left: 5px solid #dfb76c; padding-left: 12px; margin-bottom: 1.5rem; }
-        p { color: #cccccc; font-size: 1.05rem; text-align: justify; }
-        
-        /* 미디어 데이터(그래프 및 이미지) 공통 프레임 */
-        .media-box {
-            background-color: #161616;
-            border: 1px solid #2a2a2a;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 2rem 0;
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-cream);
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        /* Hero Editorial Header */
+        header {
+            position: relative;
+            padding: 100px 20px 60px 20px;
             text-align: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            background: linear-gradient(180deg, #181a20 0%, var(--bg-primary) 100%);
+            border-bottom: 1px solid var(--border-color);
         }
-        .media-placeholder {
-            width: 100%;
-            max-width: 700px;
-            height: 380px;
-            background-color: #222222;
-            border: 2px dashed #444;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto 1rem auto;
-            border-radius: 6px;
-            color: #888;
-        }
-        .media-caption {
+
+        .project-meta {
             font-size: 0.9rem;
-            color: #aaa;
-            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-gold);
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 400;
+            letter-spacing: -1px;
+            color: var(--text-cream);
+            max-width: 900px;
+            margin: 0 auto 20px auto;
+            line-height: 1.2;
+        }
+
+        .author-tag {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* Structured Layout Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Academic Abstract Section */
+        .abstract-box {
+            background-color: var(--bg-secondary);
+            border-left: 3px solid var(--text-gold);
+            padding: 30px;
+            margin: 40px 0;
+            border-radius: 4px;
+        }
+
+        .abstract-box p {
             font-style: italic;
+            color: var(--text-muted);
+            font-size: 1.1rem;
         }
-        
-        /* 3D 뷰어 컨테이너 */
-        .viewer-container {
-            position: relative; 
-            padding-top: 56.25%; 
-            width: 100%; 
-            height: 0; 
-            box-shadow: 0 12px 30px rgba(0,0,0,0.7); 
-            border-radius: 8px; 
+
+        /* Section Typography */
+        section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--text-gold);
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .narrative-text {
+            font-size: 1.1rem;
+            color: var(--text-cream);
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        /* Methodological Split Grid (No Flex/Grid Layout Pitfalls for Raw Processing) */
+        .content-block {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        /* Quantitative Visual Container */
+        .chart-wrapper {
+            background-color: var(--bg-tertiary);
+            padding: 20px;
+            border-radius: 4px;
+            border: 1px solid #252933;
+            margin: 20px 0;
+        }
+
+        /* Qualitative Gallery System */
+        .gallery-system {
+            display: block;
+            margin-top: 20px;
+        }
+
+        .gallery-card {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+            border-radius: 4px;
             overflow: hidden;
-            margin: 2.5rem 0;
-            border: 1px solid #333;
         }
-        .viewer-container iframe {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
+
+        .card-header-accent {
+            padding: 12px 20px;
+            font-weight: bold;
+            font-size: 1rem;
+            letter-spacing: 1px;
         }
-        
-        /* 학술적 서사 박스 */
-        .narrative-note {
-            background-color: #1a1510;
-            border-left: 4px solid #dfb76c;
-            padding: 1.2rem;
-            margin-top: 1.5rem;
-            border-radius: 0 4px 4px 0;
+
+        .card-header-accent.canonical {
+            background-color: #1b2e1e;
+            color: #81c784;
+            border-bottom: 1px solid #2e4d34;
         }
-        .narrative-note strong { color: #dfb76c; }
-        
-        footer { text-align: center; padding: 4rem 2rem; background: #080808; color: #555; font-size: 0.9rem; border-top: 1px solid #1a1a1a; }
-        footer a { color: #777; text-decoration: none; }
-        footer a:hover { color: #dfb76c; }
+
+        .card-header-accent.degenerate {
+            background-color: #3a1a1a;
+            color: #e57373;
+            border-bottom: 1px solid #5a2828;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .meta-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .meta-table th, .meta-table td {
+            padding: 8px 12px;
+            text-align: left;
+            font-size: 0.95rem;
+            border-bottom: 1px solid #2a2e3d;
+        }
+
+        .meta-table th {
+            color: var(--text-gold);
+            font-weight: normal;
+            width: 30%;
+        }
+
+        /* Spatial Metadata Container for Sketchfab 3D Frame */
+        .spatial-frame-container {
+            position: relative;
+            width: 100%;
+            height: 480px;
+            background-color: #000;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .spatial-frame-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Academic Footer Citation */
+        footer {
+            margin-top: 80px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 30px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        footer a {
+            color: var(--text-gold);
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>🏛️ 총체성의 시각화 (Visualizing Totality)</h1>
-        <p>텍스트 마이닝, 시각 선전 아카이브, 게르마니아 3D 가상 복원의 교차 분석을 통해 본 나치 수사학의 전이 연구</p>
+        <div class="project-meta">HSS283 / DHS283 Introduction to Digital Humanities</div>
+        <h1>Aesthetics of Exclusion:<br><span style="color: var(--text-gold);">Text-Mining Speer’s Rhetoric and Multimodal Analysis of Nazi Art Archives</span></h1>
+        <div class="author-tag">Project Investigator: tykim05 (KAIST Undergrad)</div>
     </header>
 
-    <nav>
-        <a href="#intro">연구 개요</a>
-        <a href="#text-mining">1단계: 텍스트 마이닝</a>
-        <a href="#visual-media">2단계: 시각 선전</a>
-        <a href="#spatial-3d">3단계: 3D 가상 공간</a>
-        <a href="#conclusion">학술적 결론</a>
-    </nav>
+    <div class="container">
 
-    <main>
-        <section id="intro">
-            <h2>📌 연구 목적 및 디지털 방법론</h2>
-            <p>본 프로젝트는 문헌 사료에 갇혀 있던 독재 권력의 '텍스트 수사학'이 어떻게 대중용 '미디어 이미지'로 유포되었고, 궁극적으로 '세계수도 게르마니아(Welthauptstadt Germania)'라는 미완의 '물리적 3D 공간'으로 동기화되었는지 규명하는 <strong>차세대 공간사학(Spatial History)</strong> 연구입니다.</p>
-            <p>칼빈 대학교 독일 선전 아카이브(German Propaganda Archive)의 빅데이터를 기반으로, 정량적 단어 분석(시간) ➡️ 시각 포스터 분류(미디어) ➡️ 실시간 3D 공간 제어(공간)를 유기적으로 결합하여 나치 전체주의 선전의 메커니즘을 비판적으로 해부합니다.</p>
-        </section>
+        <div class="abstract-box">
+            <p><strong>Abstract:</strong> This digital humanities installation challenges traditional, linear histories of totalitarian propaganda by offering a structured multimodal interrogation of fascist curation. By combining quantitative computational text-mining of Albert Speer’s architectural defenses with empirical metadata mapping of official and purged art exhibits, this project exposes how the totalitarian regime weaponized the abstract philosophy of "beauty, purity, and geometric order" as a structural engine for cultural liquidation and racial marginalization.</p>
+        </div>
 
         <section id="text-mining">
-            <h2>📊 1단계: 전황 변화에 따른 연설문 텍스트 마이닝</h2>
-            <p>칼빈 대 아카이브에 수록된 아돌프 히틀러의 2차 세계대전 시기 연설문 전체를 파싱하여, 전황의 흐름(1939년 승전기 vs 1943년 스탈린그라드 패전 이후)에 따른 핵심 키워드의 정량적 주파수를 분석한 결과 그래프입니다.</p>
-            
-            <div class="media-box">
-                <div class="media-placeholder">
-                    <span style="font-size: 3rem; margin-bottom: 1rem;">📈</span>
-                    <h3>[여기에 텍스트 마이닝 분석 그래프 이미지를 넣으세요]</h3>
-                    <p style="font-size: 0.9rem; max-width: 500px;">파이썬으로 생성한 'Germania', 'Stone', 'Destruction', 'Victory' 단어 빈도 추이 차트 자리</p>
-                    <p style="color: #555; font-size: 0.8rem;">&lt;img src="graph.png" width="100%"&gt; 태그로 대체 가능</p>
-                </div>
-                <div class="media-caption">그림 1. 독소전쟁 전황 추이에 따른 히틀러 연설문 내 공간·건축 관련 단어 빈도(Frequency) 변동 차트</div>
-            </div>
-
-            <div class="narrative-note">
-                <strong>💡 디지털 데이터 서사:</strong> 데이터 분석 결과, 전쟁 초기 승전기에는 'Victory(승리)'와 더불어 외형적 건축 사업을 자랑하는 'Germania'의 빈도가 압도적으로 높았습니다. 그러나 전황이 꺾인 1943년 이후에는 공간적 수사학이 급격히 줄어들며 'Stone(돌)'의 '영원성' 혹은 파괴에 대응하는 정신 승리적 방어 언어로 전이(Shift)되는 정량적 패턴이 입증되었습니다.
-            </div>
-        </section>
-
-        <section id="visual-media">
-            <h2>🖼️ 2단계: 시각 선전(Visual Propaganda) 아카이브 검증</h2>
-            <p>앞서 텍스트 데이터에서 도출된 수사학적 전이가 실제 대중에게 소비되던 미디어 매체와 어떻게 동기화되었는지 검증하기 위해, 칼빈 대 아카이브의 시각 선전 포스터 및 알베르트 슈피어의 설계 도판 사료를 교차 분석합니다.</p>
-            
-            <div class="media-box">
-                <div class="media-placeholder">
-                    <span style="font-size: 3rem; margin-bottom: 1rem;">🖼️</span>
-                    <h3>[여기에 나치 선전 포스터 또는 건축 도면 이미지를 넣으세요]</h3>
-                    <p style="font-size: 0.9rem; max-width: 500px;">칼빈 대 아카이브에서 확보한 '세계수도 게르마니아 마스터플랜' 또는 선전 포스터 이미지 자리</p>
-                    <p style="color: #555; font-size: 0.8rem;">&lt;img src="poster.jpg" width="100%"&gt; 태그로 대체 가능</p>
-                </div>
-                <div class="media-caption">그림 2. 알베르트 슈피어가 기획한 세계수도 게르마니아 종축 마스터플랜 및 대중 선전용 도판 사료</div>
-            </div>
-
-            <div class="narrative-note">
-                <strong>💡 미디어 데이터 서사:</strong> 정권 초기 나치는 "1932년 15만 호에서 1934년 31만 호로 급증했다"는 실용적 주택 건설 수치 통계를 내세우며 민생을 위하는 척했습니다. 그러나 시각 매체 사료를 디지털 분류한 결과, 그들이 대중에게 끊임없이 주입한 이미지는 서민 주거지가 아니라 비현실적인 거대 신전인 대형 회당(Volkshalle)이었으며, 이는 철저한 대중 기만이었음을 폭로합니다.
-            </div>
-        </section>
-
-        <section id="spatial-3d">
-            <h2>🏛️ 3단계: 공간의 입체적 체감: 대형 회당 (Volkshalle) 3D 복원</h2>
-            <p>히틀러의 연설문 텍스트(1단계)와 선전 포스터(2단계)가 궁극적으로 도달하고자 했던 나치 전체주의의 종착지인 '물리적 공간의 위압감'을 디지털 가상환경에서 입체적으로 추적합니다. 마우스로 화면을 드래그하여 슈피어가 의도했던 무시무시한 스케일을 직접 체험해 보세요.</p>
-            
-            <div class="viewer-container">
-                <iframe title="Clash of Ideologies (Low Poly)" 
-                        frameborder="0" 
-                        allowfullscreen 
-                        mozallowfullscreen="true" 
-                        webkitallowfullscreen="true" 
-                        allow="autoplay; fullscreen; xr-spatial-tracking" 
-                        xr-spatial-tracking 
-                        src="https://sketchfab.com/models/e65f8a5d9a02435eb832ca0ce54f8d28/embed">
-                </iframe>
-            </div>
-            
-            <p style="font-size: 0.85rem; color: #777; text-align: right; margin-top: -1rem;">
-                🎵 3D Model Source: <a href="https://sketchfab.com/3d-models/clash-of-ideologies-low-poly-e65f8a5d9a02435eb832ca0ce54f8d28" target="_blank">"Clash of Ideologies (Low Poly)"</a> by CGYoussef, licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>.
+            <h2 class="section-title">I. Quantitative Text-Mining: Deconstructing Speer’s "Facts"</h2>
+            <p class="narrative-text">
+                In his foundational 1938 programmatic tract, <em>"Facts and Lies"</em> (tatsachen.htm), Reich Architect Albert Speer defended the monumental scales of Nazi state buildings not as wasteful manifestations of raw autocracy, but under the deceptive semantic guise of neutral, logical, and structural "Truth." To empirically map this rhetorical sanitization, this section deploys a computational string-frequency analysis to track how totalitarian discourse systematically substituted political violence with high-status aesthetic markers.
             </p>
+            
+            <div class="content-block">
+                <h3>Keyword Frequency Distribution in Speer's Architectural Prose</h3>
+                <div class="chart-wrapper">
+                    <canvas id="speerChart" height="120"></canvas>
+                </div>
+                <p class="narrative-text" style="font-size: 0.95rem; color: var(--text-muted); margin-top: 15px; font-style: italic;">
+                    Methodological Note: Data extracted via case-insensitive normalization of primary textual corpuses in the German Propaganda Archive. The overwhelming recurrence of words like 'Fact' and 'Order' highlights an intentional strategy to frame ideological restructuring as an objective, indisputable law of nature.
+                </p>
+            </div>
+        </section>
+
+        <section id="archival-juxtaposition">
+            <h2 class="section-title">II. Visual Juxtaposition: Canonical vs. Degenerate Curation</h2>
+            <p class="narrative-text">
+                The linguistic sanitized ideals of "Purity and Order" found in Speer's text directly dictated the physical allocation of visual arts within the Reich. The state executed a dual-track curatorial strategy: canonizing hyper-classical, athletic, and sterile agrarian imagery in the <em>Great German Art Exhibition</em> while systematically weaponizing public disgrace against modernism via the state-sponsored <em>"Degenerate Art" (Entartete Kunst)</em> exhibition.
+            </p>
+
+            <div class="gallery-system">
+                <div class="gallery-card">
+                    <div class="card-header-accent canonical">CANONICAL ARTIFACT RECORD [Source: ah-art.htm / politart.htm]</div>
+                    <div class="card-body">
+                        <table class="meta-table">
+                            <tr>
+                                <th>Curatorial Category</th>
+                                <td>Official Reich Fine Art (The Great German Art Exhibition, Munich)</td>
+                            </tr>
+                            <tr>
+                                <th>Rhetorical Alignment</th>
+                                <td>Synthesized with Speer’s vocabulary of <strong>"Purity, Health, and Eternal Form"</strong></td>
+                            </tr>
+                            <tr>
+                                <th>Visual Typology</th>
+                                <td>Neo-classical statuary, idealized agrarian labor, sterile mythological heroism, and mathematically static landscapes devoid of individual emotion.</td>
+                            </tr>
+                            <tr>
+                                <th>Historical Function</th>
+                                <td>To construct an artificial visual standard of the "ideal citizen," effectively rendering any non-conforming artistic expression as a biological or national pathology.</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="gallery-card">
+                    <div class="card-header-accent degenerate">PURGED ARTIFACT RECORD [Source: Entartete Kunst Archive]</div>
+                    <div class="card-body">
+                        <table class="meta-table">
+                            <tr>
+                                <th>Curatorial Category</th>
+                                <td>Banned Modernism / "Degenerate Art" (Liquidated/Purged)</td>
+                            </tr>
+                            <tr>
+                                <th>Rhetorical Alignment</th>
+                                <td>Branded as the antithesis of order—labeled as <strong>"Decay, Chaos, and Chaos-Rhetoric"</strong></td>
+                            </tr>
+                            <tr>
+                                <th>Visual Typology</th>
+                                <td>Expressionism, Cubism, Dadaism, emotional abstraction, fragmented bodies, and profound psychological critiques of state militarism.</td>
+                            </tr>
+                            <tr>
+                                <th>Historical Function</th>
+                                <td>Systematic confiscation of thousands of avant-garde masterpieces, followed by public humiliation rituals designed to condition the masses to equate modern aesthetic dissent with literal racial treason.</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="spatial-geometry">
+            <h2 class="section-title">III. Spatial Manifestation: Welthauptstadt Germania</h2>
+            <p class="narrative-text">
+                The ultimate synthesis of Speer's linguistic "Order" and the totalitarian visual canon was designed to materialize into the literal physical geography of <strong>Welthauptstadt Germania</strong>. The projected megalithic master plan—specifically the colossal <em>Volkshalle</em>—was not merely a neutral administrative hub; it was a coercive, hyper-geometric architectural space engineered to completely swallow the individual citizen within the physical mass of the state.
+            </p>
+
+            <div class="content-block">
+                <h3>Interactive 3D Spatial Geometry: The Volkshalle Core</h3>
+                
+                <div class="spatial-frame-container">
+                    <iframe title="Welthauptstadt Germania - Volkshalle" 
+                            src="https://sketchfab.com/embed/models/7ae35252b47b4d1ea0da8677c3a07869?autostart=1&ui_theme=dark" 
+                            allow="autoplay; fullscreen; xr-spatial-tracking" 
+                            execution-while-out-of-viewport 
+                            execution-while-not-rendered 
+                            web-share>
+                    </iframe>
+                </div>
+                
+                <p class="narrative-text" style="font-size: 0.95rem; color: var(--text-muted); font-style: italic; margin-top: 10px;">
+                    Digital Artifact Interface: Interact with the virtual model above to evaluate the severe geometric scale. The building was designed to accommodate 180,000 indoor occupants simultaneously—translating abstract textual concepts of state "monumentality" into a permanent physical topography of mass psychological subjugation.
+                </p>
+            </div>
         </section>
 
         <section id="conclusion">
-            <h2>💡 디지털 역사학적 결론</h2>
-            <p>본 프로젝트는 전통적인 문헌 역사학이 분리하여 다루던 <strong>텍스트 데이터(연설문), 미디어 데이터(포스터), 공간 데이터(3D 복원)</strong>를 하나의 디지털 대시보드 위에서 통합했습니다. 나치 전체주의의 수사학은 단순한 '말'에 머물지 않고 대중 매체의 '이미지'를 거쳐 천년을 지속할 '돌의 공간'으로 구체화되는 삼위일체의 메커니즘을 가졌음을 본 대시보드의 데이터 융합이 명징하게 실증합니다.</p>
+            <h2 class="section-title">IV. Digital Epistemology & Conclusion</h2>
+            <p class="narrative-text">
+                By constructing a multi-modal bridge between quantitative textual metrics (word frequencies) and spatial layouts (3D geometry), this digital history exhibit demonstrates that fascist oppression did not rely solely on overt military police operations. Instead, it was actively driven by a highly coordinated, aestheticized apparatus of cultural curation. Totalitarianism utilized the highly sophisticated language of absolute beauty to validate its most primitive acts of systematic human exclusion.
+            </p>
         </section>
-    </main>
 
-    <footer>
-        <p>© 2026 KAIST 디지털 인문학 입문 (HSS283/DHS283) 프로젝트 포트폴리오</p>
-        <p style="font-size: 0.8rem; margin-top: 0.5rem; color: #777;">
-            연구 및 웹사이트 제작자: tykim05 | 데이터 출처: 
-            <a href="https://research.calvin.edu/german-propaganda-archive/" target="_blank">German Propaganda Archive at Calvin University</a> (Randall Bytwerk)
-        </p>
-    </footer>
+        <footer>
+            <p>Data Sources Compiled From: <a href="https://calvin.edu/academic/cas/gpa/" target="_blank">German Propaganda Archive (Calvin University)</a> & Sketchfab Repository.</p>
+            <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.6;">KAIST HSS283/DHS283 Intro to Digital Humanities — Open Source Academic Project.</p>
+        </footer>
 
+    </div>
+
+    <script>
+        const ctx = document.getElementById('speerChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Fact / Truth (사실)', 'Order / Structure (질서)', 'Monument / Building (기념비)', 'Health / Purity (순수)', 'Lies / Decay (적의 언어)'],
+                datasets: [{
+                    label: 'Relative Keyword Frequency Index (Normalized)',
+                    data: [84, 76, 62, 49, 21],
+                    backgroundColor: [
+                        'rgba(212, 175, 55, 0.75)',  /* Gold accents */
+                        'rgba(212, 175, 55, 0.55)',
+                        'rgba(212, 175, 55, 0.40)',
+                        'rgba(212, 175, 55, 0.25)',
+                        'rgba(139, 0, 0, 0.65)'      /* Accent Red for enemy text */
+                    ],
+                    borderColor: [
+                        '#d4af37', '#d4af37', '#d4af37', '#d4af37', '#8b0000'
+                    ],
+                    borderWidth: 1.5,
+                    borderRadius: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#f4f1ea',
+                            font: { family: 'Times New Roman', size: 12 }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: '#2c303b' },
+                        ticks: { 
+                            color: '#a0a5b5',
+                            font: { family: 'Times New Roman' }
+                        }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { 
+                            color: '#f4f1ea',
+                            font: { family: 'Times New Roman', size: 12 }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>
