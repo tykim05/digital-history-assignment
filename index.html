@@ -6,7 +6,7 @@
     <title>Aesthetics of Exclusion | Digital History Project</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* Core System Styles & Variable Typography */
+        /* Core Style System Variables */
         :root {
             --bg-primary: #0d0e10;
             --bg-secondary: #16181c;
@@ -33,7 +33,7 @@
             padding-bottom: 60px;
         }
 
-        /* Hero Editorial Header */
+        /* Editorial Header Area */
         header {
             position: relative;
             padding: 100px 20px 60px 20px;
@@ -87,7 +87,7 @@
         }
 
         section {
-            margin-bottom: 60px;
+            margin-bottom: 40px;
         }
 
         .section-title {
@@ -122,13 +122,21 @@
             margin: 20px 0;
         }
 
-        /* Multi-Stage Quiz Interactive UI Engine */
+        /* Waterfall Stage Component Animation Styles */
+        .quiz-stage-box {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 30px;
+            margin-bottom: 40px;
+            animation: fadeInStage 0.6s ease-out forwards;
+        }
+
         .stage-indicator {
             font-family: monospace;
             color: var(--text-gold);
             font-size: 1.1rem;
-            margin-bottom: 10px;
-            text-align: center;
+            margin-bottom: 15px;
             letter-spacing: 1px;
         }
 
@@ -152,10 +160,26 @@
             padding-bottom: 20px;
         }
 
-        .vote-card:hover {
+        /* Interactive styling only when active */
+        .vote-card.active-card:hover {
             border-color: var(--text-gold);
             transform: translateY(-4px);
             box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+        }
+
+        /* Locked State styling post-selection */
+        .vote-card.disabled-card {
+            cursor: not-allowed;
+            opacity: 0.4;
+            filter: grayscale(80%);
+        }
+
+        .vote-card.selected-card {
+            cursor: not-allowed;
+            border-color: var(--text-gold);
+            opacity: 1;
+            background-color: #1a1d24;
+            box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.2);
         }
 
         .vote-img-box {
@@ -188,16 +212,22 @@
             transition: all 0.3s;
         }
 
-        .vote-card:hover .vote-btn {
+        .vote-card.active-card:hover .vote-btn {
             background-color: var(--text-gold);
             color: #000;
         }
 
-        /* Gated Core Content - Hidden completely at first */
+        .vote-card.disabled-card .vote-btn {
+            border-color: #444;
+            color: #555;
+            cursor: not-allowed;
+        }
+
+        /* Gated Main Project Content Styles */
         #gated-project-content {
             display: none;
             opacity: 0;
-            transition: opacity 1s ease-in-out;
+            transition: opacity 1.2s ease-in-out;
         }
 
         .result-panel {
@@ -215,7 +245,7 @@
             margin-bottom: 15px;
         }
 
-        /* Dual-Column Gallery System */
+        /* Document Gallery Layout */
         .gallery-system {
             display: flex;
             flex-wrap: wrap;
@@ -274,6 +304,11 @@
 
         footer a { color: var(--text-gold); text-decoration: none; }
         footer a:hover { text-decoration: underline; }
+
+        @keyframes fadeInStage {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
@@ -286,50 +321,30 @@
 
     <div class="container">
 
-        <section id="interactive-quiz-gate" style="margin-top: 40px;">
-            <h2 class="section-title">🔒 Archival Gate: Discover Your Aesthetic Ideology</h2>
+        <section id="portal-introduction" style="margin-top: 40px; margin-bottom: 20px;">
+            <h2 class="section-title">🔒 Archival Gate: Multimodal Taste Evaluation Loop</h2>
             <p class="narrative-text">
-                To unlock the comprehensive historical database and data metrics of this project, you must first complete a 4-stage blind aesthetic evaluation. Below are alternating visual art and architectural styles circulated during the mid-20th century. Select the option that genuinely matches your design affinity.
+                To unlock the secondary analytical infrastructure, data metrics, and 3D spatial models of this project, you must complete a 4-stage programmatic curation track[cite: 2497]. Select the style variant that aligns closest with your immediate design preferences[cite: 2471]. Previous choices will lock in place as you descend into the deep archive.
             </p>
-
-            <div class="content-block" style="background-color: var(--bg-secondary);">
-                <div id="quiz-stage-text" class="stage-indicator">STAGE 1 OF 4</div>
-                
-                <div class="vote-zone">
-                    <div class="vote-card" onclick="processSelection('left')">
-                        <div class="vote-img-box">
-                            <img id="img-choice-left" src="" alt="Aesthetic Choice Left">
-                        </div>
-                        <h4 id="title-choice-left" style="margin-top:15px; color:var(--text-cream);">Style Option Alpha</h4>
-                        <button class="vote-btn">Select This Style</button>
-                    </div>
-
-                    <div class="vote-card" onclick="processSelection('right')">
-                        <div class="vote-img-box">
-                            <img id="img-choice-right" src="" alt="Aesthetic Choice Right">
-                        </div>
-                        <h4 id="title-choice-right" style="margin-top:15px; color:var(--text-cream);">Style Option Beta</h4>
-                        <button class="vote-btn">Select This Style</button>
-                    </div>
-                </div>
-            </div>
         </section>
+
+        <div id="waterfall-quiz-container"></div>
 
         <div id="gated-project-content">
             
-            <div class="result-panel">
+            <div id="verdict-anchor" class="result-panel">
                 <div id="verdictTitle" class="result-verdict"></div>
                 <p id="verdictDescription" class="narrative-text" style="margin-bottom:0; font-size:1.1rem;"></p>
             </div>
 
             <div class="abstract-box">
-                <p><strong>Digital Exhibit Context:</strong> You have now unlocked the master portfolio. This computational research project interrogates the dark synergy between quantitative linguistic patterns and physical curation within the Third Reich. By contrasting Albert Speer’s mathematical text parameters with visual databases and spatial 3D architecture, this installation exposes how authoritarian geometry weaponized the sublime philosophy of absolute order to validate systemic human exclusion.</p>
+                <p><strong>Digital Exhibit Context:</strong> Portfolio fully unlocked. This computational research project maps the dark synergy between quantitative linguistic systems and physical curation layouts within the Third Reich[cite: 2481]. By contrasting Albert Speer’s text metrics with visual databases and spatial 3D architecture, this installation exposes how authoritarian geometry weaponized the sublime philosophy of absolute order to validate systemic human exclusion[cite: 2349, 2424].</p>
             </div>
 
             <section id="text-mining">
                 <h2 class="section-title">II. Quantitative Text-Mining: Deconstructing Speer’s "Facts"</h2>
                 <p class="narrative-text">
-                    In his 1938 programmatic tract, <em>"Facts and Lies"</em> (tatsachen.htm), Reich Architect Albert Speer defended monumental urban projects under the semantic cloak of neutral structural "Truth." Computational string-frequency mapping maps how the regime intentionally substituted the discourse of political terror with sterile vocabularies of cosmic order. [cite: 2322]
+                    In his 1938 programmatic tract, <em>"Facts and Lies"</em> (tatsachen.htm), Reich Architect Albert Speer defended authoritarian scales under the semantic cloak of neutral structural "Truth"[cite: 2304, 2305]. Computational string-frequency mapping illuminates how fascist architecture systematically swapped the vocabulary of physical violence with clean words of cosmic stability[cite: 2394, 2400].
                 </p>
                 
                 <div class="content-block">
@@ -343,7 +358,7 @@
             <section id="archival-juxtaposition">
                 <h2 class="section-title">III. Visual Juxtaposition: Canonical vs. Degenerate Archives</h2>
                 <p class="narrative-text">
-                    The linguistic metrics calculated from Speer’s text directly dictated the physical state censorship of fine arts [cite: 2312, 2323]. The Reich executed a calculated, dual-track curatorial layout: canonizing hyper-classical realism while organizing public shaming operations to liquidate avant-garde modernism [cite: 2323].
+                    The linguistic metrics calculated from Speer’s text directly dictated the physical state censorship of fine arts[cite: 2347]. The Reich executed a calculated, dual-track curatorial layout: canonizing hyper-classical realism while organizing public shaming operations to liquidate avant-garde modernism[cite: 2358].
                 </p>
 
                 <div class="gallery-system">
@@ -353,11 +368,11 @@
                             <table class="meta-table">
                                 <tr>
                                     <th>Rhetorical Sync</th>
-                                    <td>Aligned with Speer's vocabulary of <strong>"Purity, Order, and Eternal Form"</strong> [cite: 2312, 2323]</td>
+                                    <td>Aligned with Speer's vocabulary of <strong>"Purity, Order, and Eternal Form"</strong> [cite: 2347]</td>
                                 </tr>
                                 <tr>
                                     <th>Visual Motif</th>
-                                    <td>Neo-classical statuary, idealized agrarian labor, and mathematically static landscapes completely devoid of individual human emotion [cite: 2323].</td>
+                                    <td>Neo-classical statuary, idealized agrarian labor, and mathematically static landscapes completely devoid of individual human emotion[cite: 2323].</td>
                                 </tr>
                             </table>
                         </div>
@@ -369,11 +384,11 @@
                             <table class="meta-table">
                                 <tr>
                                     <th>Rhetorical Sync</th>
-                                    <td>Branded as the chaotic antithesis—labeled as <strong>"Decay, Chaos, and Lies"</strong> [cite: 2323]</td>
+                                    <td>Branded as the chaotic antithesis—labeled as <strong>"Decay, Chaos, and Lies"</strong> [cite: 2395]</td>
                                 </tr>
                                 <tr>
                                     <th>Visual Motif</th>
-                                    <td>Expressionism, psychological distortion, and profound avant-garde critiques exposing the traumas of state militarism [cite: 2323].</td>
+                                    <td>Expressionism, psychological distortion, and profound avant-garde critiques exposing the traumas of state militarism[cite: 2303].</td>
                                 </tr>
                             </table>
                         </div>
@@ -384,7 +399,7 @@
             <section id="spatial-geometry">
                 <h2 class="section-title">IV. Spatial Manifestation: Welthauptstadt Germania</h2>
                 <p class="narrative-text">
-                    The absolute manifestation of text parameters and visual curation was targeted to crystallize into the macro-geography of Welthauptstadt Germania [cite: 2312, 2324]. The interactive 3D model of the Volkshalle below demonstrates how totalitarianism forced abstract philosphies into a permanent physical topography of mass psychological subjugation [cite: 2324].
+                    The absolute manifestation of text parameters and visual curation was targeted to crystallize into the macro-geography of Welthauptstadt Germania[cite: 2338]. The interactive 3D model of the Volkshalle below demonstrates how totalitarianism forced abstract philosophies into a permanent physical topography of mass psychological subjugation[cite: 2255, 2359].
                 </p>
 
                 <div class="content-block">
@@ -401,103 +416,150 @@
             </section>
 
             <footer>
-                <p>Data Sources Compiled From: <a href="https://research.calvin.edu/german-propaganda-archive/" target="_blank">German Propaganda Archive (Calvin University)</a> & Sketchfab Repository [cite: 2325].</p>
-                <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.6;">KAIST HSS283/DHS283 Intro to Digital Humanities Portfolio Project.</p>
+                <p>Data Sources Compiled From: <a href="https://research.calvin.edu/german-propaganda-archive/" target="_blank">German Propaganda Archive (Calvin University)</a> & Sketchfab Repository[cite: 2409].</p>
+                <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.6;">KAIST HSS283/DHS283 Intro to Digital Humanities Portfolio Project[cite: 2482].</p>
             </footer>
 
         </div> </div> <script>
-        // Comprehensive 8-Image Database mapped across 4 Stages
+        // High-Resolution 8-Image Primary Core Database Linked from Calvin GPA Server
         const quizDatabase = [
             {
                 stage: 1,
-                hint: "Architectural Symmetry vs. Cultural Satire",
-                left: { img: "https://research.calvin.edu/german-propaganda-archive/images/speer/speer10.jpg", label: "Classical Monumentalism", alignment: "canonical" },
-                right: { img: "https://research.calvin.edu/german-propaganda-archive/images/caricatures/vopo43.jpg", label: "Avant-Garde Expressionism", alignment: "degenerate" }
+                hint: "Canonical Idealism vs. Modernist Satire",
+                left: { img: "https://research.calvin.edu/german-propaganda-archive/images/politart/becker.jpg", label: "Style Alpha: Classical Form", alignment: "canonical" },
+                right: { img: "https://research.calvin.edu/german-propaganda-archive/images/caricatures/vopo43.jpg", label: "Style Beta: Avant-Garde Critique", alignment: "degenerate" }
             },
             {
                 stage: 2,
-                hint: "State Memorialization vs. Modernist Distortion",
-                left: { img: "https://research.calvin.edu/german-propaganda-archive/images/speer/speer14.jpg", label: "Symmetrical Order", alignment: "canonical" },
-                right: { img: "https://research.calvin.edu/german-propaganda-archive/images/caricatures/vopo28.jpg", label: "Abstract Lineation", alignment: "degenerate" }
+                hint: "Totalitarian Geometry vs. Abstract Lineation",
+                left: { img: "https://research.calvin.edu/german-propaganda-archive/images/speer/speer10.jpg", label: "Style Alpha: Symmetrical Order", alignment: "canonical" },
+                right: { img: "https://research.calvin.edu/german-propaganda-archive/images/caricatures/vopo28.jpg", label: "Style Beta: Fragmented Abstraction", alignment: "degenerate" }
             },
             {
                 stage: 3,
-                hint: "Idealized State Realism vs. Societal Critique",
-                left: { img: "https://research.calvin.edu/german-propaganda-archive/images/speer/speer12.jpg", label: "Heroic Realism", alignment: "canonical" },
-                right: { img: "https://research.calvin.edu/german-propaganda-archive/images/caricatures/vopo11.jpg", label: "Fragmented Figures", alignment: "degenerate" }
+                hint: "Heroic War Curation vs. Anti-Militarist Traumas",
+                left: { img: "https://research.calvin.edu/german-propaganda-archive/images/naziwarart/art4.jpg", label: "Style Alpha: Heroic Realism", alignment: "canonical" },
+                right: { img: "https://research.calvin.edu/german-propaganda-archive/images/caricatures/vopo11.jpg", label: "Style Beta: Subversive Distortion", alignment: "degenerate" }
             },
             {
                 stage: 4,
-                hint: "Sterile Urban Form vs. Psychological Chaos",
-                left: { img: "https://research.calvin.edu/german-propaganda-archive/images/speer/speer17.jpg", label: "Totalitarian Alignment", alignment: "canonical" },
-                right: { img: "https://research.calvin.edu/german-propaganda-archive/images/caricatures/vopo42.jpg", label: "Subversive Caricature", alignment: "degenerate" }
+                hint: "Monumental State Cult vs. Ideological Dissidence",
+                left: { img: "https://research.calvin.edu/german-propaganda-archive/images/speer/speer14.jpg", label: "Style Alpha: Cosmic Balance", alignment: "canonical" },
+                right: { img: "https://research.calvin.edu/german-propaganda-archive/images/caricatures/vopo42.jpg", label: "Style Beta: Psychological Chaos", alignment: "degenerate" }
             }
         ];
 
         let currentStageIndex = 0;
         let scoreTracker = { canonical: 0, degenerate: 0 };
 
-        // Initialize Stage 1 Viewport
-        function renderQuizStage() {
-            const currentData = quizDatabase[currentStageIndex];
-            document.getElementById('quiz-stage-text').innerText = `STAGE ${currentData.stage} OF 4: ${currentData.hint.toUpperCase()}`;
-            
-            document.getElementById('img-choice-left').src = currentData.left.img;
-            document.getElementById('title-choice-left').innerText = currentData.left.label;
-            
-            document.getElementById('img-choice-right').src = currentData.right.img;
-            document.getElementById('title-choice-right').innerText = currentData.right.label;
+        // Generate and Append Stage Element via Waterfall Mechanism
+        function spawnStageBlock(index) {
+            const currentData = quizDatabase[index];
+            const container = document.getElementById('waterfall-quiz-container');
+
+            // Construct HTML Node programmatically
+            const stageNode = document.createElement('div');
+            stageNode.id = `quiz-stage-${index}`;
+            stageNode.className = 'quiz-stage-box';
+            stageNode.innerHTML = `
+                <div class="stage-indicator">STAGE ${currentData.stage} OF 4: ${currentData.hint.toUpperCase()}</div>
+                <div class="vote-zone">
+                    <div id="card-${index}-left" class="vote-card active-card" onclick="submitUserChoice(${index}, 'left')">
+                        <div class="vote-img-box">
+                            <img src="${currentData.left.img}" alt="Style Alpha Asset">
+                        </div>
+                        <h4 style="margin-top:15px; color:var(--text-cream); font-weight:normal;">${currentData.left.label}</h4>
+                        <button id="btn-${index}-left" class="vote-btn">Select This Style</button>
+                    </div>
+
+                    <div id="card-${index}-right" class="vote-card active-card" onclick="submitUserChoice(${index}, 'right')">
+                        <div class="vote-img-box">
+                            <img src="${currentData.right.img}" alt="Style Beta Asset">
+                        </div>
+                        <h4 style="margin-top:15px; color:var(--text-cream); font-weight:normal;">${currentData.right.label}</h4>
+                        <button id="btn-${index}-right" class="vote-btn">Select This Style</button>
+                    </div>
+                </div>
+            `;
+
+            container.appendChild(stageNode);
+
+            // Execute fluid auto scroll down to center new content chunk
+            setTimeout(() => {
+                stageNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
         }
 
-        // Process User Choice & Track Matrix Sequence
-        function processSelection(chosenSide) {
-            const currentData = quizDatabase[currentStageIndex];
-            const identity = (chosenSide === 'left') ? currentData.left.alignment : currentData.right.alignment;
-            
-            // Increment Ideological Index
+        // Handle Evaluation Choices and Lock Previous Interface States
+        function submitUserChoice(stageIndex, selectedSide) {
+            // Early break if block was already clicked previously
+            const stageData = quizDatabase[stageIndex];
+            const leftCard = document.getElementById(`card-${stageIndex}-left`);
+            const rightCard = document.getElementById(`card-${stageIndex}-right`);
+
+            if (!leftCard.classList.contains('active-card')) return;
+
+            // Compute Selection Alignment Identity
+            const identity = (selectedSide === 'left') ? stageData.left.alignment : stageData.right.alignment;
             scoreTracker[identity]++;
 
-            // Move to Next Stage or Execute Content Unlock
+            // Structural State Hard Lockout Modifiers (Freezes the question parameters)
+            leftCard.classList.remove('active-card');
+            rightCard.classList.remove('active-card');
+            leftCard.removeAttribute('onclick');
+            rightCard.removeAttribute('onclick');
+
+            if (selectedSide === 'left') {
+                leftCard.classList.add('selected-card');
+                rightCard.classList.add('disabled-card');
+                document.getElementById(`btn-${stageIndex}-left`).innerText = "Selected Style";
+                document.getElementById(`btn-${stageIndex}-right`).innerText = "Locked";
+            } else {
+                rightCard.classList.add('selected-card');
+                leftCard.classList.add('disabled-card');
+                document.getElementById(`btn-${stageIndex}-right`).innerText = "Selected Style";
+                document.getElementById(`btn-${stageIndex}-left`).innerText = "Locked";
+            }
+
+            // Progression Sequencer Routing
             if (currentStageIndex < quizDatabase.length - 1) {
                 currentStageIndex++;
-                renderQuizStage();
+                spawnStageBlock(currentStageIndex);
             } else {
                 executeProjectUnlock();
             }
         }
 
-        // Unlocking Mechanism: Reveals Gated Materials and Triggers Dynamic Smooth Scroll
+        // Unlocking Mechanism: Opens Main Research Section and Rolls Down
         function executeProjectUnlock() {
-            // Hide the active quiz gate header block smoothly
-            document.getElementById('interactive-quiz-gate').style.display = "none";
-            
-            // Reveal Gated Primary Project Content Container
             const gatedContent = document.getElementById('gated-project-content');
             gatedContent.style.display = "block";
             setTimeout(() => { gatedContent.style.opacity = "1"; }, 50);
 
-            // Compute Final Verdict Summary
+            // Compute Final Verdict Parameters
             const title = document.getElementById('verdictTitle');
             const desc = document.getElementById('verdictDescription');
 
             if (scoreTracker.canonical >= scoreTracker.degenerate) {
                 title.style.color = "var(--text-gold)";
-                title.innerHTML = "⚠️ IDEOLOGICAL COMPLIANCE RECORD: High Symmetry Affinity";
-                desc.innerHTML = `Out of 4 algorithmic choices, your aesthetic preferences matched ${scoreTracker.canonical} elements of Albert Speer's rigid architectural framework. You subconsciously gravitated toward the sterile geometric 'Order and Purity' that the Nazi state utilized to mask industrial atrocities. In 1938, your taste parameters would have seamlessly integrated into the state's official propaganda consumption matrix.`;
+                title.innerHTML = "⚠️ IDEOLOGICAL COMPLIANCE VERDICT: High Symmetry Affinity";
+                desc.innerHTML = `Out of 4 programmatic blind choices, your design preferences aligned with ${scoreTracker.canonical} elements of Albert Speer's structural metrics[cite: 2498, 2511]. You subconsciously gravitated toward the geometric 'Order and Purity' that the Nazi state utilized to camouflage political mass terror[cite: 2474]. In 1938, your taste parameters would have seamlessly integrated into the state's official propaganda consumption grid[cite: 2346].`;
             } else {
                 title.style.color = "var(--accent-red)";
-                title.innerHTML = "🔥 TOTALITARIAN SUBVERSION RECORD: High Modernist Affinity";
-                desc.innerHTML = `Out of 4 algorithmic choices, your aesthetic preferences favored ${scoreTracker.degenerate} elements of banned avant-garde modernism. Your affinity for emotional distortion and subversion directly matches what the Third Reich condemned as 'Entartete Kunst' (Degenerate Art). In 1938, your cognitive artistic stance would have been publicly liquidated by the Gestapo as a biological pathology against the state.`;
+                title.innerHTML = "🔥 TOTALITARIAN SUBVERSION VERDICT: High Modernist Affinity";
+                desc.innerHTML = `Out of 4 programmatic blind choices, your design preferences favored ${scoreTracker.degenerate} elements of banned avant-garde modernism[cite: 2498, 2511]. Your affinity for deep emotional expressionism and non-conformist distortion directly matches what the Reich condemned as 'Entartete Kunst' (Degenerate Art)[cite: 2475]. In 1938, your cognitive stance would have been aggressively liquidated by the Gestapo as a biological pathology against the state[cite: 2475, 2476].`;
             }
 
-            // Trigger Chart JS compilation post-unlock to prevent zero-height width rendering bugs
+            // Fire Chart instantiation safely post viewport activation
             initializeChart();
 
-            // Smooth Scroll dynamic focus straight to the Verdict Panel
-            title.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Drive viewport target directly down into the uncovered research section
+            setTimeout(() => {
+                document.getElementById('verdict-anchor').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 300);
         }
 
-        // Chart Initialization Engine
+        // Chart Data Indices Logic
         function initializeChart() {
             const ctx = document.getElementById('speerChart').getContext('2d');
             new Chart(ctx, {
@@ -505,7 +567,7 @@
                 data: {
                     labels: ['Fact / Truth', 'Order / Structure', 'Monument / Building', 'Health / Purity', 'Lies / Decay'],
                     datasets: [{
-                        label: 'Relative Keyword Cluster Weight (Normalized Index)',
+                        label: 'Relative Keyword Cluster Weight (Normalized Index) [cite: 2389]',
                         data: [84, 76, 62, 49, 21],
                         backgroundColor: [
                             'rgba(212, 175, 55, 0.85)',
@@ -528,8 +590,10 @@
             });
         }
 
-        // Initialize Core View on Load
-        window.onload = renderQuizStage;
+        // Initialize First Box upon System Bootstrap
+        window.onload = function() {
+            spawnStageBlock(0);
+        };
     </script>
 </body>
 </html>
