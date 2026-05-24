@@ -160,14 +160,12 @@
             padding-bottom: 20px;
         }
 
-        /* Interactive styling only when active */
         .vote-card.active-card:hover {
             border-color: var(--text-gold);
             transform: translateY(-4px);
             box-shadow: 0 8px 20px rgba(0,0,0,0.5);
         }
 
-        /* Locked State styling post-selection */
         .vote-card.disabled-card {
             cursor: not-allowed;
             opacity: 0.4;
@@ -245,40 +243,48 @@
             margin-bottom: 15px;
         }
 
-        /* Document Gallery Layout */
+        /* Art Specimen Explanation Gallery Layout */
         .gallery-system {
             display: flex;
-            flex-wrap: wrap;
-            gap: 25px;
+            flex-direction: column;
+            gap: 35px;
             margin-top: 30px;
         }
 
         .gallery-card {
-            flex: 1;
-            min-width: 320px;
             background-color: var(--bg-tertiary);
             border: 1px solid var(--border-color);
-            border-radius: 4px;
+            border-radius: 6px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
         }
 
         .card-header-accent {
-            padding: 12px 20px;
+            padding: 14px 20px;
             font-weight: bold;
-            font-size: 1rem;
+            font-size: 1.1rem;
             letter-spacing: 1px;
+            background-color: #1a1d24;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-gold);
         }
 
-        .card-header-accent.canonical { background-color: #1b2e1e; color: #81c784; border-bottom: 1px solid #2e4d34; }
-        .card-header-accent.degenerate { background-color: #3a1a1a; color: #e57373; border-bottom: 1px solid #5a2828; }
+        .card-body { padding: 25px; }
 
-        .card-body { padding: 20px; flex-grow: 1; }
+        .meta-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        .meta-table th, .meta-table td { padding: 10px 14px; text-align: left; font-size: 1rem; border-bottom: 1px solid #2a2e3d; }
+        .meta-table th { color: var(--text-gold); font-weight: normal; width: 25%; }
 
-        .meta-table { width: 100%; border-collapse: collapse; }
-        .meta-table th, .meta-table td { padding: 8px 12px; text-align: left; font-size: 0.95rem; border-bottom: 1px solid #2a2e3d; }
-        .meta-table th { color: var(--text-gold); font-weight: normal; width: 35%; }
+        .sub-block-title {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            margin-top: 15px;
+        }
+        .sub-block-title.can-title { color: #81c784; }
+        .sub-block-title.deg-title { color: #e57373; }
 
         .spatial-frame-container {
             position: relative;
@@ -324,7 +330,7 @@
         <section id="portal-introduction" style="margin-top: 40px; margin-bottom: 20px;">
             <h2 class="section-title">🔒 Archival Gate: Multimodal Taste Evaluation Loop</h2>
             <p class="narrative-text">
-                To unlock the secondary analytical infrastructure, data metrics, and 3D spatial models of this project, you must complete a 4-stage programmatic curation track[cite: 2497]. Select the style variant that aligns closest with your immediate design preferences[cite: 2471]. Previous choices will lock in place as you descend into the deep archive.
+                To unlock the secondary analytical infrastructure, quantitative text metrics, and 3D spatial models of this project, you must complete a 4-stage programmatic curation track. Select the style variant that aligns closest with your immediate design preferences. Previous choices will lock in place as you descend into the deep archive.
             </p>
         </section>
 
@@ -337,14 +343,77 @@
                 <p id="verdictDescription" class="narrative-text" style="margin-bottom:0; font-size:1.1rem;"></p>
             </div>
 
-            <div class="abstract-box">
-                <p><strong>Digital Exhibit Context:</strong> Portfolio fully unlocked. This computational research project maps the dark synergy between quantitative linguistic systems and physical curation layouts within the Third Reich[cite: 2481]. By contrasting Albert Speer’s text metrics with visual databases and spatial 3D architecture, this installation exposes how authoritarian geometry weaponized the sublime philosophy of absolute order to validate systemic human exclusion[cite: 2349, 2424].</p>
-            </div>
+            <section id="archival-juxtaposition">
+                <h2 class="section-title">II. Unveiling the Curation: Blended Historical Specimen Expositions</h2>
+                <p class="narrative-text">
+                    Now that your blind evaluation is locked, we reveal the actual historical specimens you navigated. During the Third Reich, art was never neutral; it was weaponized into a binary system. The regime systematically elevated classical symmetry to project state authority while aggressively liquidating avant-garde modernism under the label of "Degeneracy."
+                </p>
+
+                <div class="gallery-system">
+                    
+                    <div class="gallery-card">
+                        <div class="card-header-accent">🎨 Stage 1: Figure Painting (Classicism vs. Expressionism)</div>
+                        <div class="card-body">
+                            <div class="sub-block-title can-title">🏛️ Style Alpha (Canonical Choice): Adolf Ziegler — "The Four Elements"</div>
+                            <p class="narrative-text" style="font-size: 1rem; margin-bottom: 15px; color: var(--text-cream);">
+                                Painted by Adolf Ziegler, the president of the Reich Chamber for Visual Arts and Hitler's favorite painter. This triptych depicts idealized, mathematically flawless, and sterile figures representing Earth, Water, Fire, and Air. Because of its meticulous, hyper-ordered compliance with traditional academic styles, the Nazi regime hung this masterpiece prominently in the Fuhrer's building in Munich, using it to define the strict biological and aesthetic canon of the state.
+                            </p>
+                            <div class="sub-block-title deg-title">🔥 Style Beta (Suppressed Choice): Ernst Ludwig Kirchner — "Street, Berlin"</div>
+                            <p class="narrative-text" style="font-size: 1rem; margin-bottom: 0; color: var(--text-cream);">
+                                Created by Ernst Ludwig Kirchner, a pioneer of German Expressionism. This work features jagged lines, clashing colors, and psychologically distorted figures exposing the anxiety and alienation of modern metropolitan life. Branded by the Gestapo as a "pathological distortion of the German spirit," Kirchner's entire life's work was confiscated, and over 600 of his paintings were removed from museums. Devastated by this systematic public liquidation and trauma, Kirchner eventually committed suicide in 1938.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-card">
+                        <div class="card-header-accent">🏢 Stage 2: Public Architecture (Neo-Classicism vs. Bauhaus)</div>
+                        <div class="card-body">
+                            <div class="sub-block-title can-title">🏛️ Style Alpha (Canonical Choice): Paul Troost — "The House of German Art Facade"</div>
+                            <p class="narrative-text" style="font-size: 1rem; margin-bottom: 15px; color: var(--text-cream);">
+                                Designed by Paul Ludwig Troost, Hitler's first chief architect before Albert Speer. This massive marble museum features an endless row of rigid, repetitive, and heavy columns imitating a Greek temple. Stripped of modern ornamentation, its geometric symmetry was explicitly engineered to radiate eternal authority, permanence, and political weight. It served as the official sanctuary built to host the annual "Great German Art Exhibition" celebrating regime-approved propaganda.
+                            </p>
+                            <div class="sub-block-title deg-title">🔥 Style Beta (Suppressed Choice): Walter Gropius — "Bauhaus Dessau Building"</div>
+                            <p class="narrative-text" style="font-size: 1rem; margin-bottom: 0; color: var(--text-cream);">
+                                Designed by Walter Gropius, the founder of the legendary Bauhaus school. This architecture introduced a revolutionary modern vision utilizing open steel frames, asymmetrical layouts, and radical transparent glass curtain walls to celebrate functional efficiency and international collaboration. The Nazi regime aggressively condemned this philosophy as "Jewish-Bolshevik decadence" and forced the school to permanently shut down in 1933, hunting down avant-garde architects who resisted state geometry.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-card">
+                        <div class="card-header-accent">🏞️ Stage 3: Landscape Painting (Pastoral Realism vs. Cubism)</div>
+                        <div class="card-body">
+                            <div class="sub-block-title can-title">🏛️ Style Alpha (Canonical Choice): Werner Peiner — "German Land"</div>
+                            <p class="narrative-text" style="font-size: 1rem; margin-bottom: 15px; color: var(--text-cream);">
+                                Painted by Werner Peiner, a prominent state-favored artist who operated an official academy under the patronage of Hermann Göring. This landscape meticulously renders an expansive, static, and peaceful rural valley. By portraying the countryside with absolute precision and no emotional friction, it served as a perfect visual anchor for the regime's "Blood and Soil" (Blut und Boden) ideology, promoting an artificial, agrarian fantasy of regional purity and unyielding geographic dominance.
+                            </p>
+                            <div class="sub-block-title deg-title">🔥 Style Beta (Suppressed Choice): Pablo Picasso — "Factory at Horta de Ebro"</div>
+                            <p class="narrative-text" style="font-size: 1rem; margin-bottom: 0; color: var(--text-cream);">
+                                Created by Pablo Picasso, a foundational pioneer of Cubism. This masterpiece deconstructs a village landscape into fragmented cubes, geometric shards, and multiple overlapping perspectives, rejecting traditional rules of realistic depth. Totalitarian curators aggressively attacked this avant-garde perspective as a "destructive, chaotic threat to national stability," systematically banning Cubist, Dadaist, and Fauvist styles from public display to prevent individual cognitive freedom.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-card">
+                        <div class="card-header-accent">🏛️ Stage 4: Monumental Architecture (Heavy Stone vs. Kinetic Iron)</div>
+                        <div class="card-body">
+                            <div class="sub-block-title can-title">🏛️ Style Alpha (Canonical Choice): Wilhelm Kreis — "Leipzig War Memorial Interior"</div>
+                            <p class="narrative-text" style="font-size: 1rem; margin-bottom: 15px; color: var(--text-cream);">
+                                Built to commemorate historical fallen soldiers and heavily re-conceptualized under Wilhelm Kreis, a dominant state architect during the Reich. The interior relies on colossal stone blocks, absolute geometric alignment, and severe architectural massiveness. Stripped of light decorative elements, this heavy, monolithic style was weaponized by the state to foster an atmosphere of collective mourning, absolute obedience, and solemn self-sacrifice for the eternal authority of the Reich.
+                            </p>
+                            <div class="sub-block-title deg-title">🔥 Style Beta (Suppressed Choice): Vladimir Tatlin — "Monument to the Third International"</div>
+                            <p class="narrative-text" style="font-size: 1rem; margin-bottom: 0; color: var(--text-cream);">
+                                Conceived by Vladimir Tatlin, a leading figure of Avant-Garde Constructivism. This industrial design envisioned a giant, spiraling, kinetic iron tower housing rotating glass chambers. It celebrated dynamic technological progress, transparency, and a constantly moving future. The totalitarian regime condemned this structural philosophy as the epitome of foreign, Bolshevistic chaos and completely outlawed kinetic abstraction in favor of static stone imperialism.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
 
             <section id="text-mining">
-                <h2 class="section-title">II. Quantitative Text-Mining: Deconstructing Speer’s "Facts"</h2>
+                <h2 class="section-title">III. Quantitative Text-Mining: Deconstructing Speer’s Rhetoric</h2>
                 <p class="narrative-text">
-                    In his 1938 programmatic tract, <em>"Facts and Lies"</em> (tatsachen.htm), Reich Architect Albert Speer defended authoritarian scales under the semantic cloak of neutral structural "Truth"[cite: 2304, 2305]. Computational string-frequency mapping illuminates how fascist architecture systematically swapped the vocabulary of physical violence with clean words of cosmic stability[cite: 2394, 2400].
+                    The dual-track visual and architectural censorship outlined above directly correlates with the linguistic structures utilized by Reich Architect Albert Speer. In his 1938 programmatic tract, <em>"Facts and Lies"</em> (tatsachen.htm), Speer defended monumental urban overhauls under the semantic cloak of neutral structural "Truth." Computational frequency analysis proves that the regime deliberately swapped political terror with sterile vocabularies of cosmic stability to justify social purging.
                 </p>
                 
                 <div class="content-block">
@@ -355,51 +424,10 @@
                 </div>
             </section>
 
-            <section id="archival-juxtaposition">
-                <h2 class="section-title">III. Visual Juxtaposition: Canonical vs. Degenerate Archives</h2>
-                <p class="narrative-text">
-                    The linguistic metrics calculated from Speer’s text directly dictated the physical state censorship of fine arts[cite: 2347]. The Reich executed a calculated, dual-track curatorial layout: canonizing hyper-classical realism while organizing public shaming operations to liquidate avant-garde modernism[cite: 2358].
-                </p>
-
-                <div class="gallery-system">
-                    <div class="gallery-card">
-                        <div class="card-header-accent canonical">🏛️ CANONICAL ART RECORD (Official Reich Fine Art)</div>
-                        <div class="card-body">
-                            <table class="meta-table">
-                                <tr>
-                                    <th>Rhetorical Sync</th>
-                                    <td>Aligned with Speer's vocabulary of <strong>"Purity, Order, and Eternal Form"</strong> [cite: 2347]</td>
-                                </tr>
-                                <tr>
-                                    <th>Visual Motif</th>
-                                    <td>Neo-classical statuary, idealized agrarian labor, and mathematically static landscapes completely devoid of individual human emotion[cite: 2323].</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="gallery-card">
-                        <div class="card-header-accent degenerate">🔥 DEGENERATE ART RECORD (Banned Modernism)</div>
-                        <div class="card-body">
-                            <table class="meta-table">
-                                <tr>
-                                    <th>Rhetorical Sync</th>
-                                    <td>Branded as the chaotic antithesis—labeled as <strong>"Decay, Chaos, and Lies"</strong> [cite: 2395]</td>
-                                </tr>
-                                <tr>
-                                    <th>Visual Motif</th>
-                                    <td>Expressionism, psychological distortion, and profound avant-garde critiques exposing the traumas of state militarism[cite: 2303].</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             <section id="spatial-geometry">
                 <h2 class="section-title">IV. Spatial Manifestation: Welthauptstadt Germania</h2>
                 <p class="narrative-text">
-                    The absolute manifestation of text parameters and visual curation was targeted to crystallize into the macro-geography of Welthauptstadt Germania[cite: 2338]. The interactive 3D model of the Volkshalle below demonstrates how totalitarianism forced abstract philosophies into a permanent physical topography of mass psychological subjugation[cite: 2255, 2359].
+                    The absolute spatial culmination of Speer’s text parameters and the regime's strict visual purification was targeted to crystalize into the concrete geography of Welthauptstadt Germania. The interactive 3D model of the Volkshalle below demonstrates how totalitarianism forced abstract philosophies into a permanent physical topography designed to crush individual identity.
                 </p>
 
                 <div class="content-block">
@@ -415,60 +443,59 @@
                 </div>
             </section>
 
+            <section id="project-conclusion">
+                <h2 class="section-title">V. Digital Epistemology: Methodological Intent & Synthesis</h2>
+                <p class="narrative-text" style="line-height: 1.8; font-weight: bold; color: var(--text-gold);">
+                    Project Synthesis & Critical Conclusion:
+                </p>
+                <p class="narrative-text" style="line-height: 1.7; text-align: justify;">
+                    This interactive digital humanities project was systematically constructed to expose a profound historical paradox: totalitarian oppression did not operate solely through raw physical force, but was meticulously engineered through an aestheticized apparatus of cultural curation. 
+                </p>
+                <p class="narrative-text" style="line-height: 1.7; text-align: justify;">
+                    By navigating the Archival Gate, users empirically witness that fascism heavily suppressed the free-thinking spirit of Modernism—banning its emotional expression, transparency, and avant-garde critique—while weaponizing the majestic language of Neo-Classicism, symmetry, and monumental stonework. Through the cross-examination of quantitative text-mining (Speer's rhetoric) and interactive spatial geometry (3D Germania modeling), this installation demonstrates that the pursuit of absolute "beauty and order" can be strategically deployed as a powerful weapon for socio-cultural liquidation and systemic human exclusion.
+                </p>
+            </section>
+
             <footer>
-                <p>Data Sources Compiled From: <a href="https://research.calvin.edu/german-propaganda-archive/" target="_blank">German Propaganda Archive (Calvin University)</a> & Sketchfab Repository[cite: 2409].</p>
-                <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.6;">KAIST HSS283/DHS283 Intro to Digital Humanities Portfolio Project[cite: 2482].</p>
+                <p>Data Sources Compiled From: <a href="https://research.calvin.edu/german-propaganda-archive/" target="_blank">German Propaganda Archive (Calvin University)</a> & Sketchfab Repository.</p>
+                <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.6;">KAIST HSS283/DHS283 Intro to Digital Humanities Portfolio Project.</p>
             </footer>
 
         </div> </div> <script>
-        // High-Resolution 8-Image Primary Core Database Linked from Calvin GPA Server
-        // =================================================================
-        // ✨ SECURE IMAGE DATABASE (HTTPS OVERRIDE ENABLED)
-        // Mapped across 4 Stages using fully compliant, non-blocked visual assets
-        // =================================================================
         const quizDatabase = [
             {
                 stage: 1,
-                hint: "Canonical Idealism vs. Modernist Satire",
-                // Left: Arno Breker's Official Nazi Statue (Symmetry & Power)
-                left: { img: "https://upload.wikimedia.org/wikipedia/commons/e/e2/Arno_Breker_Die_Partei.jpg", label: "Style Alpha: Classical Form", alignment: "canonical" },
-                // Right: George Grosz's Subversive Expressionism (Purged by the regime)
-                right: { img: "https://upload.wikimedia.org/wikipedia/commons/d/da/George_Grosz_St%C3%BCtzen_der_Gesellschaft_1926.jpg", label: "Style Beta: Avant-Garde Critique", alignment: "degenerate" }
+                hint: "Figure Painting (Classicism vs. Expressionism)",
+                left: { img: "canonical1.jpg", label: "Style Alpha: Classical Form", alignment: "canonical" },
+                right: { img: "degenerate1.jpg", label: "Style Beta: Avant-Garde Critique", alignment: "degenerate" }
             },
             {
                 stage: 2,
-                hint: "Totalitarian Geometry vs. Abstract Lineation",
-                // Left: Albert Speer's Symmetrical New Reich Chancellery Plan
-                left: { img: "https://upload.wikimedia.org/wikipedia/commons/2/22/Bundesarchiv_Bild_146-1990-048-11A%2C_Berlin%2C_Neue_Reichskanzlei%2C_Modell.jpg", label: "Style Alpha: Symmetrical Order", alignment: "canonical" },
-                // Right: Wassily Kandinsky's Abstract Composition (Labeled as 'Degenerate Art')
-                right: { img: "https://upload.wikimedia.org/wikipedia/commons/b/b4/Vassily_Kandinsky%2C_1923_-_Composition_8.jpg", label: "Style Beta: Fragmented Abstraction", alignment: "degenerate" }
+                hint: "Public Architecture (Neo-Classicism vs. Bauhaus)",
+                left: { img: "canonical2.jpg", label: "Style Alpha: Symmetrical Order", alignment: "canonical" },
+                right: { img: "degenerate2.jpg", label: "Style Beta: Fragmented Abstraction", alignment: "degenerate" }
             },
             {
                 stage: 3,
-                hint: "Heroic War Curation vs. Anti-Militarist Traumas",
-                // Left: Official Nazi Wartime Propagandistic Heroic Painting
-                left: { img: "https://upload.wikimedia.org/wikipedia/commons/c/c5/Bundesarchiv_Bild_101I-718-0136-12A%2C_Sowjetunion%2C_Propagandamaler.jpg", label: "Style Alpha: Heroic Realism", alignment: "canonical" },
-                // Right: Ernst Ludwig Kirchner's Subversive Military Self-Portrait (Banned/Purged)
-                right: { img: "https://upload.wikimedia.org/wikipedia/commons/a/a8/Ernst_Ludwig_Kirchner_-_Selbstbildnis_als_Soldat.jpg", label: "Style Beta: Subversive Distortion", alignment: "degenerate" }
+                hint: "Landscape Painting (Pastoral Realism vs. Cubism)",
+                left: { img: "canonical3.jpg", label: "Style Alpha: Heroic Realism", alignment: "canonical" },
+                right: { img: "degenerate3.jpg", label: "Style Beta: Subversive Distortion", alignment: "degenerate" }
             },
             {
                 stage: 4,
-                hint: "Monumental State Cult vs. Ideological Dissidence",
-                // Left: Symmetrical Columns of the House of German Art in Munich (Nazi Temple)
-                left: { img: "https://upload.wikimedia.org/wikipedia/commons/e/eb/Bundesarchiv_Bild_183-H02648%2C_M%C3%BCnchen%2C_Haus_der_Deutschen_Kunst%2C_Richtfest.jpg", label: "Style Alpha: Cosmic Balance", alignment: "canonical" },
-                // Right: Franz Marc's Modernist Masterpiece (Confiscated from museums by the Gestapo)
-                right: { img: "https://upload.wikimedia.org/wikipedia/commons/d/da/Franz_Marc_016.jpg", label: "Style Beta: Psychological Chaos", alignment: "degenerate" }
+                hint: "Monumental Architecture (Heavy Stone vs. Kinetic Iron)",
+                left: { img: "canonical4.jpg", label: "Style Alpha: Cosmic Balance", alignment: "canonical" },
+                right: { img: "degenerate4.jpg", label: "Style Beta: Psychological Chaos", alignment: "degenerate" }
             }
         ];
+
         let currentStageIndex = 0;
         let scoreTracker = { canonical: 0, degenerate: 0 };
 
-        // Generate and Append Stage Element via Waterfall Mechanism
         function spawnStageBlock(index) {
             const currentData = quizDatabase[index];
             const container = document.getElementById('waterfall-quiz-container');
 
-            // Construct HTML Node programmatically
             const stageNode = document.createElement('div');
             stageNode.id = `quiz-stage-${index}`;
             stageNode.className = 'quiz-stage-box';
@@ -495,26 +522,21 @@
 
             container.appendChild(stageNode);
 
-            // Execute fluid auto scroll down to center new content chunk
             setTimeout(() => {
                 stageNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }, 100);
         }
 
-        // Handle Evaluation Choices and Lock Previous Interface States
         function submitUserChoice(stageIndex, selectedSide) {
-            // Early break if block was already clicked previously
             const stageData = quizDatabase[stageIndex];
             const leftCard = document.getElementById(`card-${stageIndex}-left`);
             const rightCard = document.getElementById(`card-${stageIndex}-right`);
 
             if (!leftCard.classList.contains('active-card')) return;
 
-            // Compute Selection Alignment Identity
             const identity = (selectedSide === 'left') ? stageData.left.alignment : stageData.right.alignment;
             scoreTracker[identity]++;
 
-            // Structural State Hard Lockout Modifiers (Freezes the question parameters)
             leftCard.classList.remove('active-card');
             rightCard.classList.remove('active-card');
             leftCard.removeAttribute('onclick');
@@ -532,7 +554,6 @@
                 document.getElementById(`btn-${stageIndex}-left`).innerText = "Locked";
             }
 
-            // Progression Sequencer Routing
             if (currentStageIndex < quizDatabase.length - 1) {
                 currentStageIndex++;
                 spawnStageBlock(currentStageIndex);
@@ -541,36 +562,31 @@
             }
         }
 
-        // Unlocking Mechanism: Opens Main Research Section and Rolls Down
         function executeProjectUnlock() {
             const gatedContent = document.getElementById('gated-project-content');
             gatedContent.style.display = "block";
             setTimeout(() => { gatedContent.style.opacity = "1"; }, 50);
 
-            // Compute Final Verdict Parameters
             const title = document.getElementById('verdictTitle');
             const desc = document.getElementById('verdictDescription');
 
             if (scoreTracker.canonical >= scoreTracker.degenerate) {
                 title.style.color = "var(--text-gold)";
                 title.innerHTML = "⚠️ IDEOLOGICAL COMPLIANCE VERDICT: High Symmetry Affinity";
-                desc.innerHTML = `Out of 4 programmatic blind choices, your design preferences aligned with ${scoreTracker.canonical} elements of Albert Speer's structural metrics[cite: 2498, 2511]. You subconsciously gravitated toward the geometric 'Order and Purity' that the Nazi state utilized to camouflage political mass terror[cite: 2474]. In 1938, your taste parameters would have seamlessly integrated into the state's official propaganda consumption grid[cite: 2346].`;
+                desc.innerHTML = `Out of 4 programmatic blind choices, your design preferences aligned with ${scoreTracker.canonical} elements of Albert Speer's structural framework. You subconsciously gravitated toward the geometric 'Order and Purity' that the Nazi state utilized to camouflage political mass terror. In 1938, your taste parameters would have seamlessly integrated into the state's official propaganda consumption grid.`;
             } else {
                 title.style.color = "var(--accent-red)";
                 title.innerHTML = "🔥 TOTALITARIAN SUBVERSION VERDICT: High Modernist Affinity";
-                desc.innerHTML = `Out of 4 programmatic blind choices, your design preferences favored ${scoreTracker.degenerate} elements of banned avant-garde modernism[cite: 2498, 2511]. Your affinity for deep emotional expressionism and non-conformist distortion directly matches what the Reich condemned as 'Entartete Kunst' (Degenerate Art)[cite: 2475]. In 1938, your cognitive stance would have been aggressively liquidated by the Gestapo as a biological pathology against the state[cite: 2475, 2476].`;
+                desc.innerHTML = `Out of 4 programmatic blind choices, your design preferences favored ${scoreTracker.degenerate} elements of banned avant-garde modernism. Your affinity for deep emotional expressionism and non-conformist distortion directly matches what the Reich condemned as 'Entartete Kunst' (Degenerate Art). In 1938, your cognitive stance would have been aggressively liquidated by the Gestapo as a biological pathology against the state.`;
             }
 
-            // Fire Chart instantiation safely post viewport activation
             initializeChart();
 
-            // Drive viewport target directly down into the uncovered research section
             setTimeout(() => {
                 document.getElementById('verdict-anchor').scrollIntoView({ behavior: 'smooth', block: 'start' });
             }, 300);
         }
 
-        // Chart Data Indices Logic
         function initializeChart() {
             const ctx = document.getElementById('speerChart').getContext('2d');
             new Chart(ctx, {
@@ -578,7 +594,7 @@
                 data: {
                     labels: ['Fact / Truth', 'Order / Structure', 'Monument / Building', 'Health / Purity', 'Lies / Decay'],
                     datasets: [{
-                        label: 'Relative Keyword Cluster Weight (Normalized Index) [cite: 2389]',
+                        label: 'Relative Keyword Cluster Weight (Normalized Index)',
                         data: [84, 76, 62, 49, 21],
                         backgroundColor: [
                             'rgba(212, 175, 55, 0.85)',
@@ -601,7 +617,6 @@
             });
         }
 
-        // Initialize First Box upon System Bootstrap
         window.onload = function() {
             spawnStageBlock(0);
         };
