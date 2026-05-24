@@ -422,33 +422,44 @@
 
         </div> </div> <script>
         // High-Resolution 8-Image Primary Core Database Linked from Calvin GPA Server
+        // =================================================================
+        // ✨ SECURE IMAGE DATABASE (HTTPS OVERRIDE ENABLED)
+        // Mapped across 4 Stages using fully compliant, non-blocked visual assets
+        // =================================================================
         const quizDatabase = [
             {
                 stage: 1,
                 hint: "Canonical Idealism vs. Modernist Satire",
-                left: { img: "https://research.calvin.edu/german-propaganda-archive/images/politart/becker.jpg", label: "Style Alpha: Classical Form", alignment: "canonical" },
-                right: { img: "https://research.calvin.edu/german-propaganda-archive/images/caricatures/vopo43.jpg", label: "Style Beta: Avant-Garde Critique", alignment: "degenerate" }
+                // Left: Arno Breker's Official Nazi Statue (Symmetry & Power)
+                left: { img: "https://upload.wikimedia.org/wikipedia/commons/e/e2/Arno_Breker_Die_Partei.jpg", label: "Style Alpha: Classical Form", alignment: "canonical" },
+                // Right: George Grosz's Subversive Expressionism (Purged by the regime)
+                right: { img: "https://upload.wikimedia.org/wikipedia/commons/d/da/George_Grosz_St%C3%BCtzen_der_Gesellschaft_1926.jpg", label: "Style Beta: Avant-Garde Critique", alignment: "degenerate" }
             },
             {
                 stage: 2,
                 hint: "Totalitarian Geometry vs. Abstract Lineation",
-                left: { img: "https://research.calvin.edu/german-propaganda-archive/images/speer/speer10.jpg", label: "Style Alpha: Symmetrical Order", alignment: "canonical" },
-                right: { img: "https://research.calvin.edu/german-propaganda-archive/images/caricatures/vopo28.jpg", label: "Style Beta: Fragmented Abstraction", alignment: "degenerate" }
+                // Left: Albert Speer's Symmetrical New Reich Chancellery Plan
+                left: { img: "https://upload.wikimedia.org/wikipedia/commons/2/22/Bundesarchiv_Bild_146-1990-048-11A%2C_Berlin%2C_Neue_Reichskanzlei%2C_Modell.jpg", label: "Style Alpha: Symmetrical Order", alignment: "canonical" },
+                // Right: Wassily Kandinsky's Abstract Composition (Labeled as 'Degenerate Art')
+                right: { img: "https://upload.wikimedia.org/wikipedia/commons/b/b4/Vassily_Kandinsky%2C_1923_-_Composition_8.jpg", label: "Style Beta: Fragmented Abstraction", alignment: "degenerate" }
             },
             {
                 stage: 3,
                 hint: "Heroic War Curation vs. Anti-Militarist Traumas",
-                left: { img: "https://research.calvin.edu/german-propaganda-archive/images/naziwarart/art4.jpg", label: "Style Alpha: Heroic Realism", alignment: "canonical" },
-                right: { img: "https://research.calvin.edu/german-propaganda-archive/images/caricatures/vopo11.jpg", label: "Style Beta: Subversive Distortion", alignment: "degenerate" }
+                // Left: Official Nazi Wartime Propagandistic Heroic Painting
+                left: { img: "https://upload.wikimedia.org/wikipedia/commons/c/c5/Bundesarchiv_Bild_101I-718-0136-12A%2C_Sowjetunion%2C_Propagandamaler.jpg", label: "Style Alpha: Heroic Realism", alignment: "canonical" },
+                // Right: Ernst Ludwig Kirchner's Subversive Military Self-Portrait (Banned/Purged)
+                right: { img: "https://upload.wikimedia.org/wikipedia/commons/a/a8/Ernst_Ludwig_Kirchner_-_Selbstbildnis_als_Soldat.jpg", label: "Style Beta: Subversive Distortion", alignment: "degenerate" }
             },
             {
                 stage: 4,
                 hint: "Monumental State Cult vs. Ideological Dissidence",
-                left: { img: "https://research.calvin.edu/german-propaganda-archive/images/speer/speer14.jpg", label: "Style Alpha: Cosmic Balance", alignment: "canonical" },
-                right: { img: "https://research.calvin.edu/german-propaganda-archive/images/caricatures/vopo42.jpg", label: "Style Beta: Psychological Chaos", alignment: "degenerate" }
+                // Left: Symmetrical Columns of the House of German Art in Munich (Nazi Temple)
+                left: { img: "https://upload.wikimedia.org/wikipedia/commons/e/eb/Bundesarchiv_Bild_183-H02648%2C_M%C3%BCnchen%2C_Haus_der_Deutschen_Kunst%2C_Richtfest.jpg", label: "Style Alpha: Cosmic Balance", alignment: "canonical" },
+                // Right: Franz Marc's Modernist Masterpiece (Confiscated from museums by the Gestapo)
+                right: { img: "https://upload.wikimedia.org/wikipedia/commons/d/da/Franz_Marc_016.jpg", label: "Style Beta: Psychological Chaos", alignment: "degenerate" }
             }
         ];
-
         let currentStageIndex = 0;
         let scoreTracker = { canonical: 0, degenerate: 0 };
 
