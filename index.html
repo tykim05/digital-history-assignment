@@ -524,36 +524,91 @@ footer a { color: var(--text-gold); }
         </section>
 
         <!-- ═══════════════════════════════════════════════════════ -->
-        <!--  SECTION III — Text-Mining                              -->
+        <!--  SECTION III — Text-Mining (REAL DATA)                  -->
         <!-- ═══════════════════════════════════════════════════════ -->
         <section id="text-mining">
-            <h2 class="section-title">III. Computational Methodology: Deconstructing Speer's Rhetoric</h2>
+            <h2 class="section-title">III. Text-Mining Analysis: The Language of Aesthetic Exclusion</h2>
             <p class="narrative-text">
-                To empirically ground the visual censorship revealed above, this project conducts a quantitative computational text-mining analysis on the primary linguistic structures utilized by Reich Architect Albert Speer.
+                The visual suppression documented above did not emerge from raw violence alone — it was first constructed in <em>language</em>. This section presents a computational text-mining analysis of two primary sources: Hitler's 1937 Reichstag address (15,649 words) and Albert Speer's 1936 architectural essay (2,139 words). By identifying how each author deployed shared ideological vocabularies, we can trace the linguistic infrastructure that made the exclusion of Modernist art seem not like censorship, but like <em>natural order</em>.
             </p>
 
+            <!-- Pipeline -->
             <div class="content-block">
-                <h3 style="color: var(--text-gold); margin-bottom: 15px;">Empirical Digital Humanities Pipeline</h3>
+                <h3 style="color: var(--text-gold); margin-bottom: 15px;">Methodology: Semantic Cluster Analysis</h3>
                 <ul class="pipeline-list">
                     <li class="pipeline-item">
-                        <strong>Primary Corpus Ingestion:</strong> Extracted Albert Speer's official 1938 programmatic propaganda defense text, <em>"Facts and Lies"</em> (tatsachen.htm), preserved within the German Propaganda Archive at Calvin University.
+                        <strong>Corpus:</strong> Hitler's Reichstag speech (Jan. 30, 1937) &amp; Speer's essay "The Führer as Builder" (1936), both sourced from the German Propaganda Archive, Calvin University. Texts were tokenized, lowercased, and normalized.
                     </li>
                     <li class="pipeline-item">
-                        <strong>Natural Language Preprocessing:</strong> Implemented string-tokenization and lowercase normalization via computational filters to strip out non-ideological syntax and isolate high-frequency semantic nodes.
+                        <strong>Semantic Clustering:</strong> 120 keywords were hand-coded into six ideological clusters — Aesthetic Order, Eternal Permanence, Power &amp; Authority, Biological Language, Art &amp; Architecture, and Exclusion Language. Raw frequencies were normalized per 1,000 words to enable fair comparison across texts of different lengths.
                     </li>
                     <li class="pipeline-item">
-                        <strong>Ideological Clustering:</strong> Aggregated individual words into distinct thematic frequency indices. This mapping calculates how the regime intentionally substituted the discourse of state terror with neutral, sterile vocabularies of stability, structural "truth," and clean geometry.
+                        <strong>Collocation Analysis:</strong> The 8-word window surrounding art/building/culture terms was extracted to reveal what conceptual neighbors each author attached to the domain of art — exposing the ideological framing hidden within seemingly aesthetic language.
                     </li>
                 </ul>
             </div>
 
+            <!-- Chart 1: Cluster Comparison -->
             <div class="content-block">
-                <h3 style="margin-bottom: 10px;">Linguistic Cluster Weight Analysis</h3>
-                <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">
-                    The horizontal visualization below maps out the relative normalized weight of Speer's key semantic clusters. Notice the massive statistical reliance on abstract words like "Truth" and "Structure" to mask systemized purges.
+                <h3 style="margin-bottom: 6px;">Finding 1 — Semantic Cluster Comparison (per 1,000 words)</h3>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 18px;">
+                    Hitler dominates <em>biological and political</em> language; Speer concentrates almost exclusively on <em>art, architecture, and permanence</em>. Together, they constitute a <strong>division of ideological labor</strong>: Hitler defines who belongs; Speer builds the stone symbols of that belonging.
                 </p>
-                <div class="chart-wrapper" style="max-width: 650px; margin: 0 auto; padding: 15px;">
-                    <canvas id="speerChart" height="150"></canvas>
+                <div class="chart-wrapper">
+                    <canvas id="clusterCompareChart" height="180"></canvas>
+                </div>
+            </div>
+
+            <!-- Chart 2: Art domain collocates -->
+            <div class="content-block">
+                <h3 style="margin-bottom: 6px;">Finding 2 — What Surrounds "Art / Building / Culture"?</h3>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 18px;">
+                    Collocation analysis reveals the conceptual <em>company</em> that art words keep. For Speer, "building" is inseparable from <em>stone, millennia, Führer, party, will</em> — art is fused with permanence and power. For Hitler, cultural terms sit beside <em>political, life, productive, custodians</em> — art is a domain to be administered and controlled.
+                </p>
+                <div style="display:flex; gap:20px; flex-wrap:wrap;">
+                    <div class="chart-wrapper" style="flex:1; min-width:280px;">
+                        <p style="text-align:center; font-size:0.85rem; color:#e57373; margin-bottom:10px; font-family:monospace; text-transform:uppercase; letter-spacing:1px;">Hitler 1937 — Art Collocates</p>
+                        <canvas id="hitlerCollocChart" height="200"></canvas>
+                    </div>
+                    <div class="chart-wrapper" style="flex:1; min-width:280px;">
+                        <p style="text-align:center; font-size:0.85rem; color:#81c784; margin-bottom:10px; font-family:monospace; text-transform:uppercase; letter-spacing:1px;">Speer 1936 — Art Collocates</p>
+                        <canvas id="speerCollocChart" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart 3: Exclusion language asymmetry -->
+            <div class="content-block">
+                <h3 style="margin-bottom: 6px;">Finding 3 — The Asymmetry of Exclusion Language</h3>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 18px;">
+                    The most striking finding: Hitler uses exclusion vocabulary (degenerate, chaos, foreign, bolshevik, destructive…) at <strong>5.2× the rate</strong> of Speer. Speer's text contains almost none. This is not coincidence — it is the architecture of complicity. Speer did not need to name the enemy; Hitler had already done so. Speer simply built the monuments that made the enemy's exclusion feel inevitable.
+                </p>
+                <div class="chart-wrapper" style="max-width: 520px; margin: 0 auto;">
+                    <canvas id="exclusionChart" height="120"></canvas>
+                </div>
+                <!-- Insight box -->
+                <div style="margin-top:20px; padding:20px; background:rgba(139,0,0,0.12); border-left:4px solid #8b0000; border-radius:4px;">
+                    <p style="font-size:0.95rem; color:var(--text-cream); line-height:1.7;">
+                        <strong style="color:#e57373;">Core Argument:</strong> Nazi aesthetic exclusion operated through a <em>linguistic division of labor</em>. Hitler constructed the ideological framework — defining blood, race, and the degenerate enemy. Speer translated that framework into the neutral-sounding vocabulary of beauty, permanence, and architectural order. Together, their texts reveal how the suppression of Modernist art was not presented as political violence, but as the <em>natural restoration of timeless aesthetic truth</em>.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Raw data table -->
+            <div class="content-block">
+                <h3 style="margin-bottom: 12px;">Raw Data: Normalized Cluster Frequencies (per 1,000 words)</h3>
+                <div style="overflow-x:auto;">
+                <table id="dataTable" style="width:100%; border-collapse:collapse; font-family:monospace; font-size:0.88rem;">
+                    <thead>
+                        <tr style="border-bottom:2px solid var(--text-gold); color:var(--text-gold);">
+                            <th style="text-align:left; padding:8px 12px;">Semantic Cluster</th>
+                            <th style="text-align:right; padding:8px 12px;">Hitler /1k</th>
+                            <th style="text-align:right; padding:8px 12px;">Speer /1k</th>
+                            <th style="text-align:right; padding:8px 12px;">Ratio (S/H)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dataTableBody"></tbody>
+                </table>
                 </div>
             </div>
         </section>
@@ -593,15 +648,18 @@ footer a { color: var(--text-gold); }
         <!--  SECTION V — Conclusion                                 -->
         <!-- ═══════════════════════════════════════════════════════ -->
         <section id="project-conclusion">
-            <h2 class="section-title">V. Digital Epistemology: Methodological Intent & Synthesis</h2>
+            <h2 class="section-title">V. Synthesis: The Politics of Beauty</h2>
             <p class="narrative-text" style="line-height: 1.8; font-weight: bold; color: var(--text-gold);">
-                Project Synthesis & Critical Conclusion:
+                Project Argument & Critical Conclusion:
             </p>
             <p class="narrative-text" style="line-height: 1.7;">
-                This interactive digital humanities project was systematically constructed to expose a profound historical paradox: totalitarian oppression did not operate solely through raw physical force, but was meticulously engineered through an aestheticized apparatus of cultural curation.
+                This project began with a simple observation: in 1937, Ernst Ludwig Kirchner's paintings were confiscated and labeled pathological. In 1938, the Bauhaus was forced to close. These were not spontaneous acts of censorship — they were the <em>inevitable conclusion</em> of a linguistic project that had been quietly underway for years.
             </p>
             <p class="narrative-text" style="line-height: 1.7;">
-                By navigating the Archival Gate, users empirically witness that fascism heavily suppressed the free-thinking spirit of Modernism—banning its emotional expression, transparency, and avant-garde critique—while weaponizing the majestic language of Neo-Classicism, symmetry, and monumental stonework. Through the cross-examination of quantitative text-mining (Speer's rhetoric) and interactive spatial geometry (3D Germania modeling), this installation demonstrates that the pursuit of absolute "beauty and order" can be strategically deployed as a powerful weapon for socio-cultural liquidation and systemic human exclusion.
+                The text-mining analysis reveals the mechanism. Hitler's 1937 address constructed a biological and political world in which belonging was defined by race and blood (18.08/1k words) and the enemy was coded as foreign, degenerate, and chaotic (2.43/1k). Speer's 1936 essay then translated this world into architecture: buildings that would last millennia (9.35/1k), fused inseparably with the Führer's will, the party's permanence, and the Reich's authority. Art & Architecture vocabulary dominates Speer's text at <strong>30.39 per 1,000 words</strong> — more than any other cluster in either corpus — while his exclusion language nearly disappears (0.47/1k).
+            </p>
+            <p class="narrative-text" style="line-height: 1.7;">
+                This asymmetry is the core finding: <strong>Speer did not need to call Kirchner degenerate. Hitler had already done that.</strong> Speer simply built monuments so eternal, so pure, so perfectly ordered that anything which deviated — jagged Expressionist lines, asymmetrical Bauhaus glass, kinetic Constructivist iron — became, by contrast, self-evidently wrong. The suppression of Modernist art was not presented as political violence. It was presented as the restoration of beauty. That is how aesthetics becomes a weapon of exclusion.
             </p>
         </section>
 
@@ -843,7 +901,7 @@ function executeProjectUnlock() {
     // Build compact gallery
     buildCompactGallery();
 
-    initializeChart();
+    initializeCharts();
 
     setTimeout(() => {
         document.getElementById('verdict-anchor').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -898,37 +956,160 @@ function scrollToDetail(stageNum) {
     target.classList.add('detail-highlight');
 }
 
-// ── CHART ─────────────────────────────────────────────────────────────────────
-function initializeChart() {
-    const ctx = document.getElementById('speerChart').getContext('2d');
-    new Chart(ctx, {
+// ── CHARTS (REAL TEXT-MINING DATA) ───────────────────────────────────────────
+function initializeCharts() {
+
+    // ── Real data from Python analysis ──────────────────────────────────────
+    const clusterLabels = [
+        'Aesthetic Order\n(Beauty/Purity)',
+        'Eternal Permanence\n(Stone/Time)',
+        'Power & Authority\n(State/Order)',
+        'Biological Language\n(Race/Blood)',
+        'Art & Architecture\n(Creative Domain)',
+        'Exclusion Language\n(Degenerate/Chaos)'
+    ];
+    const clusterShort = [
+        'Aesthetic Order', 'Eternal Permanence',
+        'Power & Authority', 'Biological Language',
+        'Art & Architecture', 'Exclusion Language'
+    ];
+    const hitlerNorm  = [0.45, 1.53, 20.13, 18.08, 1.28, 2.43];
+    const speerNorm   = [5.61, 9.35, 27.58, 10.75, 30.39, 0.47];
+
+    const GOLD  = 'rgba(212,175,55,0.85)';
+    const GOLDB = '#d4af37';
+    const RED   = 'rgba(139,0,0,0.85)';
+    const REDB  = '#8b0000';
+    const GREEN = 'rgba(129,199,132,0.85)';
+    const GREENB= '#81c784';
+
+    // ── Chart 1: Grouped bar — cluster comparison ────────────────────────────
+    new Chart(document.getElementById('clusterCompareChart').getContext('2d'), {
         type: 'bar',
         data: {
-            labels: ['Fact / Truth', 'Order / Structure', 'Monument / Building', 'Health / Purity', 'Lies / Decay'],
+            labels: clusterShort,
+            datasets: [
+                {
+                    label: 'Hitler 1937',
+                    data: hitlerNorm,
+                    backgroundColor: 'rgba(139,0,0,0.75)',
+                    borderColor: REDB, borderWidth: 1.5
+                },
+                {
+                    label: 'Speer 1936',
+                    data: speerNorm,
+                    backgroundColor: 'rgba(212,175,55,0.75)',
+                    borderColor: GOLDB, borderWidth: 1.5
+                }
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: true,
+            scales: {
+                x: { grid:{color:'#1e2230'}, ticks:{color:'#f4f1ea', font:{family:'Times New Roman', size:11}} },
+                y: { beginAtZero:true, grid:{color:'#2c303b'}, ticks:{color:'#a0a5b5'},
+                     title:{display:true, text:'Frequency per 1,000 words', color:'#a0a5b5', font:{size:11}} }
+            },
+            plugins: {
+                legend:{labels:{color:'#f4f1ea', font:{family:'Times New Roman'}}},
+                tooltip:{callbacks:{label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y}/1k words`}}
+            }
+        }
+    });
+
+    // ── Chart 2a: Hitler art collocates ─────────────────────────────────────
+    const hitlerColloc = [
+        {w:'political', c:2}, {w:'life', c:3}, {w:'activities', c:2},
+        {w:'cultural', c:2}, {w:'productivity', c:2}, {w:'custodians', c:2},
+        {w:'acting', c:3}, {w:'sphere', c:2}, {w:'artistic', c:2}, {w:'branches', c:2}
+    ].sort((a,b)=>b.c-a.c);
+
+    new Chart(document.getElementById('hitlerCollocChart').getContext('2d'), {
+        type: 'bar',
+        data: {
+            labels: hitlerColloc.map(d=>d.w),
             datasets: [{
-                label: 'Relative Keyword Weight (Normalized Index)',
-                data: [84, 76, 62, 49, 21],
-                backgroundColor: [
-                    'rgba(212,175,55,0.85)',
-                    'rgba(212,175,55,0.65)',
-                    'rgba(212,175,55,0.45)',
-                    'rgba(212,175,55,0.25)',
-                    'rgba(139,0,0,0.75)'
-                ],
-                borderColor: ['#d4af37','#d4af37','#d4af37','#d4af37','#8b0000'],
-                borderWidth: 1.5
+                label: 'Co-occurrence count',
+                data: hitlerColloc.map(d=>d.c),
+                backgroundColor: 'rgba(139,0,0,0.7)',
+                borderColor: REDB, borderWidth:1.5
             }]
         },
         options: {
-            indexAxis: 'y',
-            responsive: true,
-            maintainAspectRatio: true,
+            indexAxis:'y', responsive:true,
             scales: {
-                y: { grid: { display: false }, ticks: { color: '#f4f1ea', font: { family: 'Times New Roman' } } },
-                x: { beginAtZero: true, grid: { color: '#2c303b' }, ticks: { color: '#a0a5b5' } }
+                y:{grid:{display:false}, ticks:{color:'#f4f1ea', font:{size:11}}},
+                x:{beginAtZero:true, grid:{color:'#2c303b'}, ticks:{color:'#a0a5b5'}}
             },
-            plugins: { legend: { display: false } }
+            plugins:{legend:{display:false}}
         }
+    });
+
+    // ── Chart 2b: Speer art collocates ───────────────────────────────────────
+    const speerColloc = [
+        {w:'will', c:9}, {w:'buildings', c:6}, {w:'cities', c:6},
+        {w:'stone', c:5}, {w:'party', c:5}, {w:'fhrer', c:5},
+        {w:'projects', c:4}, {w:'major', c:3}, {w:'political', c:3},
+        {w:'millennia', c:3}
+    ].sort((a,b)=>b.c-a.c);
+
+    new Chart(document.getElementById('speerCollocChart').getContext('2d'), {
+        type: 'bar',
+        data: {
+            labels: speerColloc.map(d=>d.w),
+            datasets: [{
+                label: 'Co-occurrence count',
+                data: speerColloc.map(d=>d.c),
+                backgroundColor: 'rgba(212,175,55,0.7)',
+                borderColor: GOLDB, borderWidth:1.5
+            }]
+        },
+        options: {
+            indexAxis:'y', responsive:true,
+            scales: {
+                y:{grid:{display:false}, ticks:{color:'#f4f1ea', font:{size:11}}},
+                x:{beginAtZero:true, grid:{color:'#2c303b'}, ticks:{color:'#a0a5b5'}}
+            },
+            plugins:{legend:{display:false}}
+        }
+    });
+
+    // ── Chart 3: Exclusion language asymmetry ────────────────────────────────
+    new Chart(document.getElementById('exclusionChart').getContext('2d'), {
+        type: 'bar',
+        data: {
+            labels: ['Exclusion Language\n(degenerate / chaos / foreign / bolshevik…)'],
+            datasets: [
+                {label:'Hitler 1937', data:[2.43], backgroundColor:'rgba(139,0,0,0.85)', borderColor:REDB, borderWidth:1.5},
+                {label:'Speer 1936',  data:[0.47], backgroundColor:'rgba(212,175,55,0.5)', borderColor:GOLDB, borderWidth:1.5}
+            ]
+        },
+        options: {
+            responsive:true, maintainAspectRatio:true,
+            scales: {
+                x:{grid:{color:'#1e2230'}, ticks:{color:'#f4f1ea'}},
+                y:{beginAtZero:true, grid:{color:'#2c303b'}, ticks:{color:'#a0a5b5'},
+                   title:{display:true, text:'per 1,000 words', color:'#a0a5b5'}}
+            },
+            plugins:{legend:{labels:{color:'#f4f1ea'}}}
+        }
+    });
+
+    // ── Raw data table ────────────────────────────────────────────────────────
+    const tbody = document.getElementById('dataTableBody');
+    clusterShort.forEach((label, i) => {
+        const ratio = speerNorm[i] > 0 ? (speerNorm[i]/hitlerNorm[i]).toFixed(1) : '—';
+        const isArt = label === 'Art & Architecture';
+        const isExcl = label === 'Exclusion Language';
+        const rowColor = isArt ? 'rgba(212,175,55,0.08)' : isExcl ? 'rgba(139,0,0,0.08)' : '';
+        const tr = document.createElement('tr');
+        tr.style.cssText = `border-bottom:1px solid #1e2230; background:${rowColor}`;
+        tr.innerHTML = `
+            <td style="padding:8px 12px; color:var(--text-cream);">${label}${isArt ? ' <span style="color:var(--text-gold)">★</span>' : isExcl ? ' <span style="color:#e57373">⚠</span>' : ''}</td>
+            <td style="padding:8px 12px; text-align:right; color:#e57373;">${hitlerNorm[i]}</td>
+            <td style="padding:8px 12px; text-align:right; color:var(--text-gold);">${speerNorm[i]}</td>
+            <td style="padding:8px 12px; text-align:right; color:var(--text-muted);">${ratio}×</td>`;
+        tbody.appendChild(tr);
     });
 }
 
