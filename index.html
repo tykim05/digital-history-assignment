@@ -1,764 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aesthetics of Exclusion | Digital History Project</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<style>
-/* Core Style System Variables */
-:root {
---bg-primary: #0d0e10;
---bg-secondary: #16181c;
---bg-tertiary: #1f232b;
---text-gold: #d4af37;
---text-cream: #f4f1ea;
---text-muted: #a0a5b5;
---border-color: #2c303b;
---accent-red: #8b0000;
---accent-green: #2e7d32;
-}
-
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-
-    body {
-        background-color: var(--bg-primary);
-        color: var(--text-cream);
-        font-family: 'Times New Roman', Times, serif;
-        line-height: 1.6;
-        padding-bottom: 60px;
-    }
-
-    /* Editorial Header Area */
-    header {
-        position: relative;
-        padding: 100px 20px 60px 20px;
-        text-align: center;
-        background: linear-gradient(180deg, #181a20 0%, var(--bg-primary) 100%);
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    .project-meta {
-        font-size: 0.9rem;
-        text-transform: uppercase;
-        letter-spacing: 3px;
-        color: var(--text-gold);
-        margin-bottom: 15px;
-    }
-
-    h1 {
-        font-size: 3rem;
-        font-weight: 400;
-        letter-spacing: -1px;
-        color: var(--text-cream);
-        max-width: 900px;
-        margin: 0 auto 20px auto;
-        line-height: 1.2;
-    }
-
-    .author-tag {
-        font-family: 'Courier New', Courier, monospace;
-        font-size: 0.95rem;
-        color: var(--text-muted);
-    }
-
-    .container {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-
-    .abstract-box {
-        background-color: var(--bg-secondary);
-        border-left: 3px solid var(--text-gold);
-        padding: 30px;
-        margin: 40px 0;
-        border-radius: 4px;
-    }
-
-    .abstract-box p {
-        font-style: italic;
-        color: var(--text-muted);
-        font-size: 1.1rem;
-    }
-
-    section {
-        margin-bottom: 50px;
-    }
-
-    .section-title {
-        font-size: 1.8rem;
-        color: var(--text-gold);
-        margin-bottom: 25px;
-        border-bottom: 1px solid var(--border-color);
-        padding-bottom: 10px;
-        letter-spacing: 1px;
-    }
-
-    .narrative-text {
-        font-size: 1.1rem;
-        color: var(--text-cream);
-        margin-bottom: 25px;
-        text-align: justify;
-    }
-
-    .content-block {
-        background-color: var(--bg-secondary);
-        border: 1px solid var(--border-color);
-        border-radius: 6px;
-        padding: 30px;
-        margin-bottom: 30px;
-    }
-
-    .chart-wrapper {
-        background-color: var(--bg-tertiary);
-        padding: 20px;
-        border-radius: 4px;
-        border: 1px solid #252933;
-        margin: 20px 0;
-    }
-
-    /* Waterfall Stage Component Animation Styles */
-    .quiz-stage-box {
-        background-color: var(--bg-secondary);
-        border: 1px solid var(--border-color);
-        border-radius: 6px;
-        padding: 30px;
-        margin-bottom: 40px;
-        animation: fadeInStage 0.6s ease-out forwards;
-    }
-
-    .stage-indicator {
-        font-family: monospace;
-        color: var(--text-gold);
-        font-size: 1.1rem;
-        margin-bottom: 15px;
-        letter-spacing: 1px;
-    }
-
-    .vote-zone {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        margin-top: 15px;
-    }
-
-    .vote-card {
-        flex: 1;
-        min-width: 280px;
-        background-color: var(--bg-tertiary);
-        border: 2px solid var(--border-color);
-        border-radius: 6px;
-        overflow: hidden;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-align: center;
-        padding-bottom: 20px;
-    }
-
-    .vote-card.active-card:hover {
-        border-color: var(--text-gold);
-        transform: translateY(-4px);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-    }
-
-    .vote-card.disabled-card {
-        cursor: not-allowed;
-        opacity: 0.4;
-        filter: grayscale(80%);
-    }
-
-    .vote-card.selected-card {
-        cursor: not-allowed;
-        border-color: var(--text-gold);
-        opacity: 1;
-        background-color: #1a1d24;
-        box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.2);
-    }
-
-    .vote-img-box {
-        background-color: #000;
-        padding: 15px;
-        height: 250px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    .vote-img-box img {
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: contain;
-        border-radius: 4px;
-    }
-
-    .vote-btn {
-        background-color: transparent;
-        border: 1px solid var(--text-gold);
-        color: var(--text-gold);
-        padding: 8px 20px;
-        font-size: 0.95rem;
-        font-family: 'Times New Roman', serif;
-        margin-top: 15px;
-        cursor: pointer;
-        border-radius: 4px;
-        transition: all 0.3s;
-    }
-
-    .vote-card.active-card:hover .vote-btn {
-        background-color: var(--text-gold);
-        color: #000;
-    }
-
-    .vote-card.disabled-card .vote-btn {
-        border-color: #444;
-        color: #555;
-        cursor: not-allowed;
-    }
-
-    /* Gated Main Project Content Styles */
-    #gated-project-content {
-        display: none;
-        opacity: 0;
-        transition: opacity 1.2s ease-in-out;
-    }
-
-    .result-panel {
-        background-color: #14171f;
-        border: 1px solid #232d3d;
-        border-radius: 6px;
-        padding: 30px;
-        margin: 40px 0;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-    }
-
-    .result-verdict {
-        font-size: 1.4rem;
-        font-weight: bold;
-        margin-bottom: 15px;
-    }
-
-    /* Split-Layout Exposition Cards for Enhanced Readability */
-    .gallery-system {
-        display: flex;
-        flex-direction: column;
-        gap: 35px;
-        margin-top: 30px;
-    }
-
-    .gallery-card {
-        background-color: var(--bg-secondary);
-        border: 1px solid var(--border-color);
-        border-radius: 6px;
-        overflow: hidden;
-    }
-
-    .card-header-accent {
-        padding: 14px 20px;
-        font-weight: bold;
-        font-size: 1.1rem;
-        letter-spacing: 1px;
-        background-color: #1a1d24;
-        border-bottom: 1px solid var(--border-color);
-        color: var(--text-gold);
-    }
-
-    .card-body-split {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 25px;
-        padding: 25px;
-    }
-
-    .exposition-visual-column {
-        flex: 1;
-        min-width: 260px;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .visual-frame-box {
-        background-color: #000;
-        padding: 10px;
-        border: 1px solid var(--border-color);
-        border-radius: 4px;
-        text-align: center;
-    }
-
-    .visual-frame-box img {
-        max-width: 100%;
-        max-height: 200px;
-        object-fit: contain;
-        border-radius: 2px;
-    }
-
-    .portrait-sub-box {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        background-color: var(--bg-tertiary);
-        padding: 10px;
-        border-radius: 4px;
-        border: 1px solid #252933;
-    }
-
-    .portrait-img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        object-fit: cover;
-        filter: grayscale(100%);
-        border: 1px solid var(--text-gold);
-        background-color: #000;
-    }
-
-    .exposition-text-column {
-        flex: 2;
-        min-width: 320px;
-    }
-
-    .sub-block-title {
-        font-size: 1.05rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 8px;
-        font-weight: bold;
-    }
-    .sub-block-title.can-title { color: #81c784; border-left: 3px solid #81c784; padding-left: 8px; }
-    .sub-block-title.deg-title { color: #e57373; border-left: 3px solid #e57373; padding-left: 8px; margin-top: 20px; }
-
-    .pipeline-list {
-        list-style: none;
-        padding: 0;
-    }
-
-    .pipeline-item {
-        position: relative;
-        padding-left: 25px;
-        margin-bottom: 15px;
-        font-size: 1rem;
-        color: var(--text-cream);
-    }
-
-    .pipeline-item::before {
-        content: "→";
-        position: absolute;
-        left: 0;
-        color: var(--text-gold);
-        font-weight: bold;
-    }
-
-    .spatial-frame-container {
-        position: relative;
-        width: 100%;
-        height: 480px;
-        background-color: #000;
-        border: 1px solid var(--border-color);
-        border-radius: 4px;
-        overflow: hidden;
-        margin: 20px 0;
-    }
-
-    .spatial-frame-container iframe { width: 100%; height: 100%; border: 0; }
-
-    @keyframes fadeInStage {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-</style>
-
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aesthetics of Exclusion | Digital History Project</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root { --bg-primary: #0d0e10; --bg-secondary: #16181c; --bg-tertiary: #1f232b; --text-gold: #d4af37; --text-cream: #f4f1ea; --text-muted: #a0a5b5; --border-color: #2c303b; --accent-red: #8b0000; }
+        body { background-color: var(--bg-primary); color: var(--text-cream); font-family: 'Times New Roman', Times, serif; line-height: 1.6; padding-bottom: 60px; }
+        header { padding: 80px 20px; text-align: center; border-bottom: 1px solid var(--border-color); }
+        h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        .section-title { font-size: 1.8rem; color: var(--text-gold); margin: 40px 0 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+        
+        .gallery-system { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .gallery-card { background: var(--bg-secondary); border: 1px solid var(--border-color); padding: 20px; margin-bottom: 20px; border-radius: 6px; }
+        .visual-frame-box { background: #000; padding: 10px; text-align: center; margin-bottom: 10px; }
+        .visual-frame-box img { max-width: 100%; height: 150px; object-fit: contain; }
+        
+        .vote-btn { background: transparent; border: 1px solid var(--text-gold); color: var(--text-gold); padding: 10px 20px; cursor: pointer; width: 100%; transition: 0.3s; margin-top:10px; }
+        .vote-btn:hover { background: var(--text-gold); color: #000; }
+        
+        #gated-project-content { display: none; }
+        .hidden-detail { margin-top: 20px; padding: 20px; background: var(--bg-secondary); border-left: 3px solid var(--text-gold); }
+        
+        /* 퀴즈 영역 스타일 추가 */
+        .quiz-stage-box { background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; padding: 30px; margin-bottom: 40px; }
+        .vote-zone { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 15px; }
+        .vote-card { flex: 1; min-width: 250px; background-color: var(--bg-tertiary); border: 2px solid var(--border-color); border-radius: 6px; cursor: pointer; text-align: center; padding-bottom: 20px; transition: 0.3s; }
+        .vote-card:hover { border-color: var(--text-gold); transform: translateY(-4px); }
+        .vote-img-box { background-color: #000; padding: 15px; height: 200px; display: flex; align-items: center; justify-content: center; }
+        .vote-img-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        
+        /* 3D 모델 영역 스타일 추가 */
+        .spatial-frame-container { position: relative; width: 100%; height: 480px; background-color: #000; border: 1px solid var(--border-color); border-radius: 4px; overflow: hidden; margin: 20px 0; }
+        .spatial-frame-container iframe { width: 100%; height: 100%; border: 0; }
+    </style>
 </head>
 <body>
 
-
 <header>
-    <div class="project-meta">HSS283 / DHS283 Introduction to Digital Humanities</div>
-    <h1>Aesthetics of Exclusion:<br><span style="color: var(--text-gold);">Text-Mining Speer’s Rhetoric and Multimodal Analysis of Nazi Art Archives</span></h1>
-    <div class="author-tag">Project Investigator: tykim05 (KAIST Undergrad)</div>
+    <div style="color:var(--text-gold); letter-spacing: 3px;">HSS283 / DHS283</div>
+    <h1>Aesthetics of Exclusion</h1>
+    <p style="color:var(--text-muted);">Text-Mining Speer’s Rhetoric and Multimodal Analysis of Nazi Art Archives</p>
 </header>
 
 <div class="container">
-
-    <section id="portal-introduction" style="margin-top: 40px; margin-bottom: 20px;">
-        <h2 class="section-title">🔒 Archival Gate: Multimodal Taste Evaluation Loop</h2>
-        <p class="narrative-text">
-            To unlock the secondary analytical infrastructure, quantitative text metrics, and 3D spatial models of this project, you must complete a 4-stage programmatic curation track. Select the style variant that aligns closest with your immediate design preferences. Previous choices will lock in place as you descend into the deep archive.
-        </p>
-    </section>
-
     <div id="waterfall-quiz-container"></div>
 
     <div id="gated-project-content">
-
-        <div id="verdict-anchor" class="result-panel">
-            <div id="verdictTitle" class="result-verdict"></div>
-            <p id="verdictDescription" class="narrative-text" style="margin-bottom:0; font-size:1.1rem;"></p>
+        <div class="result-panel" style="background:#14171f; padding:30px; border-radius:6px; margin-bottom:40px;">
+            <div id="verdictTitle" style="font-size:1.5rem; font-weight:bold; margin-bottom:10px;"></div>
+            <p id="verdictDescription"></p>
         </div>
 
         <section id="archival-juxtaposition">
-            <h2 class="section-title">II. Unveiling the Curation: Blended Historical Specimen Expositions</h2>
-            <p class="narrative-text">
-                Now that your blind evaluation is locked, we reveal the actual historical specimens you navigated. During the Third Reich, art was never neutral; it was weaponized into a binary system. The regime systematically elevated classical symmetry to project state authority while aggressively liquidating avant-garde modernism under the label of "Degeneracy."
-            </p>
-
-            <div class="gallery-system">
-
+            <h2 class="section-title">II. Curation: Historical Specimen Gallery</h2>
+            <div class="gallery-system" id="gallery-container">
                 <div class="gallery-card">
-                    <div class="card-header-accent">🎨 Stage 1: Figure Painting (Classicism vs. Expressionism)</div>
-                    <div class="card-body-split">
-                        <div class="exposition-visual-column">
-                            <div class="visual-frame-box"><img src="canonical1.jpg" alt="Ziegler Painting"></div>
-                            <div class="visual-frame-box"><img src="degenerate1.jpg" alt="Kirchner Painting"></div>
-                            <div class="portrait-sub-box">
-                                <div class="portrait-img" style="background-image: url('<https://upload.wikimedia.org/wikipedia/commons/e/ea/Adolf_Ziegler.jpg>'); background-size: cover;"></div>
-                                <div>
-                                    <p style="font-size: 0.85rem; color: var(--text-gold); font-weight: bold;">Adolf Ziegler</p>
-                                    <p style="font-size: 0.75rem; color: var(--text-muted);">Reich Chamber President</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="exposition-text-column">
-                            <div class="sub-block-title can-title">🏛️ Style Alpha (Canonical Choice): Adolf Ziegler — "The Four Elements"</div>
-                            <p class="narrative-text" style="font-size: 1rem; color: var(--text-cream); margin-bottom: 15px;">
-                                Painted by Adolf Ziegler, the president of the Reich Chamber for Visual Arts and Hitler's favorite painter. This triptych depicts idealized, mathematically flawless, and sterile figures representing Earth, Water, Fire, and Air. Because of its meticulous, hyper-ordered compliance with traditional academic styles, the Nazi regime hung this masterpiece prominently in the Fuhrer's building in Munich, using it to define the strict biological and aesthetic canon of the state.
-                            </p>
-                            <div class="sub-block-title deg-title">🔥 Style Beta (Suppressed Choice): Ernst Ludwig Kirchner — "Street, Berlin"</div>
-                            <p class="narrative-text" style="font-size: 1rem; color: var(--text-cream); margin-bottom: 0;">
-                                Created by Ernst Ludwig Kirchner, a pioneer of German Expressionism. This work features jagged lines, clashing colors, and psychologically distorted figures exposing the anxiety and alienation of modern metropolitan life. Branded by the Gestapo as a "pathological distortion of the German spirit," Kirchner's entire life's work was confiscated, and over 600 of his paintings were removed from museums. Devastated by this systematic public liquidation and trauma, Kirchner eventually committed suicide in 1938.
-                            </p>
-                        </div>
-                    </div>
+                    <div style="color:var(--text-gold); margin-bottom:10px; font-weight:bold;">🎨 Stage 1</div>
+                    <div class="visual-frame-box"><img src="canonical1.jpg" alt="Canonical"></div>
+                    <button class="vote-btn" onclick="document.getElementById('detail-1').scrollIntoView({behavior:'smooth'})">상세 설명 보기</button>
                 </div>
-
                 <div class="gallery-card">
-                    <div class="card-header-accent">🏢 Stage 2: Public Architecture (Neo-Classicism vs. Bauhaus)</div>
-                    <div class="card-body-split">
-                        <div class="exposition-visual-column">
-                            <div class="visual-frame-box"><img src="canonical2.jpg" alt="Troost Museum"></div>
-                            <div class="visual-frame-box"><img src="degenerate2.jpg" alt="Bauhaus School"></div>
-                            <div class="portrait-sub-box">
-                                <div class="portrait-img" style="background-image: url('<https://upload.wikimedia.org/wikipedia/commons/d/df/Paul_Ludwig_Troost_1930.jpg>'); background-size: cover;"></div>
-                                <div>
-                                    <p style="font-size: 0.85rem; color: var(--text-gold); font-weight: bold;">Paul Troost</p>
-                                    <p style="font-size: 0.75rem; color: var(--text-muted);">Hitler's Chief Architect</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="exposition-text-column">
-                            <div class="sub-block-title can-title">🏛️ Style Alpha (Canonical Choice): Paul Troost — "The House of German Art Facade"</div>
-                            <p class="narrative-text" style="font-size: 1rem; color: var(--text-cream); margin-bottom: 15px;">
-                                Designed by Paul Ludwig Troost, Hitler's first chief architect before Albert Speer. This massive marble museum features an endless row of rigid, repetitive, and heavy columns imitating a Greek temple. Stripped of modern ornamentation, its geometric symmetry was explicitly engineered to radiate eternal authority, permanence, and political weight. It served as the official sanctuary built to host the annual "Great German Art Exhibition" celebrating regime-approved propaganda.
-                            </p>
-                            <div class="sub-block-title deg-title">🔥 Style Beta (Suppressed Choice): Walter Gropius — "Bauhaus Dessau Building"</div>
-                            <p class="narrative-text" style="font-size: 1rem; color: var(--text-cream); margin-bottom: 0;">
-                                Designed by Walter Gropius, the founder of the legendary Bauhaus school. This architecture introduced a revolutionary modern vision utilizing open steel frames, asymmetrical layouts, and radical transparent glass curtain walls to celebrate functional efficiency and international collaboration. The Nazi regime aggressively condemned this philosophy as "Jewish-Bolshevik decadence" and forced the school to permanently shut down in 1933, hunting down avant-garde architects who resisted state geometry.
-                            </p>
-                        </div>
-                    </div>
+                    <div style="color:var(--text-gold); margin-bottom:10px; font-weight:bold;">🏢 Stage 2</div>
+                    <div class="visual-frame-box"><img src="canonical2.jpg" alt="Canonical"></div>
+                    <button class="vote-btn" onclick="document.getElementById('detail-2').scrollIntoView({behavior:'smooth'})">상세 설명 보기</button>
                 </div>
-
                 <div class="gallery-card">
-                    <div class="card-header-accent">🏞️ Stage 3: Landscape Painting (Pastoral Realism vs. Cubism)</div>
-                    <div class="card-body-split">
-                        <div class="exposition-visual-column">
-                            <div class="visual-frame-box"><img src="canonical3.jpg" alt="Peiner Landscape"></div>
-                            <div class="visual-frame-box"><img src="degenerate3.jpg" alt="Picasso Cubism"></div>
-                        </div>
-                        <div class="exposition-text-column">
-                            <div class="sub-block-title can-title">🏛️ Style Alpha (Canonical Choice): Werner Peiner — "German Land"</div>
-                            <p class="narrative-text" style="font-size: 1rem; color: var(--text-cream); margin-bottom: 15px;">
-                                Painted by Werner Peiner, a prominent state-favored artist who operated an official academy under the patronage of Hermann Göring. This landscape meticulously renders an expansive, static, and peaceful rural valley. By portraying the countryside with absolute precision and no emotional friction, it served as a perfect visual anchor for the regime's "Blood and Soil" (Blut und Boden) ideology, promoting an artificial, agrarian fantasy of regional purity and unyielding geographic dominance.
-                            </p>
-                            <div class="sub-block-title deg-title">🔥 Style Beta (Suppressed Choice): Pablo Picasso — "Factory at Horta de Ebro"</div>
-                            <p class="narrative-text" style="font-size: 1rem; color: var(--text-cream); margin-bottom: 0;">
-                                Created by Pablo Picasso, a foundational pioneer of Cubism. This masterpiece deconstructs a village landscape into fragmented cubes, geometric shards, and multiple overlapping perspectives, rejecting traditional rules of realistic depth. Totalitarian curators aggressively attacked this avant-garde perspective as a "destructive, chaotic threat to national stability," systematically banning Cubist, Dadaist, and Fauvist styles from public display to prevent individual cognitive freedom.
-                            </p>
-                        </div>
-                    </div>
+                    <div style="color:var(--text-gold); margin-bottom:10px; font-weight:bold;">🏞️ Stage 3</div>
+                    <div class="visual-frame-box"><img src="canonical3.jpg" alt="Canonical"></div>
+                    <button class="vote-btn" onclick="document.getElementById('detail-3').scrollIntoView({behavior:'smooth'})">상세 설명 보기</button>
                 </div>
-
                 <div class="gallery-card">
-                    <div class="card-header-accent">🏛️ Stage 4: Monumental Architecture (Heavy Stone vs. Kinetic Iron)</div>
-                    <div class="card-body-split">
-                        <div class="exposition-visual-column">
-                            <div class="visual-frame-box"><img src="canonical4.jpg" alt="Kreis Interior"></div>
-                            <div class="visual-frame-box"><img src="degenerate4.jpg" alt="Tatlin Tower"></div>
-                            <div class="portrait-sub-box">
-                                <div class="portrait-img" style="background-image: url('<https://upload.wikimedia.org/wikipedia/commons/d/df/Wilhelm_Kreis.jpg>'); background-size: cover;"></div>
-                                <div>
-                                    <p style="font-size: 0.85rem; color: var(--text-gold); font-weight: bold;">Wilhelm Kreis</p>
-                                    <p style="font-size: 0.75rem; color: var(--text-muted);">Reich Monument Architect</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="exposition-text-column">
-                            <div class="sub-block-title can-title">🏛️ Style Alpha (Canonical Choice): Wilhelm Kreis — "Leipzig War Memorial Interior"</div>
-                            <p class="narrative-text" style="font-size: 1rem; color: var(--text-cream); margin-bottom: 15px;">
-                                Built to commemorate historical fallen soldiers and heavily re-conceptualized under Wilhelm Kreis, a dominant state architect during the Reich. The interior relies on colossal stone blocks, absolute geometric alignment, and severe architectural massiveness. Stripped of light decorative elements, this heavy, monolithic style was weaponized by the state to foster an atmosphere of collective mourning, absolute obedience, and solemn self-sacrifice for the eternal authority of the Reich.
-                            </p>
-                            <div class="sub-block-title deg-title">🔥 Style Beta (Suppressed Choice): Vladimir Tatlin — "Monument to the Third International"</div>
-                            <p class="narrative-text" style="font-size: 1rem; color: var(--text-cream); margin-bottom: 0;">
-                                Conceived by Vladimir Tatlin, a leading figure of Avant-Garde Constructivism. This industrial design envisioned a giant, spiraling, kinetic iron tower housing rotating glass chambers. It celebrated dynamic technological progress, transparency, and a constantly moving future. The totalitarian regime condemned this structural philosophy as the epitome of foreign, Bolshevistic chaos and completely outlawed kinetic abstraction in favor of static stone imperialism.
-                            </p>
-                        </div>
-                    </div>
+                    <div style="color:var(--text-gold); margin-bottom:10px; font-weight:bold;">🏛️ Stage 4</div>
+                    <div class="visual-frame-box"><img src="canonical4.jpg" alt="Canonical"></div>
+                    <button class="vote-btn" onclick="document.getElementById('detail-4').scrollIntoView({behavior:'smooth'})">상세 설명 보기</button>
                 </div>
+            </div>
+        </section>
 
+        <section id="detailed-exhibits">
+            <h2 class="section-title">Appendix: Detailed Historical Analysis</h2>
+            <div id="detail-1" class="hidden-detail">
+                <h3 style="color:#81c784;">🏛️ Adolf Ziegler — "The Four Elements"</h3>
+                <p>Painted by Adolf Ziegler, the president of the Reich Chamber for Visual Arts and Hitler's favorite painter. This triptych depicts idealized, mathematically flawless, and sterile figures representing Earth, Water, Fire, and Air. The Nazi regime hung this masterpiece prominently in the Fuhrer's building in Munich, using it to define the strict biological and aesthetic canon of the state.</p>
+                <h3 style="color:#e57373; margin-top:15px;">🔥 Ernst Ludwig Kirchner — "Street, Berlin"</h3>
+                <p>Created by Ernst Ludwig Kirchner, a pioneer of German Expressionism. This work features jagged lines, clashing colors, and psychologically distorted figures exposing the anxiety and alienation of modern metropolitan life. Branded by the Gestapo as a "pathological distortion of the German spirit," Kirchner's entire life's work was confiscated.</p>
+            </div>
+            
+            <div id="detail-2" class="hidden-detail">
+                <h3 style="color:#81c784;">🏛️ Paul Troost — "The House of German Art Facade"</h3>
+                <p>Designed by Paul Ludwig Troost. This massive marble museum features an endless row of rigid, repetitive, and heavy columns imitating a Greek temple. Stripped of modern ornamentation, its geometric symmetry was explicitly engineered to radiate eternal authority, permanence, and political weight.</p>
+                <h3 style="color:#e57373; margin-top:15px;">🔥 Walter Gropius — "Bauhaus Dessau Building"</h3>
+                <p>Designed by Walter Gropius. This architecture introduced a revolutionary modern vision utilizing open steel frames, asymmetrical layouts, and radical transparent glass curtain walls. The Nazi regime aggressively condemned this philosophy as "Jewish-Bolshevik decadence" and forced the school to permanently shut down in 1933.</p>
+            </div>
+
+            <div id="detail-3" class="hidden-detail">
+                <h3 style="color:#81c784;">🏛️ Werner Peiner — "German Land"</h3>
+                <p>Painted by Werner Peiner. This landscape meticulously renders an expansive, static, and peaceful rural valley. By portraying the countryside with absolute precision and no emotional friction, it served as a perfect visual anchor for the regime's "Blood and Soil" (Blut und Boden) ideology.</p>
+                <h3 style="color:#e57373; margin-top:15px;">🔥 Pablo Picasso — "Factory at Horta de Ebro"</h3>
+                <p>Created by Pablo Picasso. This masterpiece deconstructs a village landscape into fragmented cubes, geometric shards, and multiple overlapping perspectives. Totalitarian curators aggressively attacked this avant-garde perspective as a "destructive, chaotic threat to national stability."</p>
+            </div>
+
+            <div id="detail-4" class="hidden-detail">
+                <h3 style="color:#81c784;">🏛️ Wilhelm Kreis — "Leipzig War Memorial Interior"</h3>
+                <p>Built to commemorate historical fallen soldiers. The interior relies on colossal stone blocks, absolute geometric alignment, and severe architectural massiveness, weaponized by the state to foster an atmosphere of collective mourning and absolute obedience.</p>
+                <h3 style="color:#e57373; margin-top:15px;">🔥 Vladimir Tatlin — "Monument to the Third International"</h3>
+                <p>Conceived by Vladimir Tatlin. This industrial design envisioned a giant, spiraling, kinetic iron tower housing rotating glass chambers. The totalitarian regime condemned this structural philosophy as the epitome of foreign, Bolshevistic chaos.</p>
             </div>
         </section>
 
         <section id="text-mining">
-            <h2 class="section-title">III. Computational Methodology: Deconstructing Speer’s Rhetoric</h2>
-            <p class="narrative-text">
-                To empirically ground the visual censorship revealed above, this project conducts a quantitative computational text-mining analysis on the primary linguistic structures utilized by Reich Architect Albert Speer.
-            </p>
-
-            <div class="content-block">
-                <h3 style="color: var(--text-gold); margin-bottom: 15px;">Empirical Digital Humanities Pipeline</h3>
-                <ul class="pipeline-list">
-                    <li class="pipeline-item">
-                        <strong>Primary Corpus Ingestion:</strong> Extracted Albert Speer's official 1938 programmatic propaganda defense text, <em>"Facts and Lies"</em> (tatsachen.htm), preserved within the German Propaganda Archive at Calvin University.
-                    </li>
-                    <li class="pipeline-item">
-                        <strong>Natural Language Preprocessing:</strong> Implemented string-tokenization and lowercase normalization via computational filters to strip out non-ideological syntax and isolate high-frequency semantic nodes.
-                    </li>
-                    <li class="pipeline-item">
-                        <strong>Ideological Clustering:</strong> Aggregated individual words into distinct thematic frequency indices. This mapping calculates how the regime intentionally substituted the discourse of state terror with neutral, sterile vocabularies of stability, structural "truth," and clean geometry.
-                    </li>
-                </ul>
-            </div>
-
-            <div class="content-block">
-                <h3 style="margin-bottom: 10px;">Linguistic Cluster Weight Analysis</h3>
-                <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">
-                    The horizontal visualization below maps out the relative normalized weight of Speer's key semantic clusters. Notice the massive statistical reliance on abstract words like "Truth" and "Structure" to mask systemized purges.
-                </p>
-                <div class="chart-wrapper" style="max-width: 650px; margin: 0 auto; padding: 15px;">
-                    <canvas id="speerChart" height="150"></canvas>
-                </div>
+            <h2 class="section-title">III. Computational Methodology: Speer's Rhetoric</h2>
+            <p>To empirically ground the visual censorship revealed above, this project conducts a quantitative computational text-mining analysis on the primary linguistic structures utilized by Reich Architect Albert Speer in his 1938 programmatic propaganda defense text, "Facts and Lies".</p>
+            <div style="max-width: 650px; margin: 30px auto; background: var(--bg-tertiary); padding: 20px; border-radius: 6px; border: 1px solid var(--border-color);">
+                <canvas id="speerChart" height="120"></canvas>
             </div>
         </section>
 
         <section id="spatial-geometry">
             <h2 class="section-title">IV. Spatial Manifestation: Welthauptstadt Germania</h2>
-            <p class="narrative-text">
-                The absolute spatial culmination of Speer’s text parameters and the regime's strict visual purification was targeted to crystalize into the concrete geography of Welthauptstadt Germania. The interactive 3D model of the Volkshalle below demonstrates how totalitarianism forced abstract philosophies into a permanent physical topography designed to crush individual identity.
-            </p>
-
-            <div class="content-block">
-                <div class="spatial-frame-container">
-                    <iframe title="Welthauptstadt Germania - Volkshalle"
-                            src="https://sketchfab.com/models/e65f8a5d9a02435eb832ca0ce54f8d28/embed?autostart=1&ui_theme=dark&internal=1"
-                            allow="autoplay; fullscreen; xr-spatial-tracking"
-                            execution-while-out-of-viewport
-                            execution-while-not-rendered
-                            web-share>
-                    </iframe>
-                </div>
-                <div class="description-box" style="margin-top: 20px; padding: 20px; background: rgba(0,0,0,0.4); border-left: 4px solid #d4af37; border-radius: 4px;">
-                    <h4 style="color: #d4af37; margin-bottom: 10px; font-family: sans-serif; text-transform: uppercase;">Architectural Scale and Ideology</h4>
-                    <p style="font-size: 0.95rem; line-height: 1.6; color: #e0e0e0;">
-                        <b>Left (Volkshalle):</b> Designed by Albert Speer for Nazi Germania, intended to symbolize the absolute authority of the Reich through colossal scale.<br>
-                        <b>Center (Eiffel Tower):</b> Included as a standard of scale to illustrate the extreme, megalomaniacal proportions of the flanking structures.<br>
-                        <b>Right (Palace of the Soviets):</b> A Stalinist project designed to surpass all others in height, featuring a monumental statue of Lenin at its summit.<br><br>
-                        <i>*These digital artifacts, originally created for Hearts of Iron IV modding, visualize how 20th-century regimes utilized architectural scale to manifest political power.</i>
-                    </p>
-                </div>
+            <p>The absolute spatial culmination of Speer’s text parameters and the regime's strict visual purification was targeted to crystalize into the concrete geography of Welthauptstadt Germania.</p>
+            <div class="spatial-frame-container">
+                <iframe title="Welthauptstadt Germania - Volkshalle"
+                        src="https://sketchfab.com/models/e65f8a5d9a02435eb832ca0ce54f8d28/embed?autostart=1&ui_theme=dark&internal=1"
+                        allow="autoplay; fullscreen; xr-spatial-tracking"
+                        web-share>
+                </iframe>
             </div>
         </section>
 
         <section id="project-conclusion">
-            <h2 class="section-title">V. Digital Epistemology: Methodological Intent & Synthesis</h2>
-            <p class="narrative-text" style="line-height: 1.8; font-weight: bold; color: var(--text-gold);">
-                Project Synthesis & Critical Conclusion:
-            </p>
-            <p class="narrative-text" style="line-height: 1.7; text-align: justify;">
-                This interactive digital humanities project was systematically constructed to expose a profound historical paradox: totalitarian oppression did not operate solely through raw physical force, but was meticulously engineered through an aestheticized apparatus of cultural curation.
-            </p>
-            <p class="narrative-text" style="line-height: 1.7; text-align: justify;">
-                By navigating the Archival Gate, users empirically witness that fascism heavily suppressed the free-thinking spirit of Modernism—banning its emotional expression, transparency, and avant-garde critique—while weaponizing the majestic language of Neo-Classicism, symmetry, and monumental stonework. Through the cross-examination of quantitative text-mining (Speer's rhetoric) and interactive spatial geometry (3D Germania modeling), this installation demonstrates that the pursuit of absolute "beauty and order" can be strategically deployed as a powerful weapon for socio-cultural liquidation and systemic human exclusion.
+            <h2 class="section-title">V. Digital Epistemology: Synthesis</h2>
+            <p style="text-align: justify; color: #e0e0e0; font-size: 1.1rem;">
+                This interactive digital humanities project was systematically constructed to expose a profound historical paradox: totalitarian oppression did not operate solely through raw physical force, but was meticulously engineered through an aestheticized apparatus of cultural curation. The pursuit of absolute "beauty and order" was strategically deployed as a powerful weapon for socio-cultural liquidation.
             </p>
         </section>
+    </div>
+</div>
 
-        <footer>
-            <p>Data Sources Compiled From: <a href="<https://research.calvin.edu/german-propaganda-archive/>" target="_blank">German Propaganda Archive (Calvin University)</a> & Sketchfab Repository.</p>
-            <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.6;">KAIST HSS283/DHS283 Intro to Digital Humanities Portfolio Project.</p>
-        </footer>
-
-    </div> </div> <script>
-    // Blinded Data Engine: Labels and data completely concealed during test loop
+<script>
+    // 4단계 원본 퀴즈 데이터 복구됨
     const quizDatabase = [
-        {
-            stage: 1,
-            hint: "Figure Painting",
-            left: { img: "canonical1.jpg", alignment: "canonical" },
-            right: { img: "degenerate1.jpg", alignment: "degenerate" }
-        },
-        {
-            stage: 2,
-            hint: "Public Architecture",
-            left: { img: "canonical2.jpg", alignment: "canonical" },
-            right: { img: "degenerate2.jpg", alignment: "degenerate" }
-        },
-        {
-            stage: 3,
-            hint: "Landscape Painting",
-            left: { img: "canonical3.jpg", alignment: "canonical" },
-            right: { img: "degenerate3.jpg", alignment: "degenerate" }
-        },
-        {
-            stage: 4,
-            hint: "Monumental Architecture",
-            left: { img: "canonical4.jpg", alignment: "canonical" },
-            right: { img: "degenerate4.jpg", alignment: "degenerate" }
-        }
+        { stage: 1, hint: "Figure Painting", left: { img: "canonical1.jpg", alignment: "canonical" }, right: { img: "degenerate1.jpg", alignment: "degenerate" } },
+        { stage: 2, hint: "Public Architecture", left: { img: "canonical2.jpg", alignment: "canonical" }, right: { img: "degenerate2.jpg", alignment: "degenerate" } },
+        { stage: 3, hint: "Landscape Painting", left: { img: "canonical3.jpg", alignment: "canonical" }, right: { img: "degenerate3.jpg", alignment: "degenerate" } },
+        { stage: 4, hint: "Monumental Architecture", left: { img: "canonical4.jpg", alignment: "canonical" }, right: { img: "degenerate4.jpg", alignment: "degenerate" } }
     ];
 
     let currentStageIndex = 0;
     let scoreTracker = { canonical: 0, degenerate: 0 };
 
-    // Pure Blind Rendering Engine (No texts or labels exposed to user)
+    // 원래 형태의 이미지 퀴즈 블록 생성 로직 복구됨
     function spawnStageBlock(index) {
         const currentData = quizDatabase[index];
         const container = document.getElementById('waterfall-quiz-container');
 
         const stageNode = document.createElement('div');
-        stageNode.id = `quiz-stage-${index}`;
         stageNode.className = 'quiz-stage-box';
         stageNode.innerHTML = `
-            <div class="stage-indicator">STAGE ${currentData.stage} OF 4: ${currentData.hint.toUpperCase()} AFFINITY</div>
+            <div style="color:var(--text-gold); margin-bottom:15px; font-family:monospace; letter-spacing:1px;">STAGE ${currentData.stage} OF 4: ${currentData.hint.toUpperCase()}</div>
             <div class="vote-zone">
-                <div id="card-${index}-left" class="vote-card active-card" onclick="submitUserChoice(${index}, 'left')">
-                    <div class="vote-img-box">
-                        <img src="${currentData.left.img}" alt="Aesthetic Asset Alpha">
-                    </div>
-                    <button id="btn-${index}-left" class="vote-btn">Select Style Alpha</button>
+                <div class="vote-card" onclick="submitChoice(${index}, 'left')">
+                    <div class="vote-img-box"><img src="${currentData.left.img}" alt="Alpha"></div>
+                    <button class="vote-btn">Select Style Alpha</button>
                 </div>
-
-                <div id="card-${index}-right" class="vote-card active-card" onclick="submitUserChoice(${index}, 'right')">
-                    <div class="vote-img-box">
-                        <img src="${currentData.right.img}" alt="Aesthetic Asset Beta">
-                    </div>
-                    <button id="btn-${index}-right" class="vote-btn">Select Style Beta</button>
+                <div class="vote-card" onclick="submitChoice(${index}, 'right')">
+                    <div class="vote-img-box"><img src="${currentData.right.img}" alt="Beta"></div>
+                    <button class="vote-btn">Select Style Beta</button>
                 </div>
             </div>
         `;
-
+        
+        container.innerHTML = ''; // 이전 스테이지 지우기
         container.appendChild(stageNode);
-
-        setTimeout(() => {
-            stageNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 100);
     }
 
-    function submitUserChoice(stageIndex, selectedSide) {
-        const stageData = quizDatabase[stageIndex];
-        const leftCard = document.getElementById(`card-${stageIndex}-left`);
-        const rightCard = document.getElementById(`card-${stageIndex}-right`);
-
-        if (!leftCard.classList.contains('active-card')) return;
-
-        const identity = (selectedSide === 'left') ? stageData.left.alignment : stageData.right.alignment;
+    function submitChoice(stageIndex, selectedSide) {
+        const identity = (selectedSide === 'left') ? quizDatabase[stageIndex].left.alignment : quizDatabase[stageIndex].right.alignment;
         scoreTracker[identity]++;
-
-        leftCard.classList.remove('active-card');
-        rightCard.classList.remove('active-card');
-        leftCard.removeAttribute('onclick');
-        rightCard.removeAttribute('onclick');
-
-        if (selectedSide === 'left') {
-            leftCard.classList.add('selected-card');
-            rightCard.classList.add('disabled-card');
-            document.getElementById(`btn-${stageIndex}-left`).innerText = "Selected";
-            document.getElementById(`btn-${stageIndex}-right`).innerText = "Locked";
-        } else {
-            rightCard.classList.add('selected-card');
-            leftCard.classList.add('disabled-card');
-            document.getElementById(`btn-${stageIndex}-right`).innerText = "Selected";
-            document.getElementById(`btn-${stageIndex}-left`).innerText = "Locked";
-        }
 
         if (currentStageIndex < quizDatabase.length - 1) {
             currentStageIndex++;
             spawnStageBlock(currentStageIndex);
         } else {
-            executeProjectUnlock();
+            document.getElementById('waterfall-quiz-container').style.display = "none";
+            document.getElementById('gated-project-content').style.display = "block";
+            
+            // 결과 텍스트 계산
+            const title = document.getElementById('verdictTitle');
+            const desc = document.getElementById('verdictDescription');
+            if (scoreTracker.canonical >= scoreTracker.degenerate) {
+                title.style.color = "var(--text-gold)";
+                title.innerHTML = "⚠️ IDEOLOGICAL COMPLIANCE VERDICT: High Symmetry Affinity";
+                desc.innerHTML = `You aligned with ${scoreTracker.canonical} elements of structural framework.`;
+            } else {
+                title.style.color = "var(--accent-red)";
+                title.innerHTML = "🔥 TOTALITARIAN SUBVERSION VERDICT: High Modernist Affinity";
+                desc.innerHTML = `You favored ${scoreTracker.degenerate} elements of banned avant-garde modernism.`;
+            }
+
+            // 방법론 섹션으로 자동 스크롤 유지됨
+            setTimeout(() => {
+                document.getElementById('text-mining').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 300);
+            
+            initChart();
         }
     }
 
-    function executeProjectUnlock() {
-        const gatedContent = document.getElementById('gated-project-content');
-        gatedContent.style.display = "block";
-        setTimeout(() => { gatedContent.style.opacity = "1"; }, 50);
-
-        const title = document.getElementById('verdictTitle');
-        const desc = document.getElementById('verdictDescription');
-
-        if (scoreTracker.canonical >= scoreTracker.degenerate) {
-            title.style.color = "var(--text-gold)";
-            title.innerHTML = "⚠️ IDEOLOGICAL COMPLIANCE VERDICT: High Symmetry Affinity";
-            desc.innerHTML = `Out of 4 programmatic blind choices, your design preferences aligned with ${scoreTracker.canonical} elements of Albert Speer's structural framework. You subconsciously gravitated toward the geometric 'Order and Purity' that the Nazi state utilized to camouflage political mass terror. In 1938, your taste parameters would have seamlessly integrated into the state's official propaganda consumption grid.`;
-        } else {
-            title.style.color = "var(--accent-red)";
-            title.innerHTML = "🔥 TOTALITARIAN SUBVERSION VERDICT: High Modernist Affinity";
-            desc.innerHTML = `Out of 4 programmatic blind choices, your design preferences favored ${scoreTracker.degenerate} elements of banned avant-garde modernism. Your affinity for deep emotional expressionism and non-conformist distortion directly matches what the Reich condemned as 'Entartete Kunst' (Degenerate Art). In 1938, your cognitive stance would have been aggressively liquidated by the Gestapo as a biological pathology against the state.`;
-        }
-
-        initializeChart();
-
-        setTimeout(() => {
-            document.getElementById('verdict-anchor').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 300);
-    }
-
-    // Optimized Compact Horizontal Bar Chart Configuration
-    function initializeChart() {
-        const ctx = document.getElementById('speerChart').getContext('2d');
-        new Chart(ctx, {
+    function initChart() {
+        new Chart(document.getElementById('speerChart').getContext('2d'), {
             type: 'bar',
             data: {
                 labels: ['Fact / Truth', 'Order / Structure', 'Monument / Building', 'Health / Purity', 'Lies / Decay'],
                 datasets: [{
-                    label: 'Relative Keyword Weight (Normalized Index)',
+                    label: 'Keyword Weight',
                     data: [84, 76, 62, 49, 21],
-                    backgroundColor: [
-                        'rgba(212, 175, 55, 0.85)',
-                        'rgba(212, 175, 55, 0.65)',
-                        'rgba(212, 175, 55, 0.45)',
-                        'rgba(212, 175, 55, 0.25)',
-                        'rgba(139, 0, 0, 0.75)'
-                    ],
+                    backgroundColor: ['rgba(212,175,55,0.85)', 'rgba(212,175,55,0.65)', 'rgba(212,175,55,0.45)', 'rgba(212,175,55,0.25)', 'rgba(139,0,0,0.75)'],
                     borderColor: ['#d4af37', '#d4af37', '#d4af37', '#d4af37', '#8b0000'],
                     borderWidth: 1.5
                 }]
             },
             options: {
-                indexAxis: 'y', // Converts the chart to a sleek horizontal dashboard format
-                responsive: true,
-                maintainAspectRatio: true,
-                scales: {
-                    y: { grid: { display: false }, ticks: { color: '#f4f1ea', font: { family: 'Times New Roman' } } },
-                    x: { beginAtZero: true, grid: { color: '#2c303b' }, ticks: { color: '#a0a5b5' } }
-                },
-                plugins: {
-                    legend: { display: false }
-                }
+                indexAxis: 'y',
+                scales: { y: { ticks: { color: '#f4f1ea' } }, x: { ticks: { color: '#a0a5b5' } } },
+                plugins: { legend: { display: false } }
             }
         });
     }
 
-    window.onload = function() {
-        spawnStageBlock(0);
-    };
+    window.onload = () => spawnStageBlock(0);
 </script>
-
-
 </body>
 </html>
